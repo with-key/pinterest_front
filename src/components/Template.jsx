@@ -15,22 +15,21 @@ const Template = ({ children }) => {
 
 // for test ; header/footer ; 컴포넌트 넣은 후 삭제
 const Header = styled.section`
-  height: 75px;
+	height: 75px;
 `;
 const Footer = styled.section``;
 
 // style
-const Wrapper = styled.section`
-`;
-  
+const Wrapper = styled.section``;
+
 const Container = styled.section`
-  width: 100%;
-  min-height: calc(100vh - 75px);
-  display: flex;
+	width: 100%;
+	min-height: calc(100vh - 75px);
+	display: flex;
 	flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #eee;
+	align-items: center;
+	justify-content: center;
+	background-color: #eee;
 `;
 
 export default Template;
