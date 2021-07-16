@@ -12,7 +12,7 @@ const GlobalStyles = createGlobalStyle`
         
     }
     html {
-        font-size:82.5%;
+        font-size:62.5%;
         margin : 0;
         padding: 0;
         
