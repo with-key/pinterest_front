@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Button = () => {
+const Footer = () => {
 	return <div></div>;
 };
 
-export default Button;
+export default Footer;
