@@ -12,15 +12,12 @@ const ImgUploader = () => {
 		});
 
 		const promise = upload.promise();
-
 		promise.then(
-			function (data) {
-				alert('이미지 업로드에 성공했습니다.');
-				console.log(data.Location);
+			({ Location }) => {
+				console.log(Location);
+				// dispatch
 			},
-			function (err) {
-				return alert('오류가 발생했습니다: ', err.message);
-			},
+			(err) => alert('오류가 발생했습니다: ', err.message),
 		);
 	};
 
