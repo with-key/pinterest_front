@@ -13,7 +13,7 @@ export default (SpecialComponent, option, adminRoute = null) => {
 			}
 		}, []);
 
-		return <SpecialComponent />;
+		return <SpecialComponent {...props} />;
 	};
 
 	return AuthenticateCheck;

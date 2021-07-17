@@ -10,9 +10,15 @@ import PinDetail from '../pages/PinDetail';
 const Router = () => {
 	return (
 		<Switch>
-			<Route path='/' component={Auth(Home, false)} exact />
-			<Route path='/signup' component={Signup} exact />
-			<Route path='/pin/:id' component={PinDetail} exact />
+			{/* 두번째 파라미터
+				null (비로그인, 로그인 모두 접속 가능)
+				true (로그인만 접속 가능)
+				false (비로그인만 접속 가능)
+				*/}
+
+			<Route path='/' component={Auth(Home, null)} exact />
+			<Route path='/signup' component={Auth(Signup, false)} exact />
+			<Route path='/pin/:id' component={Auth(PinDetail, null)} exact />
 		</Switch>
 	);
 };
