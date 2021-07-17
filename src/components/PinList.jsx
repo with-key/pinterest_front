@@ -41,6 +41,7 @@ const PinList = ({ history }) => {
 const Container = styled.header`
 	width: 100%;
 	padding: 0px 12px;
+	margin-top: 80px;
   display: grid;
 	flex-direction: column;
   align-items: center;

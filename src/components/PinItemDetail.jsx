@@ -9,7 +9,7 @@ const PinItemDetail = (props) => {
   // 뷰 정리
 	return (
 		<React.Fragment>
-      <Flex pd='12px' style={{flexDirection: 'column'}}>
+      <Flex mg={'80px 0px 0px'} pd={'12px'} style={{flexDirection: 'column'}}>
         
         <Flex>
 
@@ -83,7 +83,7 @@ const Container = styled.section`
 	position: relative;
   align-items: center;
   justify-content: center;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
 `;
 const Section = styled.div`
   height: 100%;
