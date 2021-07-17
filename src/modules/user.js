@@ -1,6 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
 import { userApi } from '../shared/api';
+import { setCookie } from '../shared/cookie';
 
 // action
 const SIGNUP = 'user/SIGNUP';
@@ -29,7 +30,7 @@ const __signup =
 	async (dispatch, getState, { history }) => {
 		try {
 			const { data } = userApi.signup(userInfo);
-			dispatch(signup(userInfo));
+			dispatch(signup(data));
 		} catch (e) {
 			console.log(e);
 		}
@@ -42,6 +43,8 @@ const __login =
 			const { data } = await userApi.login(userInfo);
 			dispatch(login(data));
 			localStorage.setItem('userId', data.email);
+			setCookie('token', data.email, 1);
+			history.replace('/');
 		} catch (e) {
 			console.log(e);
 		}
@@ -50,10 +53,12 @@ const __login =
 const __setLogin =
 	() =>
 	(dispatch, getState, { history }) => {
-		const userId = localStorage.getItem('useId');
-		if (!userId) history.push('/test');
-		console.log(userId);
-		dispatch(setLogin());
+		const userId = localStorage.getItem('userId');
+		const token = document.cookie;
+
+		if (userId !== null && token !== '') {
+			dispatch(setLogin());
+		}
 	};
 
 // reducer
