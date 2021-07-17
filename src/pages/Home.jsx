@@ -10,8 +10,8 @@ const Home = ({ history }) => {
 	// console.log(history);
 	return (
 		<Template>
-			<Header />
-			<PinList />
+			<Header history={ history }/>
+			<PinList history={ history }/>
 		</Template>
 	)
 };

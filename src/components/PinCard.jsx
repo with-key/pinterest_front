@@ -2,13 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 
 // components
-import PinList from './PinList';
 
-const PinCard = (props) => {
-	// console.log(history);
+const PinCard = ({ history }) => {
 	return (
 		<React.Fragment>
-			<ImgCard>Pin</ImgCard>
+			<ImgCard 
+				onClick={() => {history.push('/pin/:id');}}
+				history={history}
+				>Pin</ImgCard>
 		</React.Fragment>
 	)
 };

@@ -4,10 +4,10 @@ import styled from 'styled-components';
 // components
 import PinCard from './PinCard';
 
-const PinList = (props) => {
+const PinList = ({ history }) => {
 	return (
 			<Container>
-				<PinCard />
+				<PinCard history={ history }/>
 				<PinCard />
 				<PinCard />
 				<PinCard />
