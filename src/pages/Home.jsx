@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import ImgUploader from '../components/ImgUploader';
 
 // components
 import Template from '../components/Template';
@@ -10,10 +11,11 @@ const Home = ({ history }) => {
 	// console.log(history);
 	return (
 		<Template>
-			<Header history={ history }/>
-			<PinList history={ history }/>
+			<Header history={history} />
+			<PinList history={history} />
+			<ImgUploader />
 		</Template>
-	)
+	);
 };
 
 export default Home;
