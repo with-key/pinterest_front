@@ -14,7 +14,6 @@ const PinCard = ({ history }) => {
 	)
 };
 
-// for default view (Stackgrid 적용 전)
 const ImgCard = styled.section`
 	height: 375px;
 	margin: 0px 8px 40px;
@@ -26,6 +25,7 @@ const ImgCard = styled.section`
   align-items: center;
   justify-content: center;
   background-color: #ddd;
+	cursor: default;
 `;
 
 export default PinCard;
