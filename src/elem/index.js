@@ -3,5 +3,6 @@ import Text from './Text';
 import Button from './Button';
 import Input from './Input';
 import Image from './Image';
+import Logo from './Logo';
 
-export { Flex, Text, Button, Input, Image };
+export { Flex, Text, Button, Input, Image, Logo };
