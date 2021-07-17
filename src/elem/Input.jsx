@@ -26,6 +26,7 @@ Input.defaultProps = {
 const DefaultInput = styled.input`
 	width: 100%;	
 	height: ${(props) => (props.height)};
+	margin: ${(props) => (props.mg)};
 	padding: 8px;
 	border: 2px solid var(--secondary-lightgray);
 	border-radius: 18px;	
