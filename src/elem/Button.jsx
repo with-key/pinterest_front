@@ -46,6 +46,9 @@ const DefaultBtn = styled.button`
 			&:hover{
 				background-color: #9F2223;
 			}
+			&:active{
+				transform: scale(.95);
+			}
 		`}
 	
 	${(props) =>
