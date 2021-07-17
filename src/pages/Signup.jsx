@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import { Button, Text, Flex } from '../elem';
 import { Motion, spring } from 'react-motion';
 import PinList from '../components/PinList';
-import StackGrid from 'react-stack-grid';
+import { useSelector } from 'react-redux';
 
 const Signup = () => {
-	const [viewLogin, setViewLogin] = useState(false);
+	const [viewLogin, setViewLogin] = useState(true);
 
 	return (
 		<>
@@ -45,12 +45,6 @@ const Signup = () => {
 							>
 								<Text size='7rem'>집안 꾸미기 아이디어를 찾아보세요.</Text>
 							</Title>
-							<PinList
-								style={{
-									transform: `translateY(${value.listY}px)`,
-								}}
-							/>
-
 							{viewLogin && (
 								<Motion
 									defaultStyle={{
