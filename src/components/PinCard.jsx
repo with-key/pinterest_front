@@ -7,7 +7,9 @@ const PinCard = ({ history }) => {
 	return (
 		<React.Fragment>
 			<ImgCard
-				// onClick={() => {history.push('/pin/:id');}}
+				onClick={() => {
+					history.push('/pin/:id');
+				}}
 				history={history}
 			>
 				Pin
@@ -41,7 +43,7 @@ const ImgCard = styled.section`
 	align-items: center;
 	justify-content: center;
 	background-color: #ddd;
-	animation: ${boxFade} 2s 1s infinite linear alternate;
+	cursor: default;
 `;
 
 export default PinCard;
