@@ -8,11 +8,11 @@ const Button = ({ children, type, ...rest }) => {
 				{children}
 			</CircleBtn>
 		);
-	};
+	}
 
 	return (
 		<DefaultBtn onClick={rest._onClick} {...rest}>
-				{children}
+			{children}
 		</DefaultBtn>
 	);
 };
@@ -28,54 +28,62 @@ Button.defaultProps = {
 };
 
 const DefaultBtn = styled.button`
+	cursor: pointer;
 	width: ${(props) => props.width};
 	height: ${(props) => props.height};
 	margin: ${(props) => props.mg};
 	padding: ${(props) => props.pd};
+	background-color: ${(props) =>
+		props.bg ? props.bg : 'var (--primary-white)'};
+	color: ${(props) => props.color};
 	border: none;
 	border-radius: ${(props) => props.height};
 	font-weight: 900;
 	font-size: 1.6rem;
 	text-align: center;
-	
+	&:focus {
+		outline: none;
+		box-shadow: rgba(3, 102, 214, 0.4) 0px 0px 0px 4px;
+	}
+
 	${(props) =>
 		props.primary &&
 		css`
 			background-color: var(--primary-red);
 			color: var(--primary-white);
-			&:hover{
-				background-color: #9F2223;
+			&:hover {
+				background-color: #9f2223;
 			}
-			&:active{
-				transform: scale(.95);
+			&:active {
+				transform: scale(0.95);
+			}
+		`}
+
+	${(props) =>
+		props.secondary &&
+		css`
+			background-color: var(--primary-lightgray);
+			color: var(--primary-black);
+			&:hover {
+				background-color: #e2e2e2;
+			}
+		`}
+		
+	${(props) =>
+		props.tertiary &&
+		css`
+			background-color: var(--primary-white);
+			color: var(--primary-black);
+			&:hover {
+				background-color: var(--primary-lightgray);
+			}
+			&:active {
+				background-color: var(--primary-black);
+				color: var(--primary-white);
 			}
 		`}
 	
-	${(props) =>
-	props.secondary &&
-	css`
-		background-color: var(--primary-lightgray);
-		color: var(--primary-black);
-		&:hover{
-			background-color: #E2E2E2;
-		}
-	`}
-		
-	${(props) =>
-	props.tertiary &&
-	css`
-		background-color: var(--primary-white);
-		color: var(--primary-black);
-		&:hover{
-			background-color: var(--primary-lightgray);
-		}
-		&:active{
-		background-color: var(--primary-black);
-		color: var(--primary-white);
-	}
-	`}
-	
-	&:disabled{
+	&:disabled {
 		background-color: var(--primary-lightgray);
 		color: var(--primary-gray);
 		cursor: not-allowed;
@@ -84,18 +92,19 @@ const DefaultBtn = styled.button`
 
 const CircleBtn = styled.button`
 	--size: ${(props) => props.height};
-  width: var(--size);
-  height: var(--size);
+	width: var(--size);
+	height: var(--size);
 	border: none;
 	border-radius: var(--size);
 	font-weight: 900;
 	font-size: 1.6rem;
 	text-align: center;
-	background-color: var(--primary-white);
+	background-color: ${(props) =>
+		props.bg ? props.bg : 'var (--primary-white)'};
 	color: var(--primary-gray);
-		&:hover{
-			background-color: #E2E2E2;
-		}
+	&:hover {
+		background-color: #e2e2e2;
+	}
 `;
 
 export default Button;
