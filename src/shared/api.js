@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-	// baseURL: '',
+	baseURL: 'http://localhost:4000',
 	headers: {
 		'content-type': 'application/json;charset=UTF-8',
 		accept: 'application/json,',
@@ -15,13 +15,11 @@ instance.interceptors.request.use((config) => {
 	return config;
 });
 
-export const api = {
-	postPin: () => instance.get('url'),
+export const userApi = {
+	signup: (userInfo) => instance.post('/user', userInfo),
+	login: (userInfo) => instance.post('/login', userInfo),
 };
-<<<<<<< Updated upstream
-=======
 
 export const pinApi = {
 	getPinList: () => instance.get('/pin'),
 };
->>>>>>> Stashed changes

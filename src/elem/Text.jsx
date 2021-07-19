@@ -2,7 +2,11 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 const Text = ({ children, ...rest }) => {
-	return <TextBx {...rest}>{children}</TextBx>;
+	return (
+		<TextBx {...rest} onClick={rest._onClick}>
+			{children}
+		</TextBx>
+	);
 };
 
 const TextBx = styled.div`

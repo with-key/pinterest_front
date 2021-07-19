@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import styled from 'styled-components';
+import ImgUploader from '../components/ImgUploader';
 
 // components
 import Template from '../components/Template';
@@ -19,22 +20,14 @@ const Home = ({ history }) => {
 
 	return (
 		<Template>
-<<<<<<< Updated upstream
-			<Header history={ history }/>
-			<PinList history={ history }/>
-=======
 			<Header history={history} />
 			<Spacer />
 			<PinList history={history} />
 			<ImgUploader />
->>>>>>> Stashed changes
 		</Template>
-	)
+	);
 };
 
-<<<<<<< Updated upstream
-export default Home;
-=======
 const Spacer = styled.header`
 	top: 80px;
 	width: 100%;
@@ -42,4 +35,3 @@ const Spacer = styled.header`
 `;
 
 export default Home;
->>>>>>> Stashed changes

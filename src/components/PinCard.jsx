@@ -1,23 +1,12 @@
 import React from 'react';
-<<<<<<< Updated upstream
-import styled from 'styled-components';
-
-// components
-=======
 import styled, { keyframes } from 'styled-components';
+
 // elements & components
 import { Flex, Image, Button, Icons, Text } from '../elem';
->>>>>>> Stashed changes
 
 const PinCard = ({ history }) => {
 	return (
 		<React.Fragment>
-<<<<<<< Updated upstream
-			<ImgCard 
-				onClick={() => {history.push('/pin/:id');}}
-				history={history}
-				>Pin</ImgCard>
-=======
 			<ImgContainer
 				onClick={() => {history.push('/pin/:id')}}
 				history={history}
@@ -53,29 +42,11 @@ const PinCard = ({ history }) => {
 						username
 					</Text>
 				</Flex>
-			
->>>>>>> Stashed changes
 		</React.Fragment>
-	)
+	);
 };
 
-<<<<<<< Updated upstream
-const ImgCard = styled.section`
-	height: 375px;
-	margin: 0px 8px 40px;
-	border-radius: 20px;
-  box-sizing: border-box;
-	display: flex;
-	flex-direction: column; 
-	position: relative;
-  align-items: center;
-  justify-content: center;
-  background-color: #ddd;
-	cursor: default;
-`;
 
-export default PinCard;
-=======
 const boxFade = keyframes`
   0% {
     opacity: 1;
@@ -86,6 +57,20 @@ const boxFade = keyframes`
   100% {
     opacity: 1;
   }
+`;
+
+const ImgCard = styled.section`
+	height: 300px;
+	margin: 0px 8px 40px;
+	border-radius: 20px;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	align-items: center;
+	justify-content: center;
+	background-color: #ddd;
+	cursor: default;
 `;
 
 const ImgContainer = styled.section`
@@ -121,4 +106,3 @@ const Middle = styled.div`
 	justify-content: center;
 `
 export default PinCard;
->>>>>>> Stashed changes

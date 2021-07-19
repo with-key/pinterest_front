@@ -14,14 +14,14 @@ const Header = (props) => {
 	// 스크롤 구독, 헤더 고정 후 스크롤 시 그림자
 	const [isScrolled, setIsScrolled] = useState(false);
 	const scrollListener = () => {
-    setIsScrolled(window.pageYOffset > 0);
-  };
+		setIsScrolled(window.pageYOffset > 0);
+	};
 	useEffect(() => {
-    window.addEventListener('scroll', scrollListener);
-    return () => {
-      window.removeEventListener('scroll', scrollListener);
-    };
-  }, []);
+		window.addEventListener('scroll', scrollListener);
+		return () => {
+			window.removeEventListener('scroll', scrollListener);
+		};
+	}, []);
 
 	// 위로 가기 버튼
 	const scrollToTop = () => {
@@ -32,18 +32,6 @@ const Header = (props) => {
 		<Container className={isScrolled ? 'scrolled' : ''}>
 			{/* 좌: 홈으로 가기 */}
 			<Flex width={'128px'}>
-<<<<<<< Updated upstream
-				<Button 
-					children={'P'} 
-					height={'48px'} 
-					type={'circle'} 
-					_onClick={() => {
-						window.location.replace('/');
-					}}/>
-				<Button 
-					children={'홈'} 
-					height={'48px'} 
-=======
 				<Button
 					height={'48px'}
 					type={'circle'}
@@ -57,28 +45,18 @@ const Header = (props) => {
 				<Button
 					children={'홈'}
 					height={'48px'}
->>>>>>> Stashed changes
 					tertiary
 					_onClick={() => {
 						window.location.replace('/');
-					}}/>
+					}}
+				/>
 			</Flex>
 			{/* 중: 검색 */}
 			<Flex width={'calc(100vw - 336px)'}>
-<<<<<<< Updated upstream
-				<Input width={'100%'} header placeholder={'검색'} mg={'0px 8px'}/>
-=======
 				<Input width='100%' header placeholder='검색' mg='0px 8px' />
->>>>>>> Stashed changes
 			</Flex>
 			{/* 우: 개인 메뉴 */}
 			<Flex width={'200px'}>
-<<<<<<< Updated upstream
-				<Button children={'Test'} height={'48px'} type={'circle'}/>
-				<Button children={'Test'} height={'48px'} type={'circle'}/>
-				<Button children={'Test'} height={'48px'} type={'circle'}/>
-				<Button children={'Test'} height={'48px'} type={'circle'}/>
-=======
 				<Button height='48px' type='circle'>
 					<Icons.Notification color='var(--primary-gray)'/>
 				</Button>
@@ -91,7 +69,6 @@ const Header = (props) => {
 				<Button height='48px' type='circle' _onClick={toggleMenuField}>
 					<Icons.ArrowDown color='var(--primary-black)'/>
 				</Button>	
->>>>>>> Stashed changes
 			</Flex>
 			{/* 메뉴 드롭다운 토글 */}
 			{isMenuVisible ? 
@@ -122,24 +99,21 @@ const Container = styled.header`
 	height: 80px;
 	position: fixed;
 	top: 0;
-	z-index:999;
-	padding: 16px; 
+	z-index: 999;
+	padding: 16px;
 	background-color: #fff;
 	border: none;
 	box-shadow: 0;
 	transition: box-shadow 0.5s;
-		&.scrolled {
-  	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.08);
-}
+	&.scrolled {
+		box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.08);
+	}
 `;
 
-<<<<<<< Updated upstream
-=======
 const FloatMenu = styled.div`
   position: absolute;
 	top: 60px;
 	right: 4px;
 `
->>>>>>> Stashed changes
 
 export default Header;

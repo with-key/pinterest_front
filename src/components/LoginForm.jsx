@@ -1,20 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Text } from '../elem';
 import { useDispatch } from 'react-redux';
 import { userAcions } from '../modules/user';
-import LoginForm from './LoginForm';
 
-const SignupCard = () => {
-	const [loginMode, setLoginMode] = useState(false);
+const LoginForm = () => {
 	const dispatch = useDispatch();
 	const formik = useFormik({
 		initialValues: {
 			email: '',
 			password: '',
-			passwordCheck: '',
 		},
 
 		validationSchema: Yup.object({
@@ -25,16 +22,10 @@ const SignupCard = () => {
 				.min(6, '비밀번호가 너무 짧네요! 6자 이상 입력하세요.')
 				.matches(/[a-zA-Z]/, '더 강력한 비밀번호를 사용하세요.')
 				.required('패스워드를 입력해주세요.'),
-			passwordCheck: Yup.string()
-				.min(6, '비밀번호가 너무 짧네요! 6자 이상 입력하세요.')
-				.matches(/[a-zA-Z]/, '더 강력한 비밀번호를 사용하세요.')
-				.required('패스워드를 한번 더 입력해주세요.')
-				.oneOf([Yup.ref('password'), null], '비밀번호가 일치하지 않아요.'),
 		}),
 
 		onSubmit: (values) => {
-			console.log(values);
-			dispatch(userAcions.__signup(values));
+			dispatch(userAcions.__login(values));
 		},
 	});
 
@@ -67,19 +58,8 @@ const SignupCard = () => {
 						<Text color='#e60023'>{formik.errors.password}</Text>
 					) : null}
 				</div>
-				<div>
-					<Input
-						name='passwordCheck'
-						type='password'
-						onChange={formik.handleChange}
-						value={formik.values.passwordCheck}
-						placeholder='비밀번호를 한번 더 입력하세요'
-					/>
-					{formik.touched.passwordCheck && formik.errors.passwordCheck ? (
-						<Text color='#e60023'>{formik.errors.passwordCheck}</Text>
-					) : null}
-				</div>
-				<button type='submit'>계속하기</button>
+				<Text>비밀번호를 잊으셨나요?</Text>
+				<button type='submit'>로그인</button>
 			</form>
 			<Text>또는</Text>
 			<button>Facebook으로 계속하기</button>
@@ -88,16 +68,8 @@ const SignupCard = () => {
 				계속 진행하면 Pinterest 서비스 약관에 동의하고 개인정보 보호정책을
 				읽었음을 인정하는 것으로 간주됩니다.
 			</Text>
-			<Text
-				_onClick={() => {
-					console.log('h');
-					setLoginMode(true);
-				}}
-			>
-				이미 회원이신가요? 로그인하기
-			</Text>
+			<Text>이미 회원이신가요? 로그인하기</Text>
 			<GoBusiness>무료 Business 계정 만들기</GoBusiness>
-			<LoginForm />
 		</Container>
 	);
 };
@@ -139,4 +111,4 @@ const Input = styled.input`
 	}
 `;
 
-export default SignupCard;
+export default LoginForm;
