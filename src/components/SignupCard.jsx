@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Flex, Text, Logo, Button, Input } from '../elem';
+import { Flex, Text, Icons, Button, Input } from '../elem';
 import { useDispatch } from 'react-redux';
 import { userAcions } from '../modules/user';
 import LoginForm from './LoginForm';
@@ -41,7 +41,7 @@ const SignupCard = () => {
 	return (
 		<Container>
 			<Flex mg='10px 0'>
-				<Logo />
+				<Icons.Logo color='var(--primary-red)' />
 			</Flex>
 			<Text size='3.2rem' ta='center'>
 				Pinterest에 오신 것을 환영합니다.

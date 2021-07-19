@@ -25,8 +25,8 @@ const Header = (props) => {
 
 	// 위로 가기 버튼
 	const scrollToTop = () => {
-		window.scrollTo({top: 0, left: 0, behavior: "smooth"})
-	}
+		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+	};
 
 	return (
 		<Container className={isScrolled ? 'scrolled' : ''}>
@@ -38,8 +38,9 @@ const Header = (props) => {
 					color={'var(--primary-red)'}
 					_onClick={() => {
 						window.location.replace('/');
-					}}>
-					<Icons.Logo color='var(--primary-red)'/>
+					}}
+				>
+					<Icons.Logo color='var(--primary-red)' />
 				</Button>
 
 				<Button
@@ -58,35 +59,36 @@ const Header = (props) => {
 			{/* 우: 개인 메뉴 */}
 			<Flex width={'200px'}>
 				<Button height='48px' type='circle'>
-					<Icons.Notification color='var(--primary-gray)'/>
+					<Icons.Notification color='var(--primary-gray)' />
 				</Button>
 				<Button height='48px' type='circle'>
-					<Icons.Message color='var(--primary-gray)'/>
-				</Button>				
+					<Icons.Message color='var(--primary-gray)' />
+				</Button>
 				<Button height='48px' type='circle'>
 					<Image shape='circle' />
-				</Button>	
+				</Button>
 				<Button height='48px' type='circle' _onClick={toggleMenuField}>
-					<Icons.ArrowDown color='var(--primary-black)'/>
-				</Button>	
+					<Icons.ArrowDown color='var(--primary-black)' />
+				</Button>
 			</Flex>
 			{/* 메뉴 드롭다운 토글 */}
-			{isMenuVisible ? 
-				<FloatMenu> 
-					<Dropdown header width='300px'/>
-				</FloatMenu> 
-				: null}
+			{isMenuVisible ? (
+				<FloatMenu>
+					<Dropdown header width='300px' />
+				</FloatMenu>
+			) : null}
 
 			{/* 하단: 고정 버튼 */}
-			<Button 
-        type='float'
-				style={{bottom: '88px',	right: '24px'}}
-      ><Icons.Add /></Button>
-			<Button 
-        type='float'
-				style={{bottom: '24px',	right: '24px'}}
+			<Button type='float' style={{ bottom: '88px', right: '24px' }}>
+				<Icons.Add />
+			</Button>
+			<Button
+				type='float'
+				style={{ bottom: '24px', right: '24px' }}
 				_onClick={scrollToTop}
-      ><Icons.ArrowUp /></Button>
+			>
+				<Icons.ArrowUp />
+			</Button>
 		</Container>
 	);
 };
@@ -111,9 +113,9 @@ const Container = styled.header`
 `;
 
 const FloatMenu = styled.div`
-  position: absolute;
+	position: absolute;
 	top: 60px;
 	right: 4px;
-`
+`;
 
 export default Header;

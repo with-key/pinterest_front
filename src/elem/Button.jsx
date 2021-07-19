@@ -16,7 +16,7 @@ const Button = ({ children, type, ...rest }) => {
 				{children}
 			</FloatBtn>
 		);
-	};
+	}
 
 	return (
 		<DefaultBtn onClick={rest._onClick} {...rest}>
@@ -68,7 +68,6 @@ const DefaultBtn = styled.button`
 		`}
 
 	${(props) =>
-<<<<<<< HEAD
 		props.secondary &&
 		css`
 			background-color: var(--primary-lightgray);
@@ -76,20 +75,10 @@ const DefaultBtn = styled.button`
 			&:hover {
 				background-color: #e2e2e2;
 			}
+			&:active {
+				transform: scale(0.95);
+			}
 		`}
-=======
-	props.secondary &&
-	css`
-		background-color: var(--primary-lightgray);
-		color: var(--primary-black);
-		&:hover{
-			background-color: #E2E2E2;
-		}
-		&:active{
-				transform: scale(.95);
-		}
-	`}
->>>>>>> 3082d17fc3a5e8e3807a5e7026ad25f541e38cf1
 		
 	${(props) =>
 		props.tertiary &&
@@ -119,26 +108,17 @@ const CircleBtn = styled.button`
 	border: none;
 	border-radius: var(--size);
 	text-align: center;
-<<<<<<< HEAD
-	background-color: ${(props) =>
-		props.bg ? props.bg : 'var (--primary-white)'};
-	color: var(--primary-gray);
-	&:hover {
-		background-color: #e2e2e2;
-	}
-=======
 	vertical-align: middle;
 	background-color: var(--primary-white);
 	color: var(--primary-gray);
-		&:hover{
-			background-color: var(--primary-lightgray);
-		}
->>>>>>> 3082d17fc3a5e8e3807a5e7026ad25f541e38cf1
+	&:hover {
+		background-color: var(--primary-lightgray);
+	}
 `;
 //	${(props) => (props.color ? `color: ${props.color};` : `color: var(--primary-gray);`)}
 
 // 핀 작성 위한 고정버튼; 헤더 내 생성
-// 위치 style로 직접 배치 
+// 위치 style로 직접 배치
 const FloatBtn = styled.button`
 	width: 56px;
 	height: 56px;
@@ -152,9 +132,9 @@ const FloatBtn = styled.button`
 	border: none;
 	cursor: pointer;
 	box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15);
-		&:hover {
-			background-color: var(--primary-lightgray);
-		}
-`
+	&:hover {
+		background-color: var(--primary-lightgray);
+	}
+`;
 
 export default Button;
