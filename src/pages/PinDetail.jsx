@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 
 // elements & components
@@ -9,8 +9,13 @@ import PinList	from '../components/PinList';
 import Comment 	from '../components/Comment';
 import Dropdown from '../components/Dropdown';
 
-const PinDetail = ({ history }) => {
-	// console.log(history);
+// redux
+import { useSelector, useDispatch } from 'react-redux';
+import { pinActions } from '../modules/pin';
+
+const PinDetail = ({history, match, ...rest}) => {
+	const dispatch = useDispatch();
+
 	// 댓글 펼치기 토글
 	const [isCommentVisible, setIsCommentVisible] = useState(false);
 	const toggleCommentField = () => {
@@ -20,7 +25,6 @@ const PinDetail = ({ history }) => {
 	// 메뉴 펼치기 토글
 	const [isMenuVisible, setIsMenuVisible] = useState(false);
 	const [floatMenu, setFloatMenu] = useState();
-
 	const toggleMenuField = (e) => {
 		setIsMenuVisible((setIsMenuVisible) => !setIsMenuVisible);
 		setFloatMenu({
@@ -28,7 +32,20 @@ const PinDetail = ({ history }) => {
 		 	left: `${e.pageX - 30}px`,
 		});
 	};
-	
+
+	// id로 핀 가져오기
+	const id = match.params.id;
+	useEffect(() => {
+    // if (!post) {
+    //   return;
+    // }
+    dispatch(pinActions.__getPin(id));
+  }, []);
+
+	const { pinTitle, pinContent, pinImage, pinUrl, userName} = useSelector((state) => state.pin.selectedPin);
+	// const username = user.userName;
+	// console.log(username)
+	// 현재 userName = undefined;
 
 	return (
 			<Template>
@@ -49,11 +66,12 @@ const PinDetail = ({ history }) => {
 					<Container>
 						{/* 핀 이미지 블록 */}
 						<Flex width='50%' pd='20px' style={{flex: 'none'}}>
-							<Image shape='relative' pinDetail width='100%'/>       
+							<Image shape='relative' pinDetail width='100%' src={pinImage}/>       
 						</Flex>
 
 						{/* 핀 내용 블록 */}
 						<Flex 
+							width='50%'
 							jc='space-between'
 							style={{
 								padding: '20px', 
@@ -97,10 +115,10 @@ const PinDetail = ({ history }) => {
 									: null}
 
 									<Text size='3.6rem' weight='700' mg='16px 0px'>
-										Pin Title - Dummy Text Trend Alert: Maxi Dresses Spring 2019 | The Fashion Folks
+										{pinTitle}
 									</Text>
 									<Text size='1.6rem' weight='400' mg='8px 0px'>
-										Pin Contents - Here's a trend alert on the maxi dresses spring 2019! How you can style this summer's most style item in a wearable way. Read more here:
+										{pinContent}
 									</Text>
 								</Flex>
 
@@ -108,7 +126,7 @@ const PinDetail = ({ history }) => {
 								<Flex mg='16px 0px' ai='center'>
 									<Image size='48'/>
 									<Text size='1.6rem' weight='700' mg='0px 12px'>
-										Username
+										{userName}
 									</Text>
 								</Flex>
 
@@ -158,7 +176,7 @@ const PinDetail = ({ history }) => {
 				<Flex center>
           <Text size='2.2rem' weight='700' mg='0 0 16px'>다른 핀 더 보기</Text>
       	</Flex>
-				<PinList />
+				<PinList history={history}/>
 			</Template>
 	)
 };

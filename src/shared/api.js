@@ -22,4 +22,5 @@ export const userApi = {
 
 export const pinApi = {
 	getPinList: () => instance.get('/pin'),
+	getPin: (pinid) => instance.get(`/pin/${pinid}`),
 };

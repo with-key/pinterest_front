@@ -9,12 +9,12 @@ import PinList from '../components/PinList';
 
 // redux
 import { useDispatch } from 'react-redux';
-import { __getPinList } from '../modules/pin';
+import { pinActions } from '../modules/pin';
 
 const Home = ({ history }) => {
 	const dispatch = useDispatch();
 	useEffect(() => {
-		dispatch(__getPinList());
+		dispatch(pinActions.__getPinList());
 	}, []);
 
 

@@ -9,15 +9,16 @@ const GET_PIN = 'pin/GET_PIN';
 // initState
 const initState = {
 	list: [],
+	selectedPin: {},
 	isLogin: false,
 };
 
 // action creator
-export const getPinList = createAction(GET_PINLIST, (pin_list) => ({pin_list}));
-export const getPin = createAction(GET_PIN, (pin_id) => ({pin_id}));
+const getPinList = createAction(GET_PINLIST, (pin_list) => ({pin_list}));
+const getPin = createAction(GET_PIN, (pin) => ({pin}));
 
 // Thunk function
-export const __getPinList =
+const __getPinList =
 	(props) =>
 	async (dispatch, getState, { history }) => {
 		try {
@@ -28,6 +29,18 @@ export const __getPinList =
 		}
 	};
 
+// 상세페이지: 핀 목록과 선택된 핀 상세 동시에 유지 필요
+const __getPin =
+	(pin_id) =>
+	async (dispatch, getState, { history }) => {
+		try {
+			const { data } = await pinApi.getPin(pin_id);
+			dispatch(getPin(data));
+		} catch (e) {
+			console.log(e);
+		}
+};
+
 // reducer
 const pin = handleActions(
 	{
@@ -36,9 +49,26 @@ const pin = handleActions(
 				...state,
 				list: action.payload.pin_list,
 			}
-		}	
+		},
+		
+		[GET_PIN]: (state, action) => {
+			console.log(action.payload.pin.user.userName)
+			return {
+				...state,
+				selectedPin: {
+					...action.payload.pin, 
+					userName: action.payload.pin.user.userName 
+				}
+			}
+		},
+
 	},
 	initState,
 );
+
+export const pinActions = {
+	__getPinList,
+	__getPin,
+};
 
 export default pin;
