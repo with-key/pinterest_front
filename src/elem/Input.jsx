@@ -27,41 +27,26 @@ Input.defaultProps = {
 };
 
 const DefaultInput = styled.input`
-<<<<<<< HEAD
 	width: ${(props) => (props.width ? props.width : '100%')};
-	height: ${(props) => props.height};
-	margin: ${(props) => props.mg};
-	padding: 8px;
-	border: 2px solid var(--secondary-lightgray);
-	border-radius: 18px;
-=======
-	width: 100%;	
 	height: ${(props) => (props.height)};
 	margin: ${(props) => (props.mg)};
 	padding: 8px 16px;
-	font-size: 1.6rem;
 	border: 2px solid var(--secondary-lightgray);
 	border-radius: 18px;
-	${(props) =>
-		props.comment &&
-		css`
-			border: 1px solid var(--secondary-lightgray);
-			border-radius: ${(props) => (props.height)};
-		`}
->>>>>>> 3082d17fc3a5e8e3807a5e7026ad25f541e38cf1
 	box-sizing: border-box;
 	background-color: transparent;
 	display: block;
 	&:focus {
 		outline: none;
-<<<<<<< HEAD
-		/* border: 4px solid #97c2fa; */
 		box-shadow: rgba(3, 102, 214, 0.4) 0px 0px 0px 4px;
-=======
-		border: 
-			3px solid #97C2FA;
->>>>>>> 3082d17fc3a5e8e3807a5e7026ad25f541e38cf1
 	}
+	${(props) =>
+	props.comment &&
+	css`
+		border: 1px solid var(--secondary-lightgray);
+		border-radius: ${(props) => (props.height)};
+	`}
+
 `;
 
 const HeaderInput = styled.input`
@@ -80,7 +65,7 @@ const HeaderInput = styled.input`
 	}
 	&:focus {
 		outline: none;
-		border: 4px solid #97c2fa;
+		box-shadow: rgba(3, 102, 214, 0.4) 0px 0px 0px 4px;
 	}
 	&::-webkit-input-placeholder { /* Chrome/Opera/Safari */
 		background-image: url('https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-256.png');

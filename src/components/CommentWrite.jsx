@@ -10,8 +10,8 @@ const CommentWrite = (props) => {
 				<Flex>
 					<Image shape='circle' size='48' />
 				</Flex>
-				<Flex mg='0 0 0 16px' >
-					<Input  width='100%' style={{boxSizing: 'border-box'}} placeholder='댓글 추가' comment />
+				<Flex width='100%' mg='0 0 0 16px'>
+					<Input placeholder='댓글 추가' comment />
 				</Flex>
 				
 			</Flex>
