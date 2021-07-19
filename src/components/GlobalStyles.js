@@ -11,6 +11,7 @@ const GlobalStyles = createGlobalStyle`
     --primary-lightgray: #EFEFEF;
     --secondary-gray: #888888;
 		--secondary-lightgray: #DDDDDD;
+		--secondary-blue: #1876F2
   }
 
 	a {
