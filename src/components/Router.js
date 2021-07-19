@@ -10,7 +10,8 @@ import PinDetail from '../pages/PinDetail';
 const Router = () => {
 	return (
 		<Switch>
-			<Route path='/' component={Auth(Home, false)} exact />
+			<Route path='/' component={Home} exact />
+			{/* <Route path='/' component={Auth(Home, false)} exact /> */}
 			<Route path='/signup' component={Signup} exact />
 			<Route path='/pin/:id' component={PinDetail} exact />
 		</Switch>
