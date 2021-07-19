@@ -23,12 +23,28 @@ const CommentList = (props) => {
 		<React.Fragment>
 			<Section> 
 				
-				{/* 목록 정보 및 토글 */}
-				<Flex mg='8px 0px' ai='center'>  
-					<Text size='2.0rem' weight='700' mg='0 8px 0 0'>
-						댓글 {comment_count} 개 
-					</Text>			
-				</Flex>
+				{/* 목록 정보 및 토글 */}				
+					{ ( comment_count === 0 ) ? (
+						<Flex mg='16px 0' ai='center'>						
+							<Text size='2.0rem' weight='700'>
+								댓글
+							</Text>
+						</Flex>
+						)
+						: (
+						<Flex mg='16px 0' ai='center'>						
+							<Text size='2.0rem' weight='700'>
+							댓글 {comment_count} 개 
+							</Text>
+						</Flex>	
+						)	}						
+					{ ( comment_count === 0 ) && (
+						<Flex>
+							<Text size='1.2rem' weight='400' >
+								피드백을 공유하거나 질문을 하거나 칭찬을 남겨주세요
+							</Text>
+						</Flex>
+					) }
 									
 				{/* 목록 */}
 				<Section> 			
