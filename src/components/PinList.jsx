@@ -8,6 +8,7 @@ const transition = transitions.scaleUp;
 
 const PinList = ({ history }) => {
 	return (
+<<<<<<< Updated upstream
 			<Container>
 				<StackGrid
 				  monitorImagesLoaded
@@ -29,6 +30,33 @@ const PinList = ({ history }) => {
 					<PinCard key="key6">Item 6</PinCard>
         	<PinCard key="key7">Item 7</PinCard>
 					<PinCard key="key8">Item 8</PinCard>
+=======
+		<Container>
+			<StackGrid
+				monitorImagesLoaded
+				columnWidth={236}
+				gutterWidth={16}
+				gutterHeight={16}
+				appear={transition.appear}
+				appeared={transition.appeared}
+				enter={transition.enter}
+				entered={transition.entered}
+				leaved={transition.leaved}
+				easing={easings.cubicOut}
+				duration={80}
+				appearDelay={1}
+			>
+				<PinCard key='key1' history={history}>
+					Item 1
+				</PinCard>
+				<PinCard key='key2'>Item 2</PinCard>
+				<PinCard key='key3'>Item 3</PinCard>
+				<PinCard key='key4'>Item 4</PinCard>
+				<PinCard key='key5'>Item 5</PinCard>
+				<PinCard key='key6'>Item 6</PinCard>
+				<PinCard key='key7'>Item 7</PinCard>
+				<PinCard key='key8'>Item 8</PinCard>
+>>>>>>> Stashed changes
 
         	<PinCard key="key9">Item 9</PinCard>
 					<PinCard key="key10">Item 10</PinCard>
@@ -53,10 +81,13 @@ const PinList = ({ history }) => {
 	)
 };
 
+<<<<<<< Updated upstream
 const Container = styled.header`
+=======
+const Container = styled.div`
+>>>>>>> Stashed changes
 	width: 100%;
 	padding: 0px 12px;
-	margin-top: 80px;
 `;
 
 export default PinList;

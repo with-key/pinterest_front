@@ -18,3 +18,10 @@ instance.interceptors.request.use((config) => {
 export const api = {
 	postPin: () => instance.get('url'),
 };
+<<<<<<< Updated upstream
+=======
+
+export const pinApi = {
+	getPinList: () => instance.get('/pin'),
+};
+>>>>>>> Stashed changes

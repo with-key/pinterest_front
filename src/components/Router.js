@@ -10,6 +10,10 @@ const Router = () => {
 	return (
 		<Switch>
 			<Route path='/' component={Home} exact />
+<<<<<<< Updated upstream
+=======
+			{/* <Route path='/' component={Auth(Home, false)} exact /> */}
+>>>>>>> Stashed changes
 			<Route path='/signup' component={Signup} exact />
 			<Route path='/pin/:id' component={PinDetail} exact />
 		</Switch>
