@@ -4,28 +4,33 @@ import styled from 'styled-components';
 import { Button, Text, Flex } from '../elem';
 import { Motion, spring } from 'react-motion';
 import MainBackList from '../components/MainBackList';
-import { useSelector } from 'react-redux';
 
 const Signup = () => {
-	const [viewLogin, setViewLogin] = useState(true);
+	const [viewLogin, setViewLogin] = useState(false);
 
 	return (
 		<>
 			<Motion
 				defaultStyle={{
-					textY: viewLogin ? 0 : 10,
-					listY: 0,
-					opacity: 0,
-					bgOpacity: 0,
+					top: 0,
+					bottom: 1490,
+					opacity: -5,
+					bg: 0,
 				}}
 				style={{
-					textY: spring(viewLogin ? -1000 : 0, { stiffness: 70, dumping: 40 }),
-					listY: spring(viewLogin ? -1500 : 0, {
-						stiffness: 70,
+					top: spring(viewLogin ? -2000 : 0, { stiffness: 45, dumping: 100 }),
+					bottom: spring(viewLogin ? 0 : 1490, {
+						stiffness: 45,
+						dumping: 100,
+					}),
+					opacity: spring(viewLogin ? 1 : -5, {
+						stiffness: 25,
 						dumping: 40,
 					}),
-					opacity: spring(1, { stiffness: 70, dumping: 40 }),
-					bgOpacity: 1,
+					bg: spring(viewLogin ? 0.5 : 0, {
+						stiffness: 50,
+						dumping: 40,
+					}),
 				}}
 			>
 				{(value) => (
@@ -35,50 +40,47 @@ const Signup = () => {
 								if (e.nativeEvent.wheelDelta < 0) setViewLogin(true);
 								else if (e.nativeEvent.wheelDelta > 0) setViewLogin(false);
 							}}
-							style={{ opacity: value.bgOpacity }}
 						>
-							<Title
-								style={{
-									transform: `translateY(${value.textY}px)`,
-								}}
-							>
-								<Text size='7rem'>집안 꾸미기 아이디어를 찾아보세요.</Text>
-							</Title>
-							<MainBackList />
-							<Motion
-								defaultStyle={{
-									textY: viewLogin ? 0 : 10,
-									listY: viewLogin ? 1500 : 0,
-									opacity: -5,
-								}}
-								style={{
-									textY: spring(viewLogin ? -700 : 0, {
-										stiffness: 70,
-										dumping: 40,
-									}),
-									listY: spring(viewLogin ? 0 : 1500, {
-										stiffness: 70,
-										dumping: 40,
-									}),
-									opacity: spring(1, { stiffness: 25, dumping: 40 }),
-								}}
-							>
-								{(value) => (
-									<Wrapper>
-										<FlexBox
-											style={{
-												transform: `translateY(${value.listY}px)`,
-											}}
-										>
-											<Text size='7rem' mg='7rem 0 1.8rem 3.6rem'>
-												가입하여 더 많은 아이디어를
-												<br /> 만나보세요
-											</Text>
-											<SignupCard />
-										</FlexBox>
-									</Wrapper>
-								)}
-							</Motion>
+							<Wrapper>
+								<MainBackList
+									style={{
+										transform: `translateY(${value.top}px)`,
+									}}
+								/>
+								<FlexBox
+									style={{
+										transform: `translateY(${value.top}px)`,
+									}}
+								>
+									<Text size='7rem' mg='7rem 0 1.8rem 3.6rem'>
+										꾸미기 아이디어를 찾아보세요.
+									</Text>
+								</FlexBox>
+							</Wrapper>
+							<BottomWrapper>
+								<FlexBox
+									style={{
+										transform: `translateY(${value.bottom}px)`,
+										opacity: viewLogin && value.opacity,
+									}}
+								>
+									<Text
+										size='7rem'
+										mg='7rem 0 1.8rem 3.6rem'
+										color='#fff'
+										weight='700'
+									>
+										가입하여 더 많은 아이디어를
+										<br /> 만나보세요
+									</Text>
+									<SignupCard />
+								</FlexBox>
+								<Back
+									style={{
+										opacity: value.bg,
+									}}
+								/>
+							</BottomWrapper>
 						</Container>
 					</>
 				)}
@@ -88,16 +90,35 @@ const Signup = () => {
 };
 
 const Wrapper = styled.div`
+	position: absolute;
 	overflow: hidden;
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+
+const Back = styled.div`
 	position: absolute;
 	width: 100%;
-	height: 90vh;
+	height: 100%;
+	background-color: #000;
+`;
+
+const BottomWrapper = styled.div`
+	position: absolute;
+	overflow: hidden;
+	width: 100%;
+	height: 100vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 `;
 
 const FlexBox = styled.div`
+	position: absolute;
+	overflow: hidden;
 	width: 1318px;
 	display: flex;
 	justify-content: space-between;
@@ -105,16 +126,12 @@ const FlexBox = styled.div`
 `;
 
 const Container = styled.section`
-	display: flex;
 	overflow: hidden;
-	height: 90vh;
+	display: flex;
+	height: 100vh;
 	justify-content: center;
 	align-items: center;
+	/* background-color: #000; */
 `;
-const Title = styled.div`
-	/* position: absolute; */
-	z-index: 999;
-	border: 1px solid blue;
-	top: 30%;
-`;
+
 export default Signup;

@@ -33,7 +33,6 @@ const SignupCard = () => {
 		}),
 
 		onSubmit: (values) => {
-			console.log(values);
 			dispatch(userAcions.__signup(values));
 		},
 	});
@@ -168,6 +167,7 @@ const GoBusiness = styled.div`
 `;
 
 const Container = styled.section`
+	background-color: var(--primary-white);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
