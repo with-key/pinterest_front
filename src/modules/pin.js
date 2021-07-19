@@ -3,7 +3,7 @@ import produce from 'immer';
 import { pinApi } from '../shared/api';
 
 // action
-const GET_PINLIST = 'pin/GET_PINLIST';
+const GET_PIN_LIST = 'pin/GET_PIN_LIST';
 const GET_PIN = 'pin/GET_PIN';
 
 // initState
@@ -14,7 +14,7 @@ const initState = {
 };
 
 // action creator
-const getPinList = createAction(GET_PINLIST, (pin_list) => ({pin_list}));
+const getPinList = createAction(GET_PIN_LIST, (pin_list) => ({pin_list}));
 const getPin = createAction(GET_PIN, (pin) => ({pin}));
 
 // Thunk function
@@ -44,7 +44,7 @@ const __getPin =
 // reducer
 const pin = handleActions(
 	{
-		[GET_PINLIST]: (state, action) => {
+		[GET_PIN_LIST]: (state, action) => {
 			return {
 				...state,
 				list: action.payload.pin_list,
@@ -52,7 +52,6 @@ const pin = handleActions(
 		},
 		
 		[GET_PIN]: (state, action) => {
-			console.log(action.payload.pin.user.userName)
 			return {
 				...state,
 				selectedPin: {

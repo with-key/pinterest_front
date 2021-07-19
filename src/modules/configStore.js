@@ -2,6 +2,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'; // 리듀서 메서드
 import user from './user'; // 리듀서
 import pin from './pin';
+import comment from './comment';
 
 // middleware
 import thunk from 'redux-thunk'; // 썽크
@@ -16,6 +17,7 @@ export const history = createBrowserHistory();
 const rootReducer = combineReducers({
 	user,
 	pin,
+	comment,
 	router: connectRouter(history),
 });
 

@@ -6,7 +6,7 @@ import { Flex, Text, Button, Image, Icons } from '../elem';
 import Template	from '../components/Template';
 import Header 	from '../components/Header';
 import PinList	from '../components/PinList';
-import Comment 	from '../components/Comment';
+import CommentList 	from '../components/CommentList';
 import Dropdown from '../components/Dropdown';
 
 // redux
@@ -15,7 +15,6 @@ import { pinActions } from '../modules/pin';
 
 const PinDetail = ({history, match, ...rest}) => {
 	const dispatch = useDispatch();
-
 	// 댓글 펼치기 토글
 	const [isCommentVisible, setIsCommentVisible] = useState(false);
 	const toggleCommentField = () => {
@@ -36,17 +35,10 @@ const PinDetail = ({history, match, ...rest}) => {
 	// id로 핀 가져오기
 	const id = match.params.id;
 	useEffect(() => {
-    // if (!post) {
-    //   return;
-    // }
+    // if (!pin) { return; }
     dispatch(pinActions.__getPin(id));
   }, []);
-
 	const { pinTitle, pinContent, pinImage, pinUrl, userName} = useSelector((state) => state.pin.selectedPin);
-	// const username = user.userName;
-	// console.log(username)
-	// 현재 userName = undefined;
-
 	return (
 			<Template>
 				<Header />
@@ -64,6 +56,7 @@ const PinDetail = ({history, match, ...rest}) => {
 				{/* 핀 상세 */}
 				<Flex mg='80px 0px 0px' pd='12px'>   
 					<Container>
+
 						{/* 핀 이미지 블록 */}
 						<Flex width='50%' pd='20px' style={{flex: 'none'}}>
 							<Image shape='relative' pinDetail width='100%' src={pinImage}/>       
@@ -77,6 +70,7 @@ const PinDetail = ({history, match, ...rest}) => {
 								padding: '20px', 
 								flexDirection: 'column',	
 							}}>
+								
 							{/* 상단 블록 */}
 							<Flex style={{flexDirection: 'column',}}>
 
@@ -130,23 +124,9 @@ const PinDetail = ({history, match, ...rest}) => {
 									</Text>
 								</Flex>
 
-								{/* 핀 댓글 목록 블록 */} 
-								<Flex mg='8px 0px' ai='center'>  
-									<Text size='2.0rem' weight='700' mg='0 8px 0 0'>
-										댓글 n 개 
-									</Text>
-									{!isCommentVisible ? 
-										<Button height='52px' type='circle' _onClick={toggleCommentField}>
-											<Icons.ArrowRight />
-										</Button> :
-										<Button height='52px' type='circle' _onClick={toggleCommentField}>
-											<Icons.ArrowDown />
-										</Button> }									
-								</Flex>
-								
-								{/* 핀 댓글 쓰기 블록 */}
+								{/* 핀 댓글 목록 및 블록 */}
 								<Flex mg='16px 0px'> 
-									{isCommentVisible ? <Comment /> : null}
+									<CommentList history={history} match={match} {...rest} />
 								</Flex>
 							
 							</Flex>
@@ -172,11 +152,11 @@ const PinDetail = ({history, match, ...rest}) => {
 					</Container>
 				</Flex>
 
-				{/* pinlist ; 무작위? */}
+				{/* 하단 핀 목록 */}
 				<Flex center>
           <Text size='2.2rem' weight='700' mg='0 0 16px'>다른 핀 더 보기</Text>
       	</Flex>
-				<PinList history={history}/>
+				<PinList history={history} />
 			</Template>
 	)
 };
