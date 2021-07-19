@@ -4,15 +4,11 @@ import styled, { keyframes } from 'styled-components';
 // elements & components
 import { Flex, Image, Button, Icons, Text } from '../elem';
 
-const PinCard = ({ history }) => {
+const PinCard = ({ history, pinImage, user, ...rest }) => {
 	return (
 		<React.Fragment>
-			<ImgContainer
-				onClick={() => {history.push('/pin/:id')}}
-				history={history}
-			>
-				<Image className='image' shape='relative' width='236px'/>
-
+			<ImgContainer>
+				<Image className='image' shape='relative' width='236px' src={pinImage}/>
 				<Middle className='middle'>
 					<Flex>
 						<Button children='저장' width='64px' height='48px' primary/>
@@ -39,7 +35,7 @@ const PinCard = ({ history }) => {
 				<Flex mg='8px 0' ai='center'>
 					<Image size='36' shape='circle'/>
 					<Text size='1.4rem' weight='400' mg='0px 8px'>
-						username
+						{user.userName}
 					</Text>
 				</Flex>
 		</React.Fragment>
@@ -57,20 +53,6 @@ const boxFade = keyframes`
   100% {
     opacity: 1;
   }
-`;
-
-const ImgCard = styled.section`
-	height: 300px;
-	margin: 0px 8px 40px;
-	border-radius: 20px;
-	box-sizing: border-box;
-	display: flex;
-	flex-direction: column;
-	position: relative;
-	align-items: center;
-	justify-content: center;
-	background-color: #ddd;
-	cursor: default;
 `;
 
 const ImgContainer = styled.section`

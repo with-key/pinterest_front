@@ -10,6 +10,7 @@ import Comment 	from '../components/Comment';
 import Dropdown from '../components/Dropdown';
 
 const PinDetail = ({ history }) => {
+	// console.log(history);
 	// 댓글 펼치기 토글
 	const [isCommentVisible, setIsCommentVisible] = useState(false);
 	const toggleCommentField = () => {
@@ -34,7 +35,13 @@ const PinDetail = ({ history }) => {
 				<Header />
 				{/* 돌아가기 버튼 위치 고정 - icon 변경 */}
         <Flex width='320px' style={{position:'absolute', top: '96px', left: '20px'}}>
-          <Button height='48px' type='circle'><Icons.ArrowBack /></Button>
+          <Button 
+						height='48px' 
+						type='circle'
+						onClick={()=> history.push('/')}
+					>
+						<Icons.ArrowBack />
+					</Button>
         </Flex>
 
 				{/* 핀 상세 */}

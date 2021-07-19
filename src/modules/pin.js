@@ -4,6 +4,7 @@ import { pinApi } from '../shared/api';
 
 // action
 const GET_PINLIST = 'pin/GET_PINLIST';
+const GET_PIN = 'pin/GET_PIN';
 
 // initState
 const initState = {
@@ -12,15 +13,15 @@ const initState = {
 };
 
 // action creator
-export const getPinList = createAction(GET_PINLIST, (pinList) => ({pinList}));
+export const getPinList = createAction(GET_PINLIST, (pin_list) => ({pin_list}));
+export const getPin = createAction(GET_PIN, (pin_id) => ({pin_id}));
 
 // Thunk function
 export const __getPinList =
 	(props) =>
-	async (dispatch) => {
+	async (dispatch, getState, { history }) => {
 		try {
 			const { data } = await pinApi.getPinList();
-			console.log(data);
 			dispatch(getPinList(data));
 		} catch (e) {
 			console.log(e);
@@ -31,11 +32,12 @@ export const __getPinList =
 const pin = handleActions(
 	{
 		[GET_PINLIST]: (state, action) => {
-			return { ...state,
-				list: action.payload.articles,// 리덕스액션을 사용하면 action 내에 있는 데이터를 무조건 'payload'로 불러옵니다.
-		}}
+			return {
+				...state,
+				list: action.payload.pin_list,
+			}
+		}	
 	},
-
 	initState,
 );
 
