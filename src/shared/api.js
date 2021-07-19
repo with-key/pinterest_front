@@ -20,4 +20,6 @@ export const userApi = {
 	login: (userInfo) => instance.post('/login', userInfo),
 };
 
-export const pinApi = {};
+export const pinApi = {
+	getPinList: () => instance.get('/pin'),
+};

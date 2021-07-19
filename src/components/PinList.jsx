@@ -11,7 +11,9 @@ const PinList = ({ history }) => {
 		<Container>
 			<StackGrid
 				monitorImagesLoaded
-				columnWidth={240}
+				columnWidth={236}
+				gutterWidth={16}
+				gutterHeight={16}
 				appear={transition.appear}
 				appeared={transition.appeared}
 				enter={transition.enter}
@@ -55,10 +57,8 @@ const PinList = ({ history }) => {
 };
 
 const Container = styled.header`
-	top: 84px;
 	width: 100%;
 	padding: 0px 12px;
-	margin-top: 80px;
 `;
 
 export default PinList;

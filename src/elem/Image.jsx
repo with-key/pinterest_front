@@ -24,6 +24,8 @@ const Image = ({ shape, ...rest }) => {
 Image.defaultProps = {
   shape: 'circle',
   src: 'https://wallpaperaccess.com/full/3501969.png',
+  margin: '0px',
+  padding: '0px',
   size: '32',
 };
 
