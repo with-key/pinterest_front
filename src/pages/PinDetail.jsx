@@ -12,6 +12,7 @@ import Dropdown from '../components/Dropdown';
 // redux
 import { useSelector, useDispatch } from 'react-redux';
 import { pinActions } from '../modules/pin';
+import { commentActions } from '../modules/comment';
 
 const PinDetail = ({ history, match, ...rest }) => {
 	const dispatch = useDispatch();
@@ -22,23 +23,15 @@ const PinDetail = ({ history, match, ...rest }) => {
 	useEffect(() => {
 		dispatch(pinActions.__getPin(id));
 		dispatch(pinActions.__getPinList());
-		dispatch(pinActions.__getPin(id));
+		dispatch(commentActions.__getCommentList(id));
 	}, [id]);
 
 	const { pinTitle, pinContent, pinImage, userName, pinUrl } = useSelector(
 		(state) => state.pin.selectedPin,
 	);
 
-	// // pin url 글자 수 줄여서 표시
-	// const pinUrl = useSelector((state) => state.pin.selectedPin?.pinUrl);
-	// const strlength = 50;
-	// let shortPinUrl = pinUrl 
-	// if (pinUrl.length > strlength ) {
-	// 	shortPinUrl = (pinUrl.substr(0, strlength-2) + '...');
-	// }
-
 	return (
-		<Template>
+		<Template  history={history}>
 			{/* 돌아가기 */}
 			<Flex
 				width='320px'

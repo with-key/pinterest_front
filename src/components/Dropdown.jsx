@@ -4,6 +4,7 @@ import styled, {css} from 'styled-components';
 import {Text, Flex, Image, } from '../elem';
 
 const Dropdown = (props) => {
+  console.log(props.history)
   if (props.header) {
     return (
       <React.Fragment>
@@ -13,7 +14,7 @@ const Dropdown = (props) => {
               현재 로그인 계정
             </HeadingText>
   
-            <Link>
+            <Link onClick={() => (props.history.push('/board'))}>
               <Flex pd='12px 8px' >
                 <Image size='60' shape='circle'/>            
                 <Flex dr='column' pd='0 8px'>
