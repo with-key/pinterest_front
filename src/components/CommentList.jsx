@@ -47,10 +47,12 @@ const CommentList = (props) => {
 					) }
 									
 				{/* 목록 */}
-				<Section> 			
-					{comment_list.map((comment) => {
+				<Section> 
+					{comment_list ? (			
+						comment_list.map((comment) => {
 						return ( <CommentCard key={comment.id} {...comment}/>	);
-					})}
+					})
+					) : ('')}
 				</Section>
 
 				{/* 쓰기 */}

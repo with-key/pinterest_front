@@ -9,8 +9,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { commentActions } from '../modules/comment';
 
 const CommentCard = (props) => {
-	const { commentContent, createdAt, likeNum } = props;
+	const dispatch = useDispatch();
+	const { commentContent, createdAt, likeNum, pinId, id} = props;
 	const userName = props.user?.userName;
+
+	const deleteComment = () => {
+		const result = window.confirm('댓글을 삭제하시겠습니까?');
+		if (result) {
+			dispatch(commentActions.__deleteComment(id));
+		}	
+	}
 
 	return (
 		<Flex>
@@ -24,7 +32,9 @@ const CommentCard = (props) => {
 						<Text size='1.4rem' mg='0 8px 0 0' weight='700'>
 							{userName}
 						</Text>
-						<StyledText>{TimeCounting(createdAt, { lang: 'ko' })}</StyledText>
+						<StyledText>
+							{TimeCounting(createdAt, { lang: 'ko' })}
+						</StyledText>
 					</Aligned>
 					<Flex>
 						<Text size='1.2rem' mg='8px 0 0'>
@@ -35,13 +45,25 @@ const CommentCard = (props) => {
 
 				<Aligned mg='4px 0 16px 16px' jc='space-between'>
 					<Aligned>
+
 						<Button comment type='circle'>
 							<Icons.Like color='var(--primary-gray)' />
 						</Button>
-						<StyledText>{likeNum}</StyledText>
+						<StyledText>
+							{likeNum}
+						</StyledText>
 
 						<Button comment type='circle'>
 							<Icons.MessageSmall color='var(--primary-gray)' />
+						</Button>
+
+						{/* 수정/ 삭제 테스트용 버튼 */}
+						<Button comment type='circle'>
+							<Icons.Pencil color='var(--primary-gray)' />
+						</Button>
+
+						<Button comment type='circle' _onClick={deleteComment}>
+							<Icons.Pencil color='var(--primary-gray)'/>
 						</Button>
 
 						<MenuToggle list={['수정', '삭제']} editbtn comment />
