@@ -40,10 +40,13 @@ const SignupCard = () => {
 	return (
 		<Container>
 			<Flex mg='10px 0'>
-				<Icons.Logo color='var(--primary-red)' />
+				<Icons.Logo color='var(--primary-red)' size='32' />
 			</Flex>
 			<Text size='3.2rem' ta='center'>
-				Pinterest에 오신 것을 환영합니다.
+				Pinterest에 오신 것을
+			</Text>
+			<Text size='3.2rem' ta='center' mg='10px 0 10px 0'>
+				환영합니다.
 			</Text>
 			<Text size='1.6rem' color='var(--primary-gray)' mg='10px 0 32px 0'>
 				시도해 볼 만한 새로운 아이디어 찾기
@@ -105,7 +108,6 @@ const SignupCard = () => {
 					</Button>
 				</form>
 			)}
-
 			<Text mg='20px 0' size='1.6rem'>
 				또는
 			</Text>

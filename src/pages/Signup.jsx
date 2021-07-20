@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import SignupCard from '../components/SignupCard';
 import styled from 'styled-components';
-import { Button, Text, Flex } from '../elem';
+import { Button, Text, Icons, Flex } from '../elem';
 import { Motion, spring } from 'react-motion';
 import MainBackList from '../components/MainBackList';
 
 const Signup = () => {
 	const [viewLogin, setViewLogin] = useState(false);
-
 	return (
 		<>
 			<Motion
@@ -41,6 +40,51 @@ const Signup = () => {
 								else if (e.nativeEvent.wheelDelta > 0) setViewLogin(false);
 							}}
 						>
+							<Header
+								style={{
+									transform: `translateY(${value.top}px)`,
+								}}
+							>
+								<Flex ai='center' gap='10px'>
+									<Icons.Logo size='32' color='var(--primary-red)' />
+									<Text size='2rem' color='var(--primary-red)' weight='700' l>
+										Pinterest
+									</Text>
+								</Flex>
+								<Flex gap='5rem'>
+									<Flex ai='center' gap='2rem'>
+										<Text size='1.6rem' pointer>
+											소개
+										</Text>
+										<Text size='1.6rem' pointer>
+											비즈니스
+										</Text>
+										<Text size='1.6rem' pointer>
+											언론
+										</Text>
+									</Flex>
+									<Flex ai='center' gap='10px'>
+										<Button
+											primary
+											height='40px'
+											_onClick={() => {
+												setViewLogin(true);
+											}}
+										>
+											로그인
+										</Button>
+										<Button
+											color='var(--primary-black)'
+											height='40px'
+											_onClick={() => {
+												setViewLogin(true);
+											}}
+										>
+											가입하기
+										</Button>
+									</Flex>
+								</Flex>
+							</Header>
 							<Wrapper>
 								<MainBackList
 									style={{
@@ -57,7 +101,7 @@ const Signup = () => {
 									</Text>
 								</FlexBox>
 							</Wrapper>
-							<BottomWrapper>
+							<Wrapper>
 								<FlexBox
 									style={{
 										transform: `translateY(${value.bottom}px)`,
@@ -80,7 +124,7 @@ const Signup = () => {
 										opacity: value.bg,
 									}}
 								/>
-							</BottomWrapper>
+							</Wrapper>
 						</Container>
 					</>
 				)}
@@ -89,24 +133,28 @@ const Signup = () => {
 	);
 };
 
-const Wrapper = styled.div`
-	position: absolute;
+const Container = styled.section`
 	overflow: hidden;
-	width: 100%;
-	height: 100vh;
 	display: flex;
+	height: 100vh;
 	justify-content: center;
 	align-items: center;
 `;
 
-const Back = styled.div`
-	position: absolute;
+const Header = styled.header`
 	width: 100%;
-	height: 100%;
-	background-color: #000;
+	height: 80px;
+	position: absolute;
+	top: 0;
+	z-index: 1;
+	background-color: var(--primary-white);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 2.4rem;
 `;
 
-const BottomWrapper = styled.div`
+const Wrapper = styled.div`
 	position: absolute;
 	overflow: hidden;
 	width: 100%;
@@ -122,16 +170,14 @@ const FlexBox = styled.div`
 	width: 1318px;
 	display: flex;
 	justify-content: space-between;
-	z-index: 99;
+	z-index: 9999;
 `;
 
-const Container = styled.section`
-	overflow: hidden;
-	display: flex;
-	height: 100vh;
-	justify-content: center;
-	align-items: center;
-	/* background-color: #000; */
+const Back = styled.div`
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 0;
+	background-color: #000;
 `;
-
 export default Signup;
