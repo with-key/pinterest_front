@@ -1,6 +1,12 @@
 import AWS from 'aws-sdk';
+import styled from 'styled-components';
+import { preview } from '../modules/image';
+import { useDispatch, useSelector } from 'react-redux';
 
 const ImgUploader = () => {
+	const dispatch = useDispatch();
+	const imgUrl = useSelector((store) => store.image.preview);
+
 	const handleFileInput = (e) => {
 		const file = e.target.files[0];
 		const upload = new AWS.S3.ManagedUpload({
@@ -14,8 +20,7 @@ const ImgUploader = () => {
 		const promise = upload.promise();
 		promise.then(
 			({ Location }) => {
-				console.log(Location);
-				// dispatch
+				dispatch(preview(Location));
 			},
 			(err) => alert('오류가 발생했습니다: ', err.message),
 		);
@@ -30,15 +35,32 @@ const ImgUploader = () => {
 
 	return (
 		<>
-			<input
+			<Input
 				type='file'
 				id='upload'
 				className='image-upload'
 				onChange={handleFileInput}
 			/>
-			<label htmlFor='upload' className='image-upload-wrapper' />
+			<Label htmlFor='upload'>클릭하여 업로드</Label>
 		</>
 	);
 };
 
+const Input = styled.input`
+	outline: none;
+	cursor: pointer;
+	position: absolute;
+	border: 1px solid red;
+	z-index: -1;
+`;
+
+const Label = styled.label`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 340px !important;
+	height: 454px !important;
+	border: 1px solid red;
+	cursor: pointer;
+`;
 export default ImgUploader;
