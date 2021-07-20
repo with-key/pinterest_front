@@ -73,9 +73,9 @@ const FloatMenu = styled.div`
 	${(props) =>
 	props.comment &&
 	css`
-		top: -10%;
+		top: -300%;
 		left: 50%;
-		transform: translateX(20%);
+		transform: translateX(-50%);
 	`}
 `;
 

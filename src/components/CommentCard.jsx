@@ -1,35 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import TimeCounting from 'time-counting';
 //----- elements & components -----//
 import { Flex, Button, Image, Text, Icons } from '../elem';
-import ToggleButton from './ToggleButton';
-import Dropdown from './Dropdown';
 import CommentEdit from './CommentEdit';
 
 //----- redux -----//
-import { useDispatch, useSelector } from 'react-redux';
-import { commentActions } from '../modules/comment';
+import { useDispatch } from 'react-redux';
 
 const CommentCard = (props) => {
 	const dispatch = useDispatch();
 	const { commentContent, createdAt, likeNum, pinId, id} = props;
 	const userName = props.user?.userName;
-	
-	const deleteComment = () => {
-		const result = window.confirm('댓글을 삭제하시겠습니까?');
-		if (result) {
-			dispatch(commentActions.__deleteComment(id));
-		}	
-	}
 
-	const [showEditInput, setShowEditInput] = useState(false);
-
-
-	const editComment = () => {
-		// dispatch(commentActions.__deleteComment(id));
-	}
-
+	const [isEditMode, setIsEditMode] = useState(false);
 
 	return (
 		<Flex>
@@ -68,18 +52,14 @@ const CommentCard = (props) => {
 							<Icons.MessageSmall color='var(--primary-gray)' />
 						</Button>
 
-						{/* 수정/ 삭제 테스트용 버튼 */}
-						<ToggleButton edit comment>
-							<Dropdown width='160px' pd='4px'>
-								<Link onClick={() => setShowEditInput(!showEditInput)}>
-									<MenuText>수정</MenuText>
-								</Link>
-								<Link onClick={deleteComment}>
-									<MenuText>삭제</MenuText>
-								</Link>
-							</Dropdown>
-						</ToggleButton>
-
+						{props.isMyComment && (
+							<Button type='circle' comment
+								_onClick={() => {
+									setIsEditMode(!isEditMode);
+								}}>
+								<Icons.Pencil color='var(--primary-gray)'/> 
+							</Button>						
+						)}
 					</Aligned>
 
 					<Aligned>
@@ -90,8 +70,8 @@ const CommentCard = (props) => {
 					</Aligned>
 				</Aligned>
 
-				{showEditInput ? (
-					<CommentEdit props={props}/>
+				{isEditMode ? (
+					<CommentEdit props={props} isEditMode/>
 				) : ('')}
 			</Flex>
 		</Flex>
@@ -129,17 +109,5 @@ const StyledText = styled(Text)`
 	font-size: 1.2rem;
 	color: var(--primary-gray);
 `;
-const MenuText = styled(Text)`
-	font-size: 1.4rem;
-	font-weight: 700;
-	color: var(--primary-black);
-	margin: 12px 8px;
-`
-const Link = styled.div`
-	cursor: pointer;
-	&:hover {
-		background-color: var(--primary-lightgray);
-		border-radius: 12px;
-	}
-`;
+
 export default CommentCard;
