@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import TimeCounting from 'time-counting';
 //----- elements & components -----//
 import { Flex, Button, Image, Text, Icons } from '../elem';
-import Dropdown from '../components/Dropdown';
 import MenuToggle from './MenuToggle';
 //----- redux -----//
 import { useDispatch, useSelector } from 'react-redux';
@@ -50,9 +49,7 @@ const CommentCard = (props) => {
 							<Icons.MessageSmall color='var(--primary-gray)' />
 						</Button>
 
-						<Button comment type='circle'>
-							<Icons.MeatballsMenu color='var(--primary-gray)' />
-						</Button>
+						<MenuToggle list={['수정', '삭제']} editbtn comment/>
 
 					</Aligned>
 

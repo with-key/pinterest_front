@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 import Dropdown from '../components/Dropdown';
 import { Text, Button, Icons } from '../elem';
 
-const MenuToggle = ({ list }) => {
+const MenuToggle = ({ list, editbtn, comment, ...rest }) => {
 	const [isMenuVisible, setIsMenuVisible] = useState(false);
 	const [floatMenu, setFloatMenu] = useState();
 	return (
@@ -13,12 +13,12 @@ const MenuToggle = ({ list }) => {
 				setIsMenuVisible(!isMenuVisible);
 			}}
 		>
-			<Icons.ArrowUp />
+			{ editbtn ? <Icons.MeatballsMenu /> : <Icons.ArrowUp /> }			
 			{isMenuVisible && (
 				<FloatMenu style={floatMenu}>
 					<Dropdown width='180px' style={{ padding: '8px' }}>
-						{list.map((item) => (
-							<Link>
+						{list.map((item, index) => (
+							<Link key={index}>
 								<Text
 									size='1.4rem'
 									weight='700'
@@ -38,7 +38,14 @@ const MenuToggle = ({ list }) => {
 
 const StBtn = styled(Button)`
 	position: relative;
-	z-index: 999;
+	/* z-index: 999; */
+	${(props) =>
+	props.comment &&
+	css`
+		width: 32px;
+		height: 32px;
+		border-radius: 32px;
+	`}
 `;
 
 const FloatMenu = styled.div`
@@ -55,23 +62,5 @@ const Link = styled.div`
 		border-radius: 12px;
 	}
 `;
-
-// const FloatBtn = styled.button`
-// 	width: 56px;
-// 	height: 56px;
-// 	border-radius: 56px;
-// 	background-color: var(--primary-white);
-// 	color: var(--primary-black);
-// 	box-sizing: border-box;
-// 	/* position: fixed; */
-// 	text-align: center;
-// 	vertical-align: middle;
-// 	border: none;
-// 	cursor: pointer;
-// 	box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15);
-// 	&:hover {
-// 		background-color: var(--primary-lightgray);
-// 	}
-// `;
 
 export default MenuToggle;

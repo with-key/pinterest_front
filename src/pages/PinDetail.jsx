@@ -7,7 +7,7 @@ import Template	from '../components/Template';
 import Header 	from '../components/Header';
 import PinList	from '../components/PinList';
 import CommentList 	from '../components/CommentList';
-import Dropdown from '../components/Dropdown';
+import MenuToggle from '../components/MenuToggle';
 
 // redux
 import { useSelector, useDispatch } from 'react-redux';
@@ -21,17 +21,6 @@ const PinDetail = ({history, match, ...rest}) => {
 		setIsCommentVisible((setIsCommentVisible) => !setIsCommentVisible);
 	};
 
-	// 메뉴 펼치기 토글
-	const [isMenuVisible, setIsMenuVisible] = useState(false);
-	const [floatMenu, setFloatMenu] = useState();
-	const toggleMenuField = (e) => {
-		setIsMenuVisible((setIsMenuVisible) => !setIsMenuVisible);
-		setFloatMenu({
-			top: `${e.pageY + 30}px`,
-		 	left: `${e.pageX - 30}px`,
-		});
-	};
-
 	// id로 핀 가져오기
 	const id = match.params.id;
 	useEffect(() => {
@@ -42,7 +31,7 @@ const PinDetail = ({history, match, ...rest}) => {
 	return (
 			<Template>
 				<Header />
-				{/* 돌아가기 버튼 위치 고정 - icon 변경 */}
+				{/* 돌아가기 */}
         <Flex width='320px' style={{position:'absolute', top: '96px', left: '20px'}}>
           <Button 
 						height='48px' 
@@ -77,9 +66,8 @@ const PinDetail = ({history, match, ...rest}) => {
 								{/* 상단 버튼 블록 */}
 								<Flex style={{flexDirection: 'row', justifyContent: 'space-between'}}>
 									<Flex>
-										<Button height='48px' type='circle' _onClick={toggleMenuField}>
-											<Icons.MeatballsMenu />
-										</Button>
+										<MenuToggle list={['수정', '삭제']} editbtn/>
+
 										<Button height='48px' type='circle'><Icons.Export /></Button>
 									</Flex>
 									<Flex>
@@ -89,25 +77,6 @@ const PinDetail = ({history, match, ...rest}) => {
 
 								{/* 내용 블록 */}     
 								<Flex style={{flexDirection: 'column'}}>
-
-								{/* 글 수정/삭제 토글 */}
-								{isMenuVisible ? 
-									<FloatMenu style={floatMenu} className='dropdown'> 
-										<Dropdown width='180px' style={{padding: '8px'}}>
-											<Link>
-												<Text size='1.4rem' weight='700' color='var(--primary-black)' mg='12px 8px'>
-													수정
-												</Text>
-											</Link>
-											<Link>
-												<Text size='1.4rem' weight='700' color='var(--primary-black)' mg='12px 8px'>
-													삭제
-												</Text>
-											</Link>
-										</Dropdown>
-									</FloatMenu>
-									: null}
-
 									<Text size='3.6rem' weight='700' mg='16px 0px'>
 										{pinTitle}
 									</Text>
@@ -175,18 +144,5 @@ position: relative;
 justify-content: center;
 box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
 `;
-
-const FloatMenu = styled.div`
-	position: fixed;
-  /* position: absolute; */
-	z-index: 999;
-`
-const Link = styled.a`
-  cursor: pointer;
-  &:hover {
-    background-color: var(--primary-lightgray);
-    border-radius: 12px;
-  }
-`
 
 export default PinDetail;
