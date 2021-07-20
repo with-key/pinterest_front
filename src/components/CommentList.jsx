@@ -55,7 +55,7 @@ const CommentList = (props) => {
 
 				{/* 쓰기 */}
 				<Section> 	
-					<CommentWrite />
+					<CommentWrite match={props.match} />
 				</Section>
 
 			</Section>		
