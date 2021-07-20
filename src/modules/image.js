@@ -3,9 +3,11 @@ import produce from 'immer';
 
 // action
 const UPLOAD = 'image/UPLOAD';
+const PREVIEW = 'image/PREVIEW';
 
 // action creator
-export const insert = createAction(UPLOAD, (text) => ({}));
+export const insert = createAction(UPLOAD, (text) => ({ text }));
+export const preview = createAction(PREVIEW, (imgUrl) => ({ imgUrl }));
 
 // Thunk function
 export const __insert =
@@ -17,15 +19,29 @@ export const __insert =
 		} catch (e) {}
 	};
 
+export const __preview = () => (dispatch) => {};
+
+const initState = {
+	pin: '',
+	avatar: '',
+	preview: '',
+};
+
 // reducer
 const image = handleActions(
 	{
 		[UPLOAD]: (state, action) => ({
 			...state,
-			todos: state.todos.concat(action.payload), // 리덕스액션을 사용하면 action 내에 있는 데이터를 무조건 'payload'로 불러옵니다.
 		}),
+		[PREVIEW]: (state, action) => {
+			console.log(action.payload);
+			return {
+				...state,
+				preview: action.payload.imgUrl,
+			};
+		},
 	},
-	{ pin: '', avatar: '' },
+	initState,
 );
 
 export default image;

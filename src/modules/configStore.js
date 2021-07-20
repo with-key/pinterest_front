@@ -2,6 +2,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'; // 리듀서 메서드
 import user from './user'; // 리듀서
 import pin from './pin';
+import image from './image';
 
 // middleware
 import thunk from 'redux-thunk'; // 썽크
@@ -14,6 +15,7 @@ import { connectRouter } from 'connected-react-router';
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
+	image,
 	user,
 	pin,
 	router: connectRouter(history),
