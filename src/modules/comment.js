@@ -33,7 +33,7 @@ const initState = {
 const getCommentList = createAction(GET_COMMENT_LIST, (comment_list) => ({comment_list}));
 const postComment = createAction(POST_COMMENT, (comment) => ({comment}));
 const deleteComment = createAction(DELETE_COMMENT, (comment_id) => ({comment_id}));
-// const editComment = createAction(EDIT_COMMENT, (comment) => ({comment}));
+const editComment = createAction(EDIT_COMMENT, (comment_id, comment) => ({comment_id, comment}));
 
 // Thunk function
 const __getCommentList = (pinid) =>
@@ -71,10 +71,23 @@ const __postComment = (pinid, comment) =>
 
 const __deleteComment = (comment_id) => 
 	async (dispatch, getState, { history }) => {
-		console.log(comment_id)
 		try {
 			const { data } = await commentApi.deleteComment(comment_id);
 			dispatch(deleteComment(comment_id));
+		}	catch (e) {
+			console.log(e)
+		};
+}
+
+const __editComment = (comment_id, modifiedComment, previousComment) => 
+	async (dispatch, getState, { history }) => {
+		try {
+			const content ={
+				...previousComment,
+				commentContent: modifiedComment,
+			}
+			const { data } = await commentApi.editComment(comment_id, content);
+			dispatch(editComment(comment_id, data));
 		}	catch (e) {
 			console.log(e)
 		};
@@ -96,11 +109,24 @@ const comment = handleActions(
 			};
 		},
 		[DELETE_COMMENT]: (state, action) => {
-			console.log(action.payload.comment_id)
 			return {
 				...state,
 				list: state.list.filter((comment) => comment.id !== action.payload.comment_id)
 			};
+		},
+		[EDIT_COMMENT]: (state, action) => {
+			console.log(action.payload.comment_id)
+			const data = action.payload.comment;
+			return {
+				...state,
+				list: state.list.map((comment, index) => {
+					if (comment.id === data.id) {
+						return (state.list[index] = data);
+					} else {
+						return comment;
+					}
+				}),
+			};			
 		},
 	},
 	initState,
@@ -110,6 +136,7 @@ export const commentActions = {
 	__getCommentList,
 	__postComment,
 	__deleteComment,
+	__editComment,
 };
 
 export default comment;

@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import TimeCounting from 'time-counting';
 //----- elements & components -----//
 import { Flex, Button, Image, Text, Icons } from '../elem';
-import MenuToggle 	from './MenuToggle';
 import ToggleButton from './ToggleButton';
 import Dropdown from './Dropdown';
+import CommentEdit from './CommentEdit';
 
 //----- redux -----//
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,13 +15,21 @@ const CommentCard = (props) => {
 	const dispatch = useDispatch();
 	const { commentContent, createdAt, likeNum, pinId, id} = props;
 	const userName = props.user?.userName;
-
+	
 	const deleteComment = () => {
 		const result = window.confirm('댓글을 삭제하시겠습니까?');
 		if (result) {
 			dispatch(commentActions.__deleteComment(id));
 		}	
 	}
+
+	const [showEditInput, setShowEditInput] = useState(false);
+
+
+	const editComment = () => {
+		// dispatch(commentActions.__deleteComment(id));
+	}
+
 
 	return (
 		<Flex>
@@ -63,7 +71,7 @@ const CommentCard = (props) => {
 						{/* 수정/ 삭제 테스트용 버튼 */}
 						<ToggleButton edit comment>
 							<Dropdown width='160px' pd='4px'>
-								<Link>
+								<Link onClick={() => setShowEditInput(!showEditInput)}>
 									<MenuText>수정</MenuText>
 								</Link>
 								<Link onClick={deleteComment}>
@@ -81,6 +89,10 @@ const CommentCard = (props) => {
 						<StyledText>유용함</StyledText>
 					</Aligned>
 				</Aligned>
+
+				{showEditInput ? (
+					<CommentEdit props={props}/>
+				) : ('')}
 			</Flex>
 		</Flex>
 	);

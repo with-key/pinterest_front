@@ -27,7 +27,8 @@ export const pinApi = {
 
 export const commentApi = {
 	// getCommentList: (pinid) => instance.get(`/pin/comment?pinId=${pinid}`),
-	getCommentList: (pinid) => instance.get(`/comment?pinId=${pinid}`), // test
-	postComment: (pinid, comment) => instance.post(`/comment?pinId=${pinid}`, comment ),
+	getCommentList: (pin_id) => instance.get(`/comment?pinId=${pin_id}`), // test
+	postComment: (pin_id, comment) => instance.post(`/comment?pinId=${pin_id}`, comment ),
 	deleteComment: (comment_id) => instance.delete(`/comment/${comment_id}`),
+	editComment: (comment_id, comment) => instance.put(`/comment/${comment_id}`, comment),
 };
