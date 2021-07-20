@@ -3,6 +3,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'; // 리듀
 import user from './user'; // 리듀서
 import pin from './pin';
 import image from './image';
+import comment from './comment';
 
 // middleware
 import thunk from 'redux-thunk'; // 썽크
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
 	image,
 	user,
 	pin,
+	comment,
 	router: connectRouter(history),
 });
 

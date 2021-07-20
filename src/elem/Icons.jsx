@@ -12,7 +12,7 @@ const MeatballsMenu = (props) => {
 	return (
 		<Wrapper {...props}>
 			<svg
-				class='gUZ pBj'
+				className='gUZ pBj'
 				height='20'
 				width='20'
 				viewBox='0 0 24 24'
@@ -29,7 +29,7 @@ const Search = (props) => {
 	return (
 		<Wrapper {...props}>
 			<svg
-				class='gUZ B9u U9O kVc'
+				className='gUZ B9u U9O kVc'
 				height='20'
 				width='20'
 				viewBox='0 0 24 24'
@@ -47,7 +47,7 @@ const Export = (props) => {
 	return (
 		<Wrapper {...props}>
 			<svg
-				class='gUZ pBj U9O kVc'
+				className='gUZ pBj U9O kVc'
 				height='20'
 				width='20'
 				viewBox='0 0 24 24'
@@ -65,7 +65,7 @@ const Add = (props) => {
 	return (
 		<Wrapper {...props}>
 			<svg
-				class='gUZ pBj U9O kVc'
+				className='gUZ pBj U9O kVc'
 				height='20'
 				width='20'
 				viewBox='0 0 24 24'
@@ -83,7 +83,7 @@ const Pencil = (props) => {
 	return (
 		<Wrapper {...props}>
 			<svg
-				class='gUZ pBj U9O kVc'
+				className='gUZ pBj U9O kVc'
 				height='20'
 				width='20'
 				viewBox='0 0 24 24'
@@ -101,7 +101,7 @@ const Adjust = (props) => {
 	return (
 		<Wrapper {...props}>
 			<svg
-				class='gUZ pBj U9O kVc'
+				className='gUZ pBj U9O kVc'
 				height='20'
 				width='20'
 				viewBox='0 0 24 24'
@@ -164,7 +164,7 @@ const ArrowBack = (props) => {
 	return (
 		<Wrapper {...props}>
 			<svg
-				class='Hn_ gUZ pBj'
+				className='Hn_ gUZ pBj'
 				height='20'
 				width='20'
 				viewBox='0 0 24 24'
@@ -181,7 +181,7 @@ const ArrowDiagonal = (props) => {
 	return (
 		<Wrapper {...props}>
 			<svg
-				class='Hn_ gUZ pBj'
+				className='Hn_ gUZ pBj'
 				height='12'
 				width='12'
 				viewBox='0 0 24 24'
@@ -198,7 +198,7 @@ const Selected = (props) => {
 	return (
 		<Wrapper {...props}>
 			<svg
-				class='gUZ pBj'
+				className='gUZ pBj'
 				height='16'
 				width='16'
 				viewBox='0 0 24 24'
@@ -234,7 +234,7 @@ const Notification = (props) => {
 	return (
 		<Wrapper {...props}>
 			<svg
-				class='gUZ pBj U9O kVc'
+				className='gUZ pBj U9O kVc'
 				height='24'
 				width='24'
 				viewBox='0 0 24 24'
@@ -252,7 +252,7 @@ const Message = (props) => {
 	return (
 		<Wrapper {...props}>
 			<svg
-				class='Hn_ gUZ B9u U9O kVc'
+				className='Hn_ gUZ B9u U9O kVc'
 				height='24'
 				width='24'
 				viewBox='0 0 24 24'
@@ -271,7 +271,7 @@ const MessageSmall = (props) => {
 	return (
 		<Wrapper {...props}>
 			<svg
-				class='Hn_ gUZ B9u U9O kVc'
+				className='Hn_ gUZ B9u U9O kVc'
 				height='16'
 				width='16'
 				viewBox='0 0 24 24'
@@ -289,7 +289,7 @@ const Like = (props) => {
 	return (
 		<Wrapper {...props}>
 			<svg
-				class='gUZ B9u U9O kVc'
+				className='gUZ B9u U9O kVc'
 				height='16'
 				width='16'
 				viewBox='0 0 24 24'
@@ -306,7 +306,7 @@ const ThumbsUp = (props) => {
 	return (
 		<Wrapper {...props}>
 			<svg
-				class='gUZ B9u U9O kVc'
+				className='gUZ B9u U9O kVc'
 				height='16'
 				width='16'
 				viewBox='0 0 24 24'

@@ -27,11 +27,11 @@ Input.defaultProps = {
 };
 
 const DefaultInput = styled.input`
-	width: 100%;
-	height: ${(props) => props.height};
-	margin: ${(props) => props.mg};
+	width: ${(props) => (props.width ? props.width : '100%')};
+	height: ${(props) => (props.height)};
+	margin: ${(props) => (props.mg)};
+
 	padding: 8px 16px;
-	font-size: 1.6rem;
 	border: 2px solid var(--secondary-lightgray);
 	border-radius: 18px;
 	${(props) =>
@@ -40,13 +40,21 @@ const DefaultInput = styled.input`
 			border: 1px solid var(--secondary-lightgray);
 			border-radius: ${(props) => props.height};
 		`}
+
 	box-sizing: border-box;
 	background-color: transparent;
 	display: block;
 	&:focus {
 		outline: none;
-		border: 3px solid #97c2fa;
+		box-shadow: rgba(3, 102, 214, 0.4) 0px 0px 0px 4px;
 	}
+	${(props) =>
+	props.comment &&
+	css`
+		border: 1px solid var(--secondary-lightgray);
+		border-radius: ${(props) => (props.height)};
+	`}
+
 `;
 
 const HeaderInput = styled.input`
@@ -65,7 +73,7 @@ const HeaderInput = styled.input`
 	}
 	&:focus {
 		outline: none;
-		border: 4px solid #97c2fa;
+		box-shadow: rgba(3, 102, 214, 0.4) 0px 0px 0px 4px;
 	}
 	&::-webkit-input-placeholder {
 		/* Chrome/Opera/Safari */

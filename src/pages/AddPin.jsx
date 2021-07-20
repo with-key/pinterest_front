@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Template from '../components/Template';
-import Header from '../components/Header';
-import MenuToggle from '../components/MenuToggle';
 import AddForm from '../components/AddForm';
 import { Button } from '../elem';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,7 +13,6 @@ const AddPin = ({ history }) => {
 			<LeftNav>
 				<Button />
 			</LeftNav>
-			<Header history={history} />
 			<Container>
 				<AddForm />
 			</Container>

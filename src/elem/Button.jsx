@@ -102,20 +102,35 @@ const DefaultBtn = styled.button`
 `;
 
 const CircleBtn = styled.button`
-	--size: ${(props) => props.height};
+	${(props) =>
+	!props.comment &&
+	css`
+		--size: ${(props) => props.height};
+		color: ${(props) => props.color};
+	`}
+
+	${(props) =>
+	props.comment &&
+	css`
+		--size: 32px;
+		color: var(--primary-gray);
+	`}
+	
 	width: var(--size);
 	height: var(--size);
-	border: none;
 	border-radius: var(--size);
+	border: none;
 	text-align: center;
 	vertical-align: middle;
 	background-color: var(--primary-white);
-	color: var(--primary-gray);
 	&:hover {
 		background-color: var(--primary-lightgray);
 	}
 `;
-//	${(props) => (props.color ? `color: ${props.color};` : `color: var(--primary-gray);`)}
+
+
+
+
 
 // 핀 작성 위한 고정버튼; 헤더 내 생성
 // 위치 style로 직접 배치

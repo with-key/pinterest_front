@@ -22,4 +22,11 @@ export const userApi = {
 
 export const pinApi = {
 	getPinList: () => instance.get('/pin'),
+	getPin: (pinid) => instance.get(`/pin/${pinid}`),
+};
+
+export const commentApi = {
+	// getCommentList: (pinid) => instance.get(`/pin/comment?pinId=${pinid}`),
+	getCommentList: (pinid) => instance.get(`/comment?pinId=${pinid}`), // test
+	postComment: (pinid, comment) => instance.post(`/comment?pinId=${pinid}`, comment ),
 };
