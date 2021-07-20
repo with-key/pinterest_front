@@ -30,9 +30,17 @@ const DefaultInput = styled.input`
 	width: ${(props) => (props.width ? props.width : '100%')};
 	height: ${(props) => (props.height)};
 	margin: ${(props) => (props.mg)};
+
 	padding: 8px 16px;
 	border: 2px solid var(--secondary-lightgray);
 	border-radius: 18px;
+	${(props) =>
+		props.comment &&
+		css`
+			border: 1px solid var(--secondary-lightgray);
+			border-radius: ${(props) => props.height};
+		`}
+
 	box-sizing: border-box;
 	background-color: transparent;
 	display: block;
@@ -67,45 +75,49 @@ const HeaderInput = styled.input`
 		outline: none;
 		box-shadow: rgba(3, 102, 214, 0.4) 0px 0px 0px 4px;
 	}
-	&::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	&::-webkit-input-placeholder {
+		/* Chrome/Opera/Safari */
 		background-image: url('https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-256.png');
 		background-size: contain;
- 		background-position: 0px -2px;
-  	background-repeat: no-repeat;
+		background-position: 0px -2px;
+		background-repeat: no-repeat;
 		padding-left: 24px;
 		color: var(--secondary-gray);
-  	text-align: left;
-  	text-indent: 0;
+		text-align: left;
+		text-indent: 0;
 	}
-	&::-moz-placeholder { /* Firefox 19+ */
+	&::-moz-placeholder {
+		/* Firefox 19+ */
 		background-image: url('https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-256.png');
 		background-size: contain;
- 		background-position: 0px -2px;
-  	background-repeat: no-repeat;
+		background-position: 0px -2px;
+		background-repeat: no-repeat;
 		padding-left: 24px;
 		color: var(--secondary-gray);
-  	text-align: left;
-  	text-indent: 0;
+		text-align: left;
+		text-indent: 0;
 	}
-	&:-ms-input-placeholder { /* IE 10+ */
+	&:-ms-input-placeholder {
+		/* IE 10+ */
 		background-image: url('https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-256.png');
 		background-size: contain;
- 		background-position: 0px -2px;
-  	background-repeat: no-repeat;
+		background-position: 0px -2px;
+		background-repeat: no-repeat;
 		padding-left: 24px;
 		color: var(--secondary-gray);
-  	text-align: left;
-  	text-indent: 0;
+		text-align: left;
+		text-indent: 0;
 	}
-	&:-moz-placeholder { /* Firefox 18- */
+	&:-moz-placeholder {
+		/* Firefox 18- */
 		background-image: url('https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-256.png');
 		background-size: contain;
- 		background-position: 0px -2px;
-  	background-repeat: no-repeat;
+		background-position: 0px -2px;
+		background-repeat: no-repeat;
 		padding-left: 24px;
 		color: var(--secondary-gray);
-  	text-align: left;
-  	text-indent: 0;
+		text-align: left;
+		text-indent: 0;
 	}
 `;
 
