@@ -6,7 +6,8 @@ import { Flex, Text, Button, Image, Icons } from '../elem';
 import Template from '../components/Template';
 import PinList from '../components/PinList';
 import CommentList from '../components/CommentList';
-import MenuToggle from '../components/MenuToggle';
+import ToggleButton from '../components/ToggleButton';
+import Dropdown from '../components/Dropdown';
 
 // redux
 import { useSelector, useDispatch } from 'react-redux';
@@ -21,6 +22,7 @@ const PinDetail = ({ history, match, ...rest }) => {
 	useEffect(() => {
 		dispatch(pinActions.__getPin(id));
 		dispatch(pinActions.__getPinList());
+		dispatch(pinActions.__getPin(id));
 	}, [id]);
 
 	const { pinTitle, pinContent, pinImage, pinUrl, userName } = useSelector(
@@ -49,24 +51,24 @@ const PinDetail = ({ history, match, ...rest }) => {
 
 					{/* 핀 내용 블록 */}
 					<Flex
-						width='50%'
-						jc='space-between'
-						style={{
-							padding: '20px',
-							flexDirection: 'column',
-						}}
+						width='50%' jc='space-between'
+						dr='column' pd='20px'
 					>
 						{/* 상단 블록 */}
-						<Flex style={{ flexDirection: 'column' }}>
+						<Flex dr='column'>
 							{/* 상단 버튼 블록 */}
-							<Flex
-								style={{
-									flexDirection: 'row',
-									justifyContent: 'space-between',
-								}}
-							>
+							<Flex jc='space-between'>
 								<Flex>
-									<MenuToggle list={['수정', '삭제']} editbtn />
+								<ToggleButton edit>
+									<Dropdown width='160px' pd='4px'>
+										<Link>
+											<MenuText>수정</MenuText>
+										</Link>
+										<Link>
+											<MenuText>삭제</MenuText>
+										</Link>
+									</Dropdown>
+								</ToggleButton>
 
 									<Button height='48px' type='circle'>
 										<Icons.Export />
@@ -78,13 +80,13 @@ const PinDetail = ({ history, match, ...rest }) => {
 							</Flex>
 
 							{/* 내용 블록 */}
-							<Flex style={{ flexDirection: 'column' }}>
+							<Flex dr='column'>
 								<Text size='3.6rem' weight='700' mg='16px 0px'>
 									{pinTitle}
 								</Text>
-								<Text size='1.6rem' weight='400' mg='8px 0px'>
+								<DefaultText mg='8px 0px'>
 									{pinContent}
-								</Text>
+								</DefaultText>
 							</Flex>
 
 							{/* 핀 작성자 블록 */}
@@ -107,15 +109,15 @@ const PinDetail = ({ history, match, ...rest }) => {
 							<Text size='1.6rem' weight='700' mg='0px 4px 0px 8px'>
 								Username
 							</Text>
-							<Text size='1.6rem' weight='400'>
+							<DefaultText>
 								님이
-							</Text>
+							</DefaultText>
 							<Text size='1.6rem' weight='700' mg='0px 2px 0px 8px'>
 								보드
 							</Text>
-							<Text size='1.6rem' weight='400'>
+							<DefaultText>
 								에 저장
-							</Text>
+							</DefaultText>
 						</Flex>
 					</Flex>
 				</Container>
@@ -147,4 +149,21 @@ const Container = styled.div`
 	box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
 `;
 
+const DefaultText = styled(Text)`
+	font-size: 1.6rem;
+	font-weight: 400;
+`
+const MenuText = styled(Text)`
+	font-size: 1.4rem;
+	font-weight: 700;
+	color: var(--primary-black);
+	margin: 12px 8px;
+`
+const Link = styled.div`
+	cursor: pointer;
+	&:hover {
+		background-color: var(--primary-lightgray);
+		border-radius: 12px;
+	}
+`;
 export default PinDetail;
