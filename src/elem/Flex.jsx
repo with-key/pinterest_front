@@ -13,7 +13,7 @@ const FlexBx = styled.div`
 	gap: ${(props) => props.gap};
 	justify-content: ${(props) => props.jc};
 	align-items: ${(props) => props.ai};
-
+	flex-direction: ${(props) => props.dr};
 	${(props) =>
 		props.center &&
 		css`
