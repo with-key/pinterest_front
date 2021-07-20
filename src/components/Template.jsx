@@ -1,16 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
+import Header from '../components/Header';
 
-const Template = ({ children }) => {
+const Template = ({ children, history, ...rest }) => {
 	return (
-		<Wrapper>
-			{children}
-		</Wrapper>
+		<Container {...rest}>
+			<Header history={history} />
+			<Main {...rest}>{children}</Main>
+		</Container>
 	);
 };
 
 // style
-const Wrapper = styled.section`
+const Container = styled.section`
+	padding-top: 80px;
+	height: 100vh;
+	background-color: ${(props) => props.bg};
+`;
+
+const Main = styled.main`
+	padding: ${(props) => props.pd};
+	margin: ${(props) => props.mg};
 	width: 100%;
 	display: flex;
 	flex-direction: column;
