@@ -115,7 +115,7 @@ const CircleBtn = styled.button`
 		--size: 32px;
 		color: var(--primary-gray);
 	`}
-	
+	cursor: pointer;
 	width: var(--size);
 	height: var(--size);
 	border-radius: var(--size);
@@ -125,6 +125,9 @@ const CircleBtn = styled.button`
 	background-color: var(--primary-white);
 	&:hover {
 		background-color: var(--primary-lightgray);
+	}
+	&:disabled {
+		cursor: not-allowed;
 	}
 `;
 
