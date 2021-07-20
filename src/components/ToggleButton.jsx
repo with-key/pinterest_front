@@ -9,15 +9,15 @@ const ToggleButton = ({ edit, ...rest}) => {
 	const [floatMenu, setFloatMenu] = useState();
 
   // 토글버튼 / 메뉴 바깥영역 클릭 시 닫기 / 일단 추후 수정
-  const closeMenu = (e) => {
+  const handleCloseMenu = (e) => {
     if (isMenuVisible && !dropdownMenu.current.contains(e.target)) {
 		  setIsMenuVisible(false);
     }
   };
   useEffect(() => {
-    window.addEventListener('click', closeMenu);
+    window.addEventListener('click', handleCloseMenu);
     return () => {
-      window.removeEventListener('click', closeMenu);
+      window.removeEventListener('click', handleCloseMenu);
     };
   }, []);
 
