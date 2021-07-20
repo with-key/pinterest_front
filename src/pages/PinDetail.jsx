@@ -25,9 +25,17 @@ const PinDetail = ({ history, match, ...rest }) => {
 		dispatch(pinActions.__getPin(id));
 	}, [id]);
 
-	const { pinTitle, pinContent, pinImage, pinUrl, userName } = useSelector(
+	const { pinTitle, pinContent, pinImage, userName, pinUrl } = useSelector(
 		(state) => state.pin.selectedPin,
 	);
+
+	// // pin url 글자 수 줄여서 표시
+	// const pinUrl = useSelector((state) => state.pin.selectedPin?.pinUrl);
+	// const strlength = 50;
+	// let shortPinUrl = pinUrl 
+	// if (pinUrl.length > strlength ) {
+	// 	shortPinUrl = (pinUrl.substr(0, strlength-2) + '...');
+	// }
 
 	return (
 		<Template>
@@ -78,6 +86,13 @@ const PinDetail = ({ history, match, ...rest }) => {
 									<Button children='저장' width='64px' height='48px' primary />
 								</Flex>
 							</Flex>
+
+							{/* 외부 링크 */}
+							<UrlBox>
+								<DefaultText mg='16px 0px 8px'>
+									<a href={pinUrl} style={{textDecoration: 'underline'}} >{pinUrl}</a>
+								</DefaultText>
+							</UrlBox>
 
 							{/* 내용 블록 */}
 							<Flex dr='column'>
@@ -166,4 +181,10 @@ const Link = styled.div`
 		border-radius: 12px;
 	}
 `;
+const UrlBox = styled(Flex)`
+	width: 80%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;	
+`
 export default PinDetail;
