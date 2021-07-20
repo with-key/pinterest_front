@@ -40,7 +40,7 @@ const PinDetail = ({ history, match, ...rest }) => {
 			</Flex>
 
 			{/* 핀 상세 */}
-			<Flex mg='80px 0px 0px' pd='12px'>
+			<Flex pd='12px'>
 				<Container>
 					{/* 핀 이미지 블록 */}
 					<Flex width='50%' pd='20px' style={{ flex: 'none' }}>
