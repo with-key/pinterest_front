@@ -1,17 +1,19 @@
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
 //----- elements & components -----//
 import Template from '../components/Template';
 import PinList from '../components/PinList';
 //----- redux -----//
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { pinActions } from '../modules/pin';
 
 const Home = ({ history }) => {
 	const dispatch = useDispatch();
+	const pin_list = useSelector((state) => state.pin.list);
 
 	useEffect(() => {
-		dispatch(pinActions.__getPinList());
+		if (pin_list.length === 0) {
+			dispatch(pinActions.__getPinList());
+		}		
 	}, []);
 
 	return (

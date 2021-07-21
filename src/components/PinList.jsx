@@ -4,18 +4,28 @@ import StackGrid, { transitions, easings } from 'react-stack-grid';
 // elements & components
 import { Flex } from '../elem';
 import PinCard from './PinCard';
+import InfiniteScroll from './InfiniteScroll';
 
 // redux
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { pinActions } from '../modules/pin';
 
 // stack-grid transition 설정
 const transition = transitions.scaleUp;
 
 const PinList = ({ history }) => {
+	const dispatch = useDispatch();
   const pin_list = useSelector((state)=> (state.pin.list));
+	const isLoading = useSelector((state)=> (state.pin.isLoading));
+	const paging = useSelector((state)=> (state.pin.paging));
 	return (
 		<Container>
-			<StackGrid
+			<InfiniteScroll
+					callNextPage = {() => (dispatch(pinActions.__getPinList(paging.page)))}
+					isLoading={isLoading}
+					isNext={ paging.next ? true : false }
+			>
+				<StackGrid
 				monitorImagesLoaded
 				columnWidth={236}
 				gutterWidth={16}
@@ -28,20 +38,21 @@ const PinList = ({ history }) => {
 				easing={easings.cubicOut}
 				duration={80}
 				appearDelay={1}
-			>
-			{pin_list.map((pin, index) => {
-				return (
-					<Flex 
-						key={index}  
-						style={{flexDirection: 'column'}}
-						onClick={() => {history.push(`/pin/${pin.id}`)}}
-						>
-						<PinCard {...pin} history={history}/>
-					</Flex>				
-				)	
-			})}
+				>
+					{pin_list.map((pin, index) => {
+						return (
+							<Flex 
+								key={index}  
+								style={{flexDirection: 'column'}}
+								onClick={() => {history.push(`/pin/${pin.id}`)}}
+								>
+								<PinCard {...pin} history={history}/>
+							</Flex>				
+						)	
+					})}
 				
-			</StackGrid>
+				</StackGrid>
+			</InfiniteScroll>
 		</Container>
 	);
 };

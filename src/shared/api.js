@@ -22,7 +22,7 @@ export const userApi = {
 };
 
 export const pinApi = {
-	getPinList: () => instance.get('/pin'),
+	getPinList: (page, limit) => instance.get(`/pin?page=${page}&limit=${limit}`), // page & limit; for infinite scroll
 	getPin: (pinid) => instance.get(`/pin/${pinid}`),
 };
 
