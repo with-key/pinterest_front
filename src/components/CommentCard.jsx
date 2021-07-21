@@ -10,8 +10,9 @@ import { useDispatch } from 'react-redux';
 
 const CommentCard = (props) => {
 	const dispatch = useDispatch();
-	const { commentContent, createdAt, likeNum, pinId, id} = props;
+	const { commentContents, likeNum, pinId, commentId} = props;
 	const userName = props.user?.userName;
+	const modifiedAt = props.user?.modifiedAt;
 
 	const [isEditMode, setIsEditMode] = useState(false);
 
@@ -28,12 +29,12 @@ const CommentCard = (props) => {
 							{userName}
 						</Text>
 						<StyledText>
-							{TimeCounting(createdAt, { lang: 'ko' })}
+							{modifiedAt}
 						</StyledText>
 					</Aligned>
 					<Flex>
 						<Text size='1.2rem' mg='8px 0 0'>
-							{commentContent}
+							{commentContents}
 						</Text>
 					</Flex>
 				</CommentContainer>

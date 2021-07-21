@@ -8,22 +8,21 @@ import { commentActions } from '../modules/comment';
 
 const CommentEdit = (props) => {
 	const dispatch = useDispatch();
-	const [modifiedComment, setModifiedComment] = useState(props.props.commentContent)
-	const comment_id = props.props.id;
+	const [modifiedComment, setModifiedComment] = useState(props.props.commentContents)
+	const commentId = props.props.commentId;
 	// 수정
-	const previousComment = props.props;
 	const resetComment = () => {
 		setModifiedComment('');
 	};
 	const submitComment = () => {
-		dispatch(commentActions.__editComment(comment_id, modifiedComment, previousComment));
+		dispatch(commentActions.__editComment(commentId, modifiedComment));
 		setModifiedComment('');
 	};
 	// 삭제
 	const deleteComment = () => {
 		const result = window.confirm('댓글을 삭제하시겠습니까?');
 		if (result) {
-			dispatch(commentActions.__deleteComment(comment_id));
+			dispatch(commentActions.__deleteComment(commentId));
 		}	
 	}
 	
