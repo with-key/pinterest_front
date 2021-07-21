@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import TimeCounting from 'time-counting';
 //----- elements & components -----//
 import { Flex, Button, Image, Text, Icons } from '../elem';
-import MenuToggle from './MenuToggle';
+import CommentEdit from './CommentEdit';
+
 //----- redux -----//
-import { useDispatch, useSelector } from 'react-redux';
-import { commentActions } from '../modules/comment';
+import { useDispatch } from 'react-redux';
 
 const CommentCard = (props) => {
-	const { commentContent, createdAt, likeNum } = props;
+	const dispatch = useDispatch();
+	const { commentContent, createdAt, likeNum, pinId, id} = props;
 	const userName = props.user?.userName;
+
+	const [isEditMode, setIsEditMode] = useState(false);
 
 	return (
 		<Flex>
@@ -24,7 +27,9 @@ const CommentCard = (props) => {
 						<Text size='1.4rem' mg='0 8px 0 0' weight='700'>
 							{userName}
 						</Text>
-						<StyledText>{TimeCounting(createdAt, { lang: 'ko' })}</StyledText>
+						<StyledText>
+							{TimeCounting(createdAt, { lang: 'ko' })}
+						</StyledText>
 					</Aligned>
 					<Flex>
 						<Text size='1.2rem' mg='8px 0 0'>
@@ -35,16 +40,26 @@ const CommentCard = (props) => {
 
 				<Aligned mg='4px 0 16px 16px' jc='space-between'>
 					<Aligned>
+
 						<Button comment type='circle'>
 							<Icons.Like color='var(--primary-gray)' />
 						</Button>
-						<StyledText>{likeNum}</StyledText>
+						<StyledText>
+							{likeNum}
+						</StyledText>
 
 						<Button comment type='circle'>
 							<Icons.MessageSmall color='var(--primary-gray)' />
 						</Button>
 
-						<MenuToggle list={['수정', '삭제']} editbtn comment />
+						{props.isMyComment && (
+							<Button type='circle' comment
+								_onClick={() => {
+									setIsEditMode(!isEditMode);
+								}}>
+								<Icons.Pencil color='var(--primary-gray)'/> 
+							</Button>						
+						)}
 					</Aligned>
 
 					<Aligned>
@@ -54,6 +69,10 @@ const CommentCard = (props) => {
 						<StyledText>유용함</StyledText>
 					</Aligned>
 				</Aligned>
+
+				{isEditMode ? (
+					<CommentEdit props={props} isEditMode/>
+				) : ('')}
 			</Flex>
 		</Flex>
 	);

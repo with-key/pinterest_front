@@ -31,8 +31,11 @@ const CommentWrite = (props) => {
 						comment
 						value={comment}
 						_onChange={(e) => {
-							setComment(e.target.value);
-						}}
+							setComment(e.target.value);}}
+						onKeyPress={(e) => {
+							if (e.key === 'Enter') {
+								submitComment();
+						}}}
 					/>
 				</Flex>
 			</Flex>

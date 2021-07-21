@@ -1,6 +1,5 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
-
+import styled from 'styled-components';
 // elements & components
 import { Flex, Image, Button, Icons, Text } from '../elem';
 
@@ -19,18 +18,18 @@ const PinCard = ({ history, pinImage, user, ...rest }) => {
 						<Button children='저장' width='64px' height='48px' primary />
 					</Flex>
 
-					{/* <Flex>
-						<Button width='120px' height='36px'>
+					{/* <Flex width='100%' jc='space-between'>
+						<Button height='32px' width='120px'>
 							<Text weight='400'>
 								<Icons.ArrowDiagonal />			
 							</Text>
-						</Button>						
-						<Button height='36px' type='circle'>
-							<Icons.Export />
-						</Button>
-						<Button height='36px' type='circle'>
-							<Icons.MeatballsMenu />
-						</Button>						
+						</Button>								
+							<Button height='32px' type='circle'>
+								<Icons.Export />
+							</Button>
+							<Button height='32px' type='circle'>
+								<Icons.MeatballsMenu />
+							</Button>			
 					</Flex> */}
 				</Middle>
 			</ImgContainer>
@@ -46,19 +45,7 @@ const PinCard = ({ history, pinImage, user, ...rest }) => {
 	);
 };
 
-const boxFade = keyframes`
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-`;
-
-const ImgContainer = styled.section`
+const ImgContainer = styled(Flex)`
 	width: auto;
 	height: auto;
 	margin: 0px;
@@ -76,9 +63,9 @@ const ImgContainer = styled.section`
 		opacity: 1;
 	}
 `;
-const Middle = styled.div`
+const Middle = styled(Flex)`
 	width: 100%;
-	height: auto;
+	height: 100%;
 	padding: 8px;
 	position: absolute;
 	transition: 0.5s ease;
@@ -88,6 +75,6 @@ const Middle = styled.div`
 	left: 0%;
 	flex-direction: column;
 	align-items: flex-end;
-	justify-content: center;
+	justify-content: space-between;
 `;
 export default PinCard;

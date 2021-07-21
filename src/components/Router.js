@@ -6,6 +6,7 @@ import Auth from '../shared/auth';
 import Home from '../pages/Home';
 import Signup from '../pages/Signup';
 import PinDetail from '../pages/PinDetail';
+import PinBoard from '../pages/PinBoard';
 import AddPin from '../pages/AddPin';
 
 const Router = () => {
@@ -14,6 +15,7 @@ const Router = () => {
 			<Route path='/' component={Auth(Home, null)} exact />
 			<Route path='/main' component={Auth(Signup, false)} exact />
 			<Route path='/pin/:id' component={Auth(PinDetail, null)} exact />
+			<Route path='/board' component={Auth(PinBoard, null)} exact />
 			<Route path='/pin-bulider' component={Auth(AddPin, null)} exact />
 		</Switch>
 	);

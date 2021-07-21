@@ -8,6 +8,32 @@ const Wrapper = styled.div`
 `;
 
 // global
+const SpinnerIcon = (props) => {
+	return (
+		<Wrapper {...props}>
+			<svg
+				xmlns='http://www.w3.org/2000/svg'
+				enable-background='new 0 0 20 20'
+				height='48px'
+				viewBox='0 0 20 20'
+				width='48px'
+				fill='#000000'
+			>
+				<g>
+					<rect fill='none' height='20' width='20' />
+				</g>
+				<g>
+					<g>
+						<circle cx='5' cy='14' r='3' />
+						<circle cx='10' cy='6' r='3' />
+						<circle cx='15' cy='14' r='3' />
+					</g>
+				</g>
+			</svg>
+		</Wrapper>
+	);
+};
+
 const MeatballsMenu = (props) => {
 	return (
 		<Wrapper {...props}>
@@ -355,7 +381,7 @@ const Paint = (props) => {
 };
 
 const Icons = {
-	Paint,
+	SpinnerIcon,
 	MeatballsMenu,
 	Search,
 	Export,
@@ -374,7 +400,6 @@ const Icons = {
 	MessageSmall,
 	Like,
 	ThumbsUp,
-	Trash,
 };
 
 export default Icons;

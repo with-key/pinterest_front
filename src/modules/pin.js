@@ -1,4 +1,5 @@
 import { createAction, handleActions } from 'redux-actions';
+import { produce } from 'immer';
 import { pinApi } from '../shared/api';
 
 // action
@@ -6,19 +7,28 @@ import { pinApi } from '../shared/api';
 const ADD_PIN = 'pin/ADD_PIN';
 const GET_PIN_LIST = 'pin/GET_PIN_LIST';
 const GET_PIN = 'pin/GET_PIN';
+// infinite scroll
+const LOADING = 'pin/LOADING';
 
 // initState
-
+// infinite scroll paging
 const initState = {
 	list: [],
 	selectedPin: {},
-	pin: {},
+	paging: { page: 0, next: 0, limit: 5 }, // page 0? 1?
+	isLoading: false,
+	isLogin: false,
+	pin: null,
 };
 
 // action creator
-export const getPinList = createAction(GET_PIN_LIST, (pinList) => ({
+
+export const getPinList = createAction(GET_PIN_LIST, (pinList, paging) => ({
 	pinList,
+	paging,
 }));
+// infinite scroll
+export const loading = createAction(LOADING, (isLoading) => ({ isLoading }));
 export const addPin = createAction(ADD_PIN, (pin) => ({ pin }));
 export const getPin = createAction(GET_PIN, (pin) => ({ pin }));
 
@@ -41,12 +51,22 @@ export const __addPin = (contents) => (dispatch, getState) => {
 	}
 };
 
+// 핀 목록 페이지 ; infinite scroll
 export const __getPinList =
-	(props) =>
+	(page = 0, limit = 5) =>
 	async (dispatch, getState, { history }) => {
 		try {
-			const { data } = await pinApi.getPinList();
-			dispatch(getPinList(data));
+			const _next = getState().pin.paging?.next;
+			if (_next === null) return;
+			dispatch(loading(true));
+
+			const { data } = await pinApi.getPinList(page, limit);
+			// next
+			if (data.length < limit) {
+				dispatch(getPinList(data, { next: null }));
+				return;
+			}
+			dispatch(getPinList(data, { page: page + 1, next: true, limit: limit }));
 		} catch (e) {
 			console.log(e);
 		}
@@ -69,7 +89,8 @@ const pin = handleActions(
 		[GET_PIN_LIST]: (state, action) => {
 			return {
 				...state,
-				list: action.payload.pinList,
+				list: [...state.list, ...action.payload.pinList],
+				paging: action.payload.paging,
 			};
 		},
 		[GET_PIN]: (state, action) => {
