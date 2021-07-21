@@ -55,7 +55,7 @@ const PinList = ({ history }) => {
 							<Flex 
 								key={index}  
 								style={{flexDirection: 'column'}}
-								onClick={() => {history.push(`/pin/${pin.id}`)}}
+								onClick={() => {history.push(`/pin/${pin.pinId}`)}}
 								>
 								<PinCard {...pin} history={history}/>
 							</Flex>				

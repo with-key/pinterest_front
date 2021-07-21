@@ -23,7 +23,7 @@ export const userApi = {
 
 export const pinApi = {
 	getPinList: (page, size) => instance.get(`/api/pin/page?page=${page}&size=${size}`),
-	getPin: (pinid) => instance.get(`/pin/${pinid}`),
+	getPin: (pinId) => instance.get(`/pin/${pinId}`),
 	addPin: (pin) => instance.post('/pin', pin),
 };
 
