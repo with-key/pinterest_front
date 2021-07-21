@@ -1,5 +1,5 @@
 import { createAction, handleActions } from 'redux-actions';
-import produce from 'immer';
+import jwt_decode from 'jwt-decode';
 import { userApi } from '../shared/api';
 import { setCookie } from '../shared/cookie';
 
@@ -11,9 +11,7 @@ const SET_LOGIN = 'user/SET_LOGIN';
 // initState
 const initState = {
 	user: {
-		userId: '',
 		userName: '',
-		password: '',
 		userImage: '',
 	},
 	isLogin: false,
@@ -28,9 +26,10 @@ const setLogin = createAction(SET_LOGIN, (userInfo) => ({ userInfo }));
 const __signup =
 	(userInfo) =>
 	async (dispatch, getState, { history }) => {
+		console.log(userInfo);
 		try {
 			const { data } = userApi.signup(userInfo);
-			dispatch(signup(data));
+			dispatch(signup(userInfo));
 		} catch (e) {
 			console.log(e);
 		}
@@ -39,14 +38,16 @@ const __signup =
 const __login =
 	(userInfo) =>
 	async (dispatch, getState, { history }) => {
+		console.log(userInfo);
 		try {
 			const { data } = await userApi.login(userInfo);
-			dispatch(login(data));
-			localStorage.setItem('userId', data.email);
-			setCookie('token', data.email, 1);
+			const decoded = jwt_decode(data);
+			dispatch(login(decoded.sub));
+			localStorage.setItem('userId', decoded.sub);
+			setCookie('token', data, 1);
 			history.replace('/');
 		} catch (e) {
-			console.log(e);
+			window.alert(e);
 		}
 	};
 
@@ -71,9 +72,7 @@ const user = handleActions(
 				isLogin: true,
 				user: {
 					...state.user,
-					userId: action.payload.userInfo.email,
-					// userName: action.payload.userInfo.userName,
-					// userImage: action.payload.userInfo.userImage,
+					userName: action.payload.userInfo,
 				},
 			};
 		},
