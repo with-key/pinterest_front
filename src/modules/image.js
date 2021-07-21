@@ -1,30 +1,19 @@
 import { createAction, handleActions } from 'redux-actions';
-import produce from 'immer';
 
 // action
 const UPLOAD = 'image/UPLOAD';
 const PREVIEW = 'image/PREVIEW';
 
 // action creator
-export const insert = createAction(UPLOAD, (text) => ({ text }));
-export const preview = createAction(PREVIEW, (imgUrl) => ({ imgUrl }));
+export const preview = createAction(PREVIEW, (preview) => ({ preview }));
+export const uploadImgeToS3 = createAction(UPLOAD, (imgUrl) => ({ imgUrl }));
 
 // Thunk function
-export const __insert =
-	(text, { history }) =>
-	async (dispatch) => {
-		try {
-			// const data = await
-			dispatch(insert(text));
-		} catch (e) {}
-	};
-
-export const __preview = () => (dispatch) => {};
-
 const initState = {
 	pin: '',
 	avatar: '',
 	preview: '',
+	imgUrl: '',
 };
 
 // reducer
@@ -32,12 +21,12 @@ const image = handleActions(
 	{
 		[UPLOAD]: (state, action) => ({
 			...state,
+			imgUrl: action.payload.imgUrl,
 		}),
 		[PREVIEW]: (state, action) => {
-			console.log(action.payload);
 			return {
 				...state,
-				preview: action.payload.imgUrl,
+				preview: action.payload.preview,
 			};
 		},
 	},
