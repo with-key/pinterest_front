@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
+	// baseURL: 'http://3.35.139.51',
 	baseURL: 'http://localhost:4000',
 	headers: {
 		'content-type': 'application/json;charset=UTF-8',
@@ -26,8 +27,7 @@ export const pinApi = {
 };
 
 export const commentApi = {
-	// getCommentList: (pinid) => instance.get(`/pin/comment?pinId=${pinid}`),
-	getCommentList: (pin_id) => instance.get(`/comment?pinId=${pin_id}`), // test
+	getCommentList: (pin_id) => instance.get(`/comment?pinId=${pin_id}`),
 	postComment: (pin_id, comment) => instance.post(`/comment?pinId=${pin_id}`, comment ),
 	deleteComment: (comment_id) => instance.delete(`/comment/${comment_id}`),
 	editComment: (comment_id, comment) => instance.put(`/comment/${comment_id}`, comment),

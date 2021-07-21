@@ -15,7 +15,7 @@ const Home = ({ history }) => {
 	}, []);
 
 	return (
-		<Template pd='80px 0 0 0' history={history}>
+		<Template history={history}>
 			<PinList history={history} />
 		</Template>
 	);
