@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const instance = axios.create({
-	// baseURL: 'http://3.35.139.51',
-	baseURL: 'http://localhost:4000',
+	baseURL: 'http://3.35.139.51',
+	// baseURL: 'http://localhost:4000',
 	headers: {
 		'content-type': 'application/json;charset=UTF-8',
 		accept: 'application/json,',
@@ -22,16 +22,16 @@ export const userApi = {
 };
 
 export const pinApi = {
-	getPinList: (page, limit) => instance.get(`/pin?page=${page}&limit=${limit}`), // page & limit; for infinite scroll
+	getPinList: (page, size) => instance.get(`/api/pin/page?page=${page}&size=${size}`),
 	getPin: (pinid) => instance.get(`/pin/${pinid}`),
 	addPin: (pin) => instance.post('/pin', pin),
 };
 
 export const commentApi = {
-	getCommentList: (pin_id) => instance.get(`/comment?pinId=${pin_id}`),
+	getCommentList: (pin_id) => instance.get(`/pin/comment/${pin_id}`),
 	postComment: (pin_id, comment) =>
-		instance.post(`/comment?pinId=${pin_id}`, comment),
-	deleteComment: (comment_id) => instance.delete(`/comment/${comment_id}`),
+		instance.post(`/pin/comment/${pin_id}`, comment),
+	deleteComment: (comment_id) => instance.delete(`/pin/comment/${comment_id}`),
 	editComment: (comment_id, comment) =>
-		instance.put(`/comment/${comment_id}`, comment),
+		instance.put(`/pin/comment/${comment_id}`, comment),
 };

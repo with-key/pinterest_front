@@ -3,7 +3,7 @@ import styled from 'styled-components';
 // elements & components
 import { Flex, Image, Button, Icons, Text } from '../elem';
 
-const PinCard = ({ history, pinImage, user, ...rest }) => {
+const PinCard = ({ history, pinId, pinImage, user, ...rest }) => {
 	return (
 		<React.Fragment>
 			<ImgContainer>
@@ -38,7 +38,7 @@ const PinCard = ({ history, pinImage, user, ...rest }) => {
 			<Flex mg='8px 0' ai='center'>
 				<Image size='36' shape='circle' />
 				<Text size='1.4rem' weight='400' mg='0px 8px'>
-					{/* {user.userName} */}
+					{user.userName}
 				</Text>
 			</Flex>
 		</React.Fragment>
