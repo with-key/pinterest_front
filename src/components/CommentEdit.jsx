@@ -15,6 +15,10 @@ const CommentEdit = (props) => {
 		setModifiedComment('');
 	};
 	const submitComment = () => {
+		if (modifiedComment.match(/\s/g) || !modifiedComment ) {
+			window.alert('내용을 입력하세요.')
+			return;
+		}
 		dispatch(commentActions.__editComment(commentId, modifiedComment));
 		setModifiedComment('');
 	};

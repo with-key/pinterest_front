@@ -15,6 +15,10 @@ const CommentWrite = (props) => {
 		setComment('');
 	};
 	const submitComment = () => {
+		if (comment.match(/\s/g) || !comment ) {
+			window.alert('내용을 입력하세요.')
+			return;
+		}
 		dispatch(commentActions.__postComment(pinid, comment));
 		setComment('');
 	};
