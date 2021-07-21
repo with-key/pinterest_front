@@ -383,6 +383,7 @@ const Paint = (props) => {
 const Icons = {
 	SpinnerIcon,
 	MeatballsMenu,
+	Trash,
 	Search,
 	Export,
 	Add,
@@ -393,6 +394,7 @@ const Icons = {
 	ArrowDown,
 	ArrowBack,
 	ArrowDiagonal,
+	Paint,
 	Selected,
 	Logo,
 	Notification,
