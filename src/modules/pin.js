@@ -1,10 +1,9 @@
 import { createAction, handleActions } from 'redux-actions';
-import { produce } from "immer";
+import { produce } from 'immer';
 import { pinApi } from '../shared/api';
 
 // action
-const GET_PINLIST = 'pin/GET_PINLIST';
-const ADD_FORM = 'pin/ADD_FORM';
+
 const ADD_PIN = 'pin/ADD_PIN';
 const GET_PIN_LIST = 'pin/GET_PIN_LIST';
 const GET_PIN = 'pin/GET_PIN';
@@ -16,7 +15,7 @@ const LOADING = 'pin/LOADING';
 const initState = {
 	list: [],
 	selectedPin: {},
-	paging: { page: 0, next: 0, limit: 5}, // page 0? 1?
+	paging: { page: 0, next: 0, limit: 5 }, // page 0? 1?
 	isLoading: false,
 	isLogin: false,
 	pin: null,
@@ -35,9 +34,21 @@ export const getPin = createAction(GET_PIN, (pin) => ({ pin }));
 
 // Thunk function
 
-export const __addPin = () => (dispatch) => {
+export const __addPin = (contents) => (dispatch, getState) => {
 	try {
-	} catch (e) {}
+		const { imgUrl } = getState().image;
+		const willDispatchContents = {
+			...contents,
+			pinImage: imgUrl,
+		};
+		console.log(willDispatchContents);
+		// api post
+		const { data } = pinApi.addPin(willDispatchContents);
+		console.log(data);
+		// dispatch(addPin(willDispatchContents));
+	} catch (e) {
+		console.log(e);
+	}
 };
 
 // 핀 목록 페이지 ; infinite scroll
@@ -46,7 +57,7 @@ export const __getPinList =
 	async (dispatch, getState, { history }) => {
 		try {
 			const _next = getState().pin.paging?.next;
-			if (_next === null) return;			
+			if (_next === null) return;
 			dispatch(loading(true));
 
 			const { data } = await pinApi.getPinList(page, limit);
@@ -54,14 +65,13 @@ export const __getPinList =
 			if (data.length < limit) {
 				dispatch(getPinList(data, { next: null }));
 				return;
-			}				
-			dispatch(getPinList(data, {page: page + 1, next: true, limit: limit}));
+			}
+			dispatch(getPinList(data, { page: page + 1, next: true, limit: limit }));
 		} catch (e) {
 			console.log(e);
 		}
 	};
 
-// 상세페이지: 핀 목록과 선택된 핀 상세 동시에 유지 필요
 const __getPin =
 	(pinId) =>
 	async (dispatch, getState, { history }) => {
@@ -80,9 +90,9 @@ const pin = handleActions(
 			return {
 				...state,
 				list: [...state.list, ...action.payload.pinList],
-				paging: action.payload.paging
+				paging: action.payload.paging,
 			};
-		},		
+		},
 		[GET_PIN]: (state, action) => {
 			return {
 				...state,
@@ -90,6 +100,12 @@ const pin = handleActions(
 					...action.payload.pin,
 					userName: action.payload.pin.user.userName,
 				},
+			};
+		},
+		[ADD_PIN]: (state, action) => {
+			return {
+				...state,
+				list: state.list.concat(action.payload.pin),
 			};
 		},
 	},

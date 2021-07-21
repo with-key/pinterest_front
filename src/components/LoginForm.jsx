@@ -9,12 +9,12 @@ const LoginForm = () => {
 	const dispatch = useDispatch();
 	const formik = useFormik({
 		initialValues: {
-			email: '',
+			userName: '',
 			password: '',
 		},
 
 		validationSchema: Yup.object({
-			email: Yup.string()
+			userName: Yup.string()
 				.email('올바른 이메일 주소가 아닙니다.')
 				.required('빠뜨린 부분이 있네요! 잊지 말고 이메일을 추가하세요.'),
 			password: Yup.string()
@@ -34,15 +34,15 @@ const LoginForm = () => {
 				<Input
 					mg='5px 0'
 					width='268px'
-					name='email'
+					name='userName'
 					type='text'
 					_onChange={formik.handleChange}
-					value={formik.values.email}
+					value={formik.values.userName}
 					placeholder='이메일'
 				/>
-				{formik.touched.email && formik.errors.email ? (
+				{formik.touched.userName && formik.errors.userName ? (
 					<Text mg='5px 0' color='#e60023'>
-						{formik.errors.email}
+						{formik.errors.userName}
 					</Text>
 				) : null}
 			</div>

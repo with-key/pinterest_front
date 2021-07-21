@@ -7,10 +7,15 @@ const PinCard = ({ history, pinImage, user, ...rest }) => {
 	return (
 		<React.Fragment>
 			<ImgContainer>
-				<Image className='image' shape='relative' width='236px' src={pinImage}/>
+				<Image
+					className='image'
+					shape='relative'
+					width='236px'
+					src={pinImage}
+				/>
 				<Middle className='middle'>
 					<Flex>
-						<Button children='저장' width='64px' height='48px' primary/>
+						<Button children='저장' width='64px' height='48px' primary />
 					</Flex>
 
 					{/* <Flex width='100%' jc='space-between'>
@@ -26,17 +31,16 @@ const PinCard = ({ history, pinImage, user, ...rest }) => {
 								<Icons.MeatballsMenu />
 							</Button>			
 					</Flex> */}
-
 				</Middle>
-			</ImgContainer> 
+			</ImgContainer>
 
-				{/* 핀 작성자 블록 */}
-				<Flex mg='8px 0' ai='center'>
-					<Image size='36' shape='circle'/>
-					<Text size='1.4rem' weight='400' mg='0px 8px'>
-						{user.userName}
-					</Text>
-				</Flex>
+			{/* 핀 작성자 블록 */}
+			<Flex mg='8px 0' ai='center'>
+				<Image size='36' shape='circle' />
+				<Text size='1.4rem' weight='400' mg='0px 8px'>
+					{/* {user.userName} */}
+				</Text>
+			</Flex>
 		</React.Fragment>
 	);
 };
@@ -59,18 +63,18 @@ const ImgContainer = styled(Flex)`
 		opacity: 1;
 	}
 `;
-const Middle = styled(Flex)`	
+const Middle = styled(Flex)`
 	width: 100%;
 	height: 100%;
 	padding: 8px;
 	position: absolute;
-  transition: .5s ease;
-  opacity: 0;
+	transition: 0.5s ease;
+	opacity: 0;
 	display: flex;
 	top: 0%;
-  left: 0%;
+	left: 0%;
 	flex-direction: column;
 	align-items: flex-end;
 	justify-content: space-between;
-`
+`;
 export default PinCard;

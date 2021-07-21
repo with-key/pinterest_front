@@ -8,6 +8,7 @@ const Flex = ({ children, ...rest }) => {
 const FlexBx = styled.div`
 	display: flex;
 	width: ${(props) => props.width};
+	height: ${(props) => props.height};
 	margin: ${(props) => props.mg};
 	padding: ${(props) => props.pd};
 	gap: ${(props) => props.gap};

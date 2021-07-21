@@ -12,20 +12,20 @@ const SignupCard = () => {
 	const dispatch = useDispatch();
 	const formik = useFormik({
 		initialValues: {
-			email: '',
+			userName: '',
 			password: '',
-			passwordCheck: '',
+			checkPassword: '',
 		},
 
 		validationSchema: Yup.object({
-			email: Yup.string()
+			userName: Yup.string()
 				.email('올바른 이메일 주소가 아닙니다.')
 				.required('빠뜨린 부분이 있네요! 잊지 말고 이메일을 추가하세요.'),
 			password: Yup.string()
 				.min(6, '비밀번호가 너무 짧네요! 6자 이상 입력하세요.')
 				.matches(/[a-zA-Z]/, '더 강력한 비밀번호를 사용하세요.')
 				.required('패스워드를 입력해주세요.'),
-			passwordCheck: Yup.string()
+			checkPassword: Yup.string()
 				.min(6, '비밀번호가 너무 짧네요! 6자 이상 입력하세요.')
 				.matches(/[a-zA-Z]/, '더 강력한 비밀번호를 사용하세요.')
 				.required('패스워드를 한번 더 입력해주세요.')
@@ -33,7 +33,9 @@ const SignupCard = () => {
 		}),
 
 		onSubmit: (values) => {
+			console.log(values);
 			dispatch(userAcions.__signup(values));
+			setLoginMode(true);
 		},
 	});
 
@@ -59,15 +61,15 @@ const SignupCard = () => {
 						<Input
 							mg='5px 0'
 							width='268px'
-							name='email'
+							name='userName'
 							type='text'
 							_onChange={formik.handleChange}
-							value={formik.values.email}
+							value={formik.values.userName}
 							placeholder='이메일'
 						/>
-						{formik.touched.email && formik.errors.email ? (
+						{formik.touched.userName && formik.errors.userName ? (
 							<Text mg='5px 0' color='#e60023'>
-								{formik.errors.email}
+								{formik.errors.userName}
 							</Text>
 						) : null}
 					</div>
@@ -91,15 +93,15 @@ const SignupCard = () => {
 						<Input
 							mg='5px 0'
 							width='268px'
-							name='passwordCheck'
+							name='checkPassword'
 							type='password'
 							_onChange={formik.handleChange}
-							value={formik.values.passwordCheck}
+							value={formik.values.checkPassword}
 							placeholder='비밀번호를 한번 더 입력하세요'
 						/>
-						{formik.touched.passwordCheck && formik.errors.passwordCheck ? (
+						{formik.touched.checkPassword && formik.errors.checkPassword ? (
 							<Text mg='5px 0' color='#e60023'>
-								{formik.errors.passwordCheck}
+								{formik.errors.checkPassword}
 							</Text>
 						) : null}
 					</div>
