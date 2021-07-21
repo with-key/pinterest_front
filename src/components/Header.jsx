@@ -31,11 +31,11 @@ const Header = (props) => {
 	return (
 		<Container className={isScrolled ? 'scrolled' : ''}>
 			{/* 좌: 홈으로 가기 */}
-			<Flex width={'128px'}>
+			<Flex width='112px'>
 				<Button
-					height={'48px'}
-					type={'circle'}
-					color={'var(--primary-red)'}
+					height='48px'
+					type='circle'
+					color='var(--primary-red)'
 					_onClick={() => {
 						window.location.replace('/');
 					}}
@@ -44,8 +44,9 @@ const Header = (props) => {
 				</Button>
 
 				<Button
-					children={'홈'}
-					height={'48px'}
+					children='홈'
+					width='64px'
+					height='48px'
 					tertiary
 					_onClick={() => {
 						window.location.replace('/');
@@ -53,7 +54,7 @@ const Header = (props) => {
 				/>
 			</Flex>
 			{/* 중: 검색 */}
-			<Flex width={'calc(100vw - 336px)'}>
+			<Flex width='calc(100vw - 332px)'>
 				<Input width='100%' header placeholder='검색' mg='0px 8px' />
 			</Flex>
 			{/* 우: 개인 메뉴 */}
@@ -64,7 +65,7 @@ const Header = (props) => {
 				<Button height='48px' type='circle'>
 					<Icons.Message color='var(--primary-gray)' />
 				</Button>
-				<Button height='48px' type='circle'>
+				<Button height='48px' type='circle' onClick={() => (props.history.push('/board'))}>
 					<Image shape='circle' />
 				</Button>
 				<Button height='48px' type='circle' _onClick={toggleMenuField}>
@@ -74,7 +75,7 @@ const Header = (props) => {
 			{/* 메뉴 드롭다운 토글 */}
 			{isMenuVisible ? (
 				<FloatMenu>
-					<Dropdown header width='300px' />
+					<Dropdown header width='300px' history={props.history}/>
 				</FloatMenu>
 			) : null}
 
@@ -97,6 +98,7 @@ const Container = styled.header`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	align-items: center;
 	width: 100%;
 	height: 80px;
 	position: fixed;
