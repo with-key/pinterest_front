@@ -12,15 +12,14 @@ const CommentList = (props) => {
 	const dispatch = useDispatch();
 	const [isCommentVisible, setIsCommentVisible] = useState(false);
 	// 해당 핀 댓글 목록 가져오기
-	const id = props.match.params.id;
+	const pinId = props.match.params.id;
 	useEffect(() => {
-		dispatch(commentActions.__getCommentList(id));
+		dispatch(commentActions.__getCommentList(pinId));
 	}, []);
 	const comment_list = useSelector((state)=> (state.comment.list));
 	const comment_count = comment_list.length	
 
-	const user_id = useSelector((state)=> (state.user));
-	// console.log(user_id); // 서버테스트 후 수정
+	const userId = localStorage.getItem('userId')
 	return (
 		<React.Fragment>
 			<Section> 
@@ -49,15 +48,14 @@ const CommentList = (props) => {
 					<Section> 
 					{ comment_list ? (			
 						comment_list.map((comment) => {
-							if(comment.user.userId === user_id) {
-								return (
-									<CommentCard key={comment.id} {...comment} />
-								);
-							} else {
+							if(comment.user.userName === userId) {
 								return (
 									<CommentCard key={comment.id} {...comment} isMyComment/>
 								);
-								// 테스트 위해 일치하지 않을 경우 보이게 넣어둠, 나중에 교체
+							} else {
+								return (
+									<CommentCard key={comment.id} {...comment} />
+								);
 							}
 					})) : ('')}
 					{ ( comment_count === 0 ) ? (												

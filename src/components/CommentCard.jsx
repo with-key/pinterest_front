@@ -1,20 +1,27 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import TimeCounting from 'time-counting';
 //----- elements & components -----//
 import { Flex, Button, Image, Text, Icons } from '../elem';
 import CommentEdit from './CommentEdit';
-
 //----- redux -----//
 import { useDispatch } from 'react-redux';
+import { commentActions } from '../modules/comment';
 
 const CommentCard = (props) => {
 	const dispatch = useDispatch();
 	const { commentContents, likeNum, pinId, commentId} = props;
-	const userName = props.user?.userName;
-	const modifiedAt = props.user?.modifiedAt;
+	const userName = props.user.userName;
+	const modifiedAt = props.user.modifiedAt;
 
 	const [isEditMode, setIsEditMode] = useState(false);
+	
+	// 삭제
+	const deleteComment = () => {
+		const result = window.confirm('댓글을 삭제하시겠습니까?');
+		if (result) {
+			dispatch(commentActions.__deleteComment(commentId));
+		}	
+	}
 
 	return (
 		<Flex>
@@ -54,12 +61,18 @@ const CommentCard = (props) => {
 						</Button>
 
 						{props.isMyComment && (
-							<Button type='circle' comment
-								_onClick={() => {
-									setIsEditMode(!isEditMode);
-								}}>
-								<Icons.Pencil color='var(--primary-gray)'/> 
-							</Button>						
+							<>
+								<Button type='circle' comment
+									_onClick={() => {
+										setIsEditMode(!isEditMode);
+									}}>
+									<Icons.Pencil color='var(--primary-gray)'/> 
+								</Button>
+								<Button type='circle' comment
+								_onClick={deleteComment}>
+									<Icons.Trash color='var(--primary-gray)'/>
+								</Button>	
+							</>
 						)}
 					</Aligned>
 
