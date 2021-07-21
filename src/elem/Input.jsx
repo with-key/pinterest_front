@@ -8,6 +8,7 @@ const Input = ({ type, header, ...rest }) => {
 
 	return (
 		<DefaultInput
+			name={rest.name}
 			onClick={rest._onClick}
 			type={type}
 			onChange={rest._onChange}
@@ -28,8 +29,8 @@ Input.defaultProps = {
 
 const DefaultInput = styled.input`
 	width: ${(props) => (props.width ? props.width : '100%')};
-	height: ${(props) => (props.height)};
-	margin: ${(props) => (props.mg)};
+	height: ${(props) => props.height};
+	margin: ${(props) => props.mg};
 
 	padding: 8px 16px;
 	border: 2px solid var(--secondary-lightgray);
@@ -49,12 +50,11 @@ const DefaultInput = styled.input`
 		box-shadow: rgba(3, 102, 214, 0.4) 0px 0px 0px 4px;
 	}
 	${(props) =>
-	props.comment &&
-	css`
-		border: 1px solid var(--secondary-lightgray);
-		border-radius: ${(props) => (props.height)};
-	`}
-
+		props.comment &&
+		css`
+			border: 1px solid var(--secondary-lightgray);
+			border-radius: ${(props) => props.height};
+		`}
 `;
 
 const HeaderInput = styled.input`

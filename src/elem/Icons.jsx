@@ -216,7 +216,7 @@ const Logo = (props) => {
 	return (
 		<Wrapper {...props}>
 			<svg
-				class='gUZ lZJ U9O kVc'
+				className='gUZ lZJ U9O kVc'
 				height={`${props.size ? props.size : `24`}`}
 				width={`${props.size ? props.size : `24`}`}
 				viewBox='0 0 24 24'
@@ -319,7 +319,43 @@ const ThumbsUp = (props) => {
 	);
 };
 
+const Trash = (props) => {
+	return (
+		<Wrapper {...props}>
+			<svg
+				className='gUZ pBj U9O kVc'
+				height='18'
+				width='18'
+				viewBox='0 0 24 24'
+				aria-hidden='true'
+				aria-label=''
+				role='img'
+			>
+				<path d='M4.878 22.116A2 2 0 0 0 6.875 24h10.229a2 2 0 0 0 1.995-1.881L20 7H4l.88 15.116zM22 3.5A1.5 1.5 0 0 1 20.5 5h-17a1.5 1.5 0 0 1 0-3h6V1a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v1h6A1.5 1.5 0 0 1 22 3.5z'></path>
+			</svg>
+		</Wrapper>
+	);
+};
+
+const Paint = (props) => {
+	return (
+		<svg
+			xmlns='http://www.w3.org/2000/svg'
+			viewBox='0 0 24 24'
+			width='24'
+			height='24'
+		>
+			<path fill='none' d='M0 0h24v24H0z' />
+			<path
+				d='M4.828 21l-.02.02-.021-.02H2.992A.993.993 0 0 1 2 20.007V3.993A1 1 0 0 1 2.992 3h18.016c.548 0 .992.445.992.993v16.014a1 1 0 0 1-.992.993H4.828zM20 15V5H4v14L14 9l6 6zm0 2.828l-6-6L6.828 19H20v-1.172zM8 11a2 2 0 1 1 0-4 2 2 0 0 1 0 4z'
+				fill='rgba(149,164,166,1)'
+			/>
+		</svg>
+	);
+};
+
 const Icons = {
+	Paint,
 	MeatballsMenu,
 	Search,
 	Export,
@@ -338,6 +374,7 @@ const Icons = {
 	MessageSmall,
 	Like,
 	ThumbsUp,
+	Trash,
 };
 
 export default Icons;
