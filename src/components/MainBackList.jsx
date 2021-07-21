@@ -5,11 +5,51 @@ import StackGrid, { transitions, easings } from 'react-stack-grid';
 // components
 const transition = transitions.scaleUp;
 const MainBackList = ({ style }) => {
+	const array = [
+		{ src: 'https://source.unsplash.com/category/nature/300x390', size: 200 },
+		{ src: 'https://source.unsplash.com/category/nature/301x390', size: 400 },
+		{ src: 'https://source.unsplash.com/category/nature/302x390', size: 300 },
+		{ src: 'https://source.unsplash.com/category/nature/303x390', size: 240 },
+		{ src: 'https://source.unsplash.com/category/nature/304x390', size: 300 },
+		{ src: 'https://source.unsplash.com/category/nature/305x390', size: 310 },
+		{ src: 'https://source.unsplash.com/category/nature/306x390', size: 200 },
+		{ src: 'https://source.unsplash.com/category/nature/307x390', size: 400 },
+		{ src: 'https://source.unsplash.com/category/nature/308x390', size: 200 },
+		{ src: 'https://source.unsplash.com/category/nature/309x390', size: 200 },
+		{ src: 'https://source.unsplash.com/category/nature/310x390', size: 400 },
+		{ src: 'https://source.unsplash.com/category/nature/311x390', size: 200 },
+		{ src: 'https://source.unsplash.com/category/nature/312x390', size: 230 },
+		{ src: 'https://source.unsplash.com/category/nature/313x390', size: 400 },
+		{ src: 'https://source.unsplash.com/category/nature/314x390', size: 250 },
+		{ src: 'https://source.unsplash.com/category/nature/315x390', size: 300 },
+		{ src: 'https://source.unsplash.com/category/nature/316x390', size: 200 },
+		{ src: 'https://source.unsplash.com/category/nature/317x390', size: 370 },
+		{ src: 'https://source.unsplash.com/category/nature/318x390', size: 380 },
+		{ src: 'https://source.unsplash.com/category/nature/319x390', size: 400 },
+		{ src: 'https://source.unsplash.com/category/nature/320x390', size: 320 },
+		{ src: 'https://source.unsplash.com/category/nature/321x390', size: 400 },
+		{ src: 'https://source.unsplash.com/category/nature/322x390', size: 500 },
+		{ src: 'https://source.unsplash.com/category/nature/323x390', size: 200 },
+		{ src: 'https://source.unsplash.com/category/nature/324x390', size: 320 },
+		{ src: 'https://source.unsplash.com/category/nature/325x390', size: 400 },
+		{ src: 'https://source.unsplash.com/category/nature/326x390', size: 200 },
+		{ src: 'https://source.unsplash.com/category/nature/327x390', size: 600 },
+		{ src: 'https://source.unsplash.com/category/nature/328x390', size: 500 },
+		{ src: 'https://source.unsplash.com/category/nature/329x390', size: 500 },
+		{ src: 'https://source.unsplash.com/category/nature/330x390', size: 400 },
+		{ src: 'https://source.unsplash.com/category/nature/331x390', size: 300 },
+		{ src: 'https://source.unsplash.com/category/nature/332x390', size: 600 },
+		{ src: 'https://source.unsplash.com/category/nature/333x390', size: 500 },
+		{ src: 'https://source.unsplash.com/category/nature/334x390', size: 500 },
+		{ src: 'https://source.unsplash.com/category/nature/335x390', size: 400 },
+		{ src: 'https://source.unsplash.com/category/nature/336x390', size: 300 },
+	];
+
 	return (
 		<Container style={style}>
 			<StackGrid
 				monitorImagesLoaded
-				columnWidth={240}
+				columnWidth={300}
 				appear={transition.appear}
 				appeared={transition.appeared}
 				enter={transition.enter}
@@ -19,58 +59,9 @@ const MainBackList = ({ style }) => {
 				duration={80}
 				appearDelay={1}
 			>
-				<ImgCard key='key1'>Item 1</ImgCard>
-				<ImgCard key='key2' style={{ backgroundColor: '#fff' }}>
-					Item 2
-				</ImgCard>
-				<ImgCard key='key3'>Item 3</ImgCard>
-				<ImgCard key='key4'>Item 4</ImgCard>
-				<ImgCard key='key5'>Item 5</ImgCard>
-				<ImgCard key='key6'>Item 6</ImgCard>
-				<ImgCard key='key7'>Item 7</ImgCard>
-				<ImgCard key='key8'>Item 8</ImgCard>
-				<ImgCard key='key9'>Item 9</ImgCard>
-				<ImgCard key='key10'>Item 10</ImgCard>
-				<ImgCard key='key11'>Item 11</ImgCard>
-				<ImgCard key='key12'>Item 12</ImgCard>
-				<ImgCard key='key13'>Item 13</ImgCard>
-				<ImgCard key='key14'>Item 14</ImgCard>
-				<ImgCard key='key15'>Item 15</ImgCard>
-				<ImgCard key='key16'>Item 16</ImgCard>
-				<ImgCard key='key17'>Item 17</ImgCard>
-				<ImgCard key='key18'>Item 18</ImgCard>
-				<ImgCard key='key19'>Item 19</ImgCard>
-				<ImgCard key='key20'>Item 20</ImgCard>
-				<ImgCard key='key21'>Item 21</ImgCard>
-				<ImgCard key='key22'>Item 21</ImgCard>
-				<ImgCard key='key23'>Item 21</ImgCard>
-				<ImgCard key='key24'>Item 21</ImgCard>
-				<ImgCard key='key26'>Item 21</ImgCard>
-				<ImgCard key='key27'>Item 21</ImgCard>
-				<ImgCard key='key28'>Item 21</ImgCard>
-				<ImgCard key='key29'>Item 21</ImgCard>
-				<ImgCard key='key30'>Item 21</ImgCard>
-				<ImgCard key='key31'>Item 20</ImgCard>
-				<ImgCard key='key32'>Item 21</ImgCard>
-				<ImgCard key='key33'>Item 21</ImgCard>
-				<ImgCard key='key34'>Item 21</ImgCard>
-				<ImgCard key='key35'>Item 21</ImgCard>
-				<ImgCard key='key36'>Item 21</ImgCard>
-				<ImgCard key='key37'>Item 21</ImgCard>
-				<ImgCard key='key38'>Item 21</ImgCard>
-				<ImgCard key='key39'>Item 21</ImgCard>
-				<ImgCard key='key40'>Item 21</ImgCard>
-				<ImgCard key='key41'>Item 21</ImgCard>
-				<ImgCard key='key42'>Item 20</ImgCard>
-				<ImgCard key='key42'>Item 21</ImgCard>
-				<ImgCard key='key44'>Item 21</ImgCard>
-				<ImgCard key='key45'>Item 21</ImgCard>
-				<ImgCard key='key46'>Item 21</ImgCard>
-				<ImgCard key='key47'>Item 21</ImgCard>
-				<ImgCard key='key48'>Item 21</ImgCard>
-				<ImgCard key='key49'>Item 21</ImgCard>
-				<ImgCard key='key50'>Item 21</ImgCard>
-				<ImgCard key='key51'>Item 21</ImgCard>
+				{array.map((item, idx) => (
+					<ImgCard key={idx} src={item.src} size={item.size} />
+				))}
 			</StackGrid>
 		</Container>
 	);
@@ -79,12 +70,13 @@ const MainBackList = ({ style }) => {
 const Container = styled.section`
 	position: absolute;
 	overflow: hidden;
-	top: 400px;
+	top: 600px;
 	width: 80%;
 `;
 
 const ImgCard = styled.section`
-	height: 300px;
+	background-image: url(${(props) => props.src});
+	height: ${(props) => props.size}px;
 	margin: 0px 8px 40px;
 	border-radius: 20px;
 	box-sizing: border-box;

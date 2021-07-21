@@ -26,7 +26,7 @@ const Signup = () => {
 						stiffness: 25,
 						dumping: 40,
 					}),
-					bg: spring(viewLogin ? 0.5 : 0, {
+					bg: spring(viewLogin ? 0.7 : 0, {
 						stiffness: 50,
 						dumping: 40,
 					}),
@@ -85,7 +85,7 @@ const Signup = () => {
 									</Flex>
 								</Flex>
 							</Header>
-							<Wrapper>
+							<Wrapper style={{ width: '1920px' }}>
 								<MainBackList
 									style={{
 										transform: `translateY(${value.top}px)`,
@@ -96,9 +96,9 @@ const Signup = () => {
 										transform: `translateY(${value.top}px)`,
 									}}
 								>
-									<Text size='7rem' mg='7rem 0 1.8rem 3.6rem'>
-										꾸미기 아이디어를 찾아보세요.
-									</Text>
+									<MainDesc>
+										<Text>집안 꾸미기 아이디어를 찾아보세요.</Text>
+									</MainDesc>
 								</FlexBox>
 							</Wrapper>
 							<Wrapper>
@@ -132,6 +132,16 @@ const Signup = () => {
 		</>
 	);
 };
+
+const MainDesc = styled(Text)`
+	font-size: 7rem;
+	color: rgb(64, 122, 87);
+	font-weight: 700;
+	width: 100%;
+	height: 500px;
+	display: flex;
+	justify-content: center;
+`;
 
 const Container = styled.section`
 	overflow: hidden;
