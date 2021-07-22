@@ -18,7 +18,7 @@ const PinList = ({ history }) => {
   const pin_list = useSelector((state)=> (state.pin.list));
 	const isLoading = useSelector((state)=> (state.pin.isLoading));
 	const paging = useSelector((state)=> (state.pin.paging));
-	console.log(`state 내 page: ${paging.page} next: ${paging.next} size: ${paging.size}`)
+	// console.log(`state 내 page: ${paging.page} next: ${paging.next} size: ${paging.size}`)
 
 	const callNextPage = () => {
 		if (paging.next === false) {

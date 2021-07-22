@@ -60,28 +60,16 @@ export const __getPinList =
 			const _page = getState().pin.paging.page;
 			if ( _page=== false && next === false ) return;
 			dispatch(loading(true));
-			console.log(`서버 요청 page: ${_page}, size: ${size} `)
+			
 			const { data } = await pinApi.getPinList(_page, size);
-			console.log(data.content, data);
+
 			const totalPages = data.totalPages;
 			let paging = {
 				page: data.content.length < size ? false: _page + 1,
 				next: _page === totalPages ? false : true,
 				size: size,
 			};
-			// const next = getState().pin.paging.next;
-			// const _page = getState().pin.paging.page;
-			// if ( _page=== false && next === false ) return;
-			// dispatch(loading(true));
-			// console.log(`서버 요청 page: ${page}, size: ${size} `)
-			// const { data } = await pinApi.getPinList(page, size);
-			// console.log(data.content, data);
-			// const totalPages = data.totalPages;
-			// let paging = {
-			// 	page: page === totalPages ? false: page + 1,
-			// 	next: page === totalPages ? false : true,
-			// 	size: size,
-			// };
+
 			dispatch(getPinList(data.content, paging));
 		} catch (e) {
 			console.log(e);
@@ -105,19 +93,12 @@ const pin = handleActions(
 		[GET_PIN_LIST]: (state, action) => produce(state, (draft) => {
 				draft.list.push(...action.payload.pinList);
         draft.paging = action.payload.paging;
-				console.log(draft.paging)
 				draft.isLoading = false;
 			}
 		),
-		[GET_PIN]: (state, action) => {
-			return {
-				...state,
-				selectedPin: {
-					...action.payload.pin,
-					userName: action.payload.pin.user.userName,
-				},
-			};
-		},
+		[GET_PIN]: (state, action) => produce(state, (draft) => {
+        draft.selectedPin = action.payload.pin;
+		}),
 		[ADD_PIN]: (state, action) => {
 			return {
 				...state,

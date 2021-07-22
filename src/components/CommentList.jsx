@@ -48,7 +48,7 @@ const CommentList = (props) => {
 					<Section> 
 					{ comment_list ? (			
 						comment_list.map((comment) => {
-							if(comment.user.userName === userId) {
+							if(comment.user?.userName === userId) {
 								return (
 									<CommentCard key={comment.id} {...comment} isMyComment/>
 								);

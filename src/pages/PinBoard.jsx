@@ -11,6 +11,8 @@ import { pinActions } from '../modules/pin';
 
 const PinBoard = ({ history, match, ...rest }) => {
 	const dispatch = useDispatch();
+	const email = localStorage.getItem('userId')
+	const name = email.split('@')[0]
 
 	useEffect(() => {
 		dispatch(pinActions.__getPinList());
@@ -19,13 +21,12 @@ const PinBoard = ({ history, match, ...rest }) => {
 	return (
 		<Template history={history}>
 			<Container>
-				
 				<Image size='120'/>
 				<Text size='3.6rem' weight='700' mg='16px'>
-					username
+					{name}
 				</Text>
 				<Text size='1.8rem' weight='400'>
-					@username
+					{email}
 				</Text>
 
 				<Flex width='100%' jc='space-between' mg='52px 0 16px'>

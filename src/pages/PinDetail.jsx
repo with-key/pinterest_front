@@ -26,9 +26,10 @@ const PinDetail = ({ history, match, ...rest }) => {
 		dispatch(commentActions.__getCommentList(id));
 	}, [id]);
 
-	const { pinTitle, pinContent, pinImage, userName, pinUrl } = useSelector(
+	const { pinTitle, pinContent, pinImage, pinUrl } = useSelector(
 		(state) => state.pin.selectedPin,
 	);
+	const userName = useSelector((state) => state.pin.selectedPin.user?.userName);;
 
 	return (
 		<Template  history={history}>
