@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 const ImgUploader = ({ fileInput, noImageAlert, setNoImageAlert }) => {
 	const dispatch = useDispatch();
 	const imgUrl = useSelector((store) => store.image.preview);
-	const result = imgUrl === '';
 
 	// preview (only in redux (base64))
 	const imagePreview = () => {
@@ -42,13 +41,13 @@ const ImgUploader = ({ fileInput, noImageAlert, setNoImageAlert }) => {
 			{noImageAlert ? (
 				<Label
 					htmlFor='upload'
-					result={result}
+					imgUrl={imgUrl}
 					style={{
 						backgroundColor: '#FEF7F8',
 						color: '#E60023',
 					}}
 				>
-					<Border result={result} style={{ border: '2px dashed #E60023' }}>
+					<Border imgUrl={imgUrl} style={{ border: '2px dashed #E60023' }}>
 						{imgUrl ? (
 							<Img src={`${imgUrl}`} alt='' />
 						) : (
@@ -57,8 +56,8 @@ const ImgUploader = ({ fileInput, noImageAlert, setNoImageAlert }) => {
 					</Border>
 				</Label>
 			) : (
-				<Label htmlFor='upload' result={result}>
-					<Border result={result}>
+				<Label htmlFor='upload' imgUrl={imgUrl}>
+					<Border imgUrl={imgUrl}>
 						{imgUrl ? <Img src={`${imgUrl}`} alt='' /> : '클릭하여 업로드'}
 					</Border>
 				</Label>
@@ -74,7 +73,8 @@ const Border = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border: ${(props) => (props.result ? '2px dashed var(--primary-gray)' : '')};
+	border: ${(props) =>
+		props.imgUrl === '' ? '2px dashed var(--primary-gray)' : ''};
 `;
 
 const Img = styled.img`
@@ -100,7 +100,7 @@ const Label = styled.label`
 	cursor: pointer;
 	border-radius: 8px;
 	background-color: ${(props) =>
-		props.result ? 'var(--primary-lightgray)' : ''};
+		props.imgUrl === '' ? 'var(--primary-lightgray)' : ''};
 `;
 
 export default ImgUploader;
