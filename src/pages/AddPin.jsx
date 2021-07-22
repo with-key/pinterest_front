@@ -9,14 +9,13 @@ const AddPin = ({ history }) => {
 	const previewUrl = useSelector((store) => store.image.preview);
 
 	return (
-		<Template bg='var(--primary-lightgray)' pd='28px 0'>
+		<Template bg='var(--primary-lightgray)' pd='28px 0' history={history}>
 			<LeftNav>
-				<AddformBtn />
 				<MiniView previewUrl={previewUrl}>
 					{previewUrl ? '' : <Icons.Paint />}
 				</MiniView>
 			</LeftNav>
-			<AddForm />
+			<AddForm history={history} />
 		</Template>
 	);
 };

@@ -24,9 +24,6 @@ const Header = (props) => {
 	}, []);
 
 	// 위로 가기 버튼
-	const scrollToTop = () => {
-		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-	};
 
 	return (
 		<Container className={isScrolled ? 'scrolled' : ''}>
@@ -65,7 +62,11 @@ const Header = (props) => {
 				<Button height='48px' type='circle'>
 					<Icons.Message color='var(--primary-gray)' />
 				</Button>
-				<Button height='48px' type='circle' onClick={() => (props.history.push('/board'))}>
+				<Button
+					height='48px'
+					type='circle'
+					onClick={() => props.history.push('/board')}
+				>
 					<Image shape='circle' />
 				</Button>
 				<Button height='48px' type='circle' _onClick={toggleMenuField}>
@@ -75,21 +76,9 @@ const Header = (props) => {
 			{/* 메뉴 드롭다운 토글 */}
 			{isMenuVisible ? (
 				<FloatMenu>
-					<Dropdown header width='300px' history={props.history}/>
+					<Dropdown header width='300px' history={props.history} />
 				</FloatMenu>
 			) : null}
-
-			{/* 하단: 고정 버튼 */}
-			<Button type='float' style={{ bottom: '88px', right: '24px' }}>
-				<Icons.Add />
-			</Button>
-			<Button
-				type='float'
-				style={{ bottom: '24px', right: '24px' }}
-				_onClick={scrollToTop}
-			>
-				<Icons.ArrowUp />
-			</Button>
 		</Container>
 	);
 };

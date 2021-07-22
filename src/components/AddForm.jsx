@@ -5,11 +5,11 @@ import styled, { css } from 'styled-components';
 import { Button, Flex, Text, Input, Icons } from '../elem';
 import ImgUploader from '../components/ImgUploader';
 import { useDispatch, useSelector } from 'react-redux';
-import MenuToggle from './MenuToggle';
+import Drop from './Drop';
 import { preview, uploadImgeToS3 } from '../modules/image';
 import { __addPin } from '../modules/pin';
 
-const AddForm = () => {
+const AddForm = ({ history }) => {
 	const dispatch = useDispatch();
 	const fileInput = useRef();
 	const previewUrl = useSelector((store) => store.image.preview);
@@ -56,7 +56,16 @@ const AddForm = () => {
 	return (
 		<Container>
 			<Flex jc='space-between' mg='0 0 20px 0'>
-				<MenuToggle list={['삭제', '복제']} editbtn />
+				<Drop.Container
+					direction='bottom'
+					size='48px'
+					type='menu'
+					history={history}
+				>
+					<Drop.Item>복제</Drop.Item>
+					<Drop.Item>삭제</Drop.Item>
+				</Drop.Container>
+
 				<Button primary _onClick={addPinHandler}>
 					저장
 				</Button>
@@ -89,7 +98,9 @@ const AddForm = () => {
 								_onClick={() => {
 									setSaveAtSite(false);
 								}}
-							/>
+							>
+								<Icons.ArrowRight />
+							</StBtn>
 							<StInput
 								name='pinUrl'
 								_onChange={changeHandler}
@@ -117,9 +128,11 @@ const AddForm = () => {
 							onChange={changeHandler}
 						/>
 						<Flex ai='center' gap='10px'>
-							<Div>S</Div>
+							<Avatar>
+								{localStorage.getItem('userId').slice(0, 1).toUpperCase()}
+							</Avatar>
 							<Text size='1.4rem' weight='700'>
-								username
+								{localStorage.getItem('userId')}
 							</Text>
 						</Flex>
 						<UnderlineInput
@@ -142,12 +155,24 @@ const AddForm = () => {
 	);
 };
 
+const Avatar = styled.div`
+	display: flex;
+	font-size: 20px;
+	font-weight: 700;
+	justify-content: center;
+	align-items: center;
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	background-color: var(--primary-lightgray);
+`;
 const UnderlineInput = styled.input`
 	::placeholder {
 		font-size: 1rem;
 		line-height: 40px;
 	}
 	vertical-align: top;
+	padding: 0 10px;
 	line-height: 40px;
 	border: none;
 	&:focus {
@@ -159,9 +184,7 @@ const UnderlineInput = styled.input`
 	${(props) =>
 		props.noContentAlert &&
 		css`
-			border-radius: 8px;
 			background-color: #fef7f8;
-			border: 1px solid #e60023;
 		`}
 `;
 
@@ -177,6 +200,9 @@ const Container = styled.div`
 
 const StBtn = styled(Button)`
 	position: absolute;
+	padding-left: 65px;
+	display: flex;
+	align-items: center;
 	right: 0;
 	width: 30%;
 	border-radius: 0px 8px 8px 0 !important;
