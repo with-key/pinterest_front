@@ -68,7 +68,8 @@ const Header = (props) => {
 					onClick={() => props.history.push('/board')}
 				>
 					<Avatar width='36px' fontSize='1.4rem' fontWeight='700'>
-						{localStorage.getItem('userId').slice(0, 1).toUpperCase()}
+						{localStorage.getItem('userId') &&
+							localStorage.getItem('userId').slice(0, 1).toUpperCase()}
 					</Avatar>
 				</Button>
 				<Button height='48px' type='circle' _onClick={toggleMenuField}>
