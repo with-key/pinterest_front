@@ -7,8 +7,8 @@ import { pinApi } from '../shared/api';
 const ADD_PIN = 'pin/ADD_PIN';
 const GET_PIN_LIST = 'pin/GET_PIN_LIST';
 const GET_PIN = 'pin/GET_PIN';
-// infinite scroll
 const LOADING = 'pin/LOADING';
+const PIN_ADD_TO_BOARD = 'pin/PIN_ADD_TO_BOARD';
 
 // initState
 // infinite scroll paging
@@ -16,13 +16,14 @@ const initState = {
 	list: [],
 	selectedPin: {
 		user: {
-			userName:'',
-		}
+			userName: '',
+		},
 	},
-	paging: { page: 1, next: null, size: 10 }, 
+	paging: { page: 1, next: null, size: 10 },
 	isLoading: false,
 	isLogin: false,
 	pin: null,
+	willAddPin: null,
 };
 
 // action creator
@@ -35,10 +36,19 @@ export const getPinList = createAction(GET_PIN_LIST, (pinList, paging) => ({
 export const loading = createAction(LOADING, (isLoading) => ({ isLoading }));
 export const addPin = createAction(ADD_PIN, (pin) => ({ pin }));
 export const getPin = createAction(GET_PIN, (pin) => ({ pin }));
+export const pinAddToBoard = createAction(PIN_ADD_TO_BOARD, (pin) => ({ pin }));
 
 // Thunk function
 
-export const __addPin = (contents) => (dispatch, getState) => {
+export const __pinAddToBoard = (pinId, boardId) => async (dispatch) => {
+	try {
+		// console.log(pinId, boardId);
+		const data = await pinApi.pinAddToBoard(pinId, boardId);
+		console.log(data);
+	} catch (e) {}
+};
+
+export const __addPin = (contents) => async (dispatch, getState) => {
 	try {
 		const { imgUrl } = getState().image;
 		const willDispatchContents = {
@@ -47,9 +57,8 @@ export const __addPin = (contents) => (dispatch, getState) => {
 		};
 		console.log(willDispatchContents);
 		// api post
-		const { data } = pinApi.addPin(willDispatchContents);
-		console.log(data);
-		// dispatch(addPin(willDispatchContents));
+		const { data } = await pinApi.addPin(willDispatchContents);
+		dispatch(addPin(data));
 	} catch (e) {
 		console.log(e);
 	}
@@ -62,14 +71,14 @@ export const __getPinList =
 		try {
 			const next = getState().pin.paging.next;
 			const _page = getState().pin.paging.page;
-			if ( _page=== false && next === false ) return;
+			if (_page === false && next === false) return;
 			dispatch(loading(true));
-			
+
 			const { data } = await pinApi.getPinList(_page, size);
 
 			const totalPages = data.totalPages;
 			let paging = {
-				page: data.content.length < size ? false: _page + 1,
+				page: data.content.length < size ? false : _page + 1,
 				next: _page === totalPages ? false : true,
 				size: size,
 			};
@@ -94,15 +103,16 @@ const __getPin =
 // reducer
 const pin = handleActions(
 	{
-		[GET_PIN_LIST]: (state, action) => produce(state, (draft) => {
+		[GET_PIN_LIST]: (state, action) =>
+			produce(state, (draft) => {
 				draft.list.push(...action.payload.pinList);
-        draft.paging = action.payload.paging;
+				draft.paging = action.payload.paging;
 				draft.isLoading = false;
-			}
-		),
-		[GET_PIN]: (state, action) => produce(state, (draft) => {
-        draft.selectedPin = action.payload.pin;
-		}),
+			}),
+		[GET_PIN]: (state, action) =>
+			produce(state, (draft) => {
+				draft.selectedPin = action.payload.pin;
+			}),
 		[ADD_PIN]: (state, action) => {
 			return {
 				...state,
@@ -116,6 +126,7 @@ const pin = handleActions(
 export const pinActions = {
 	__getPinList,
 	__getPin,
+	__pinAddToBoard,
 };
 
 export default pin;
