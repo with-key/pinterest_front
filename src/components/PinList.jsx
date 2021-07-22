@@ -24,6 +24,7 @@ const PinList = ({ history }) => {
 		if (paging.next === false) {
 			return;
 		}
+		
 		setTimeout(() => {
 			dispatch(pinActions.__getPinList(paging.page));
 		}, 500)
