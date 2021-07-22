@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 // elements & components
-import { Flex, Text, Button, Image, Icons } from '../elem';
+import { Flex, Text, Button, Image, Icons, Avatar } from '../elem';
 import Template from '../components/Template';
 import PinList from '../components/PinList';
 import CommentList from '../components/CommentList';
@@ -29,7 +29,7 @@ const PinDetail = ({ history, match, ...rest }) => {
 	const { pinTitle, pinContent, pinImage, pinUrl } = useSelector(
 		(state) => state.pin.selectedPin,
 	);
-	const userName = useSelector((state) => state.pin.selectedPin.user?.userName);;
+	const userName = useSelector((state) => state.pin.selectedPin.user.userName);
 
 	return (
 		<Template  history={history}>
@@ -100,7 +100,9 @@ const PinDetail = ({ history, match, ...rest }) => {
 
 							{/* 핀 작성자 블록 */}
 							<Flex mg='16px 0px' ai='center'>
-								<Image size='48' />
+							<Avatar width='48px' fontSize='1.8rem' fontWeight='700'>
+								{userName.slice(0, 1).toUpperCase()}
+							</Avatar>
 								<Text size='1.6rem' weight='700' mg='0px 12px'>
 									{userName}
 								</Text>
@@ -116,7 +118,7 @@ const PinDetail = ({ history, match, ...rest }) => {
 						<Flex ai='center'>
 							<Image size='32' />
 							<Text size='1.6rem' weight='700' mg='0px 4px 0px 8px'>
-								Username
+								리신
 							</Text>
 							<DefaultText>
 								님이

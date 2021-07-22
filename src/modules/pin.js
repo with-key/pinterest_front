@@ -14,7 +14,11 @@ const LOADING = 'pin/LOADING';
 // infinite scroll paging
 const initState = {
 	list: [],
-	selectedPin: {},
+	selectedPin: {
+		user: {
+			userName:'',
+		}
+	},
 	paging: { page: 1, next: null, size: 10 }, 
 	isLoading: false,
 	isLogin: false,

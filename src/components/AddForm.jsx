@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import AWS from 'aws-sdk';
 import styled, { css } from 'styled-components';
 
-import { Button, Flex, Text, Input, Icons } from '../elem';
+import { Button, Flex, Text, Input, Icons, Avatar } from '../elem';
 import ImgUploader from '../components/ImgUploader';
 import { useDispatch, useSelector } from 'react-redux';
 import Drop from './Drop';
@@ -155,17 +155,6 @@ const AddForm = ({ history }) => {
 	);
 };
 
-const Avatar = styled.div`
-	display: flex;
-	font-size: 20px;
-	font-weight: 700;
-	justify-content: center;
-	align-items: center;
-	width: 48px;
-	height: 48px;
-	border-radius: 50%;
-	background-color: var(--primary-lightgray);
-`;
 const UnderlineInput = styled.input`
 	::placeholder {
 		font-size: 1rem;
