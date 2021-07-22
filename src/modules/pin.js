@@ -22,6 +22,7 @@ const initState = {
 	paging: { page: 1, next: null, size: 40 }, 
 	isLoading: false,
 	isLogin: false,
+	pin: null,
 };
 
 // action creator

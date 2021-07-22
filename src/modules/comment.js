@@ -4,7 +4,6 @@ import { commentApi } from '../shared/api';
 
 // action
 const GET_COMMENT_LIST = 'comment/GET_COMMENT_LIST';
-const GET_NEXT_COMMENT_LIST = 'comment/GET_COMMENT_LIST';
 const POST_COMMENT = 'comment/POST_COMMENT';
 const DELETE_COMMENT = 'comment/DELETE_COMMENT';
 const EDIT_COMMENT = 'comment/EDIT_COMMENT';
@@ -12,71 +11,60 @@ const EDIT_COMMENT = 'comment/EDIT_COMMENT';
 // initState
 const initState = {
 	list: [],
+	comment: {
+		commentContent: '',
+		createdAt: '2021-07-19T06:44:10.590Z',
+		id: 0,
+		likeNum: 0,
+		liken: false,
+		pinId: 1,
+		user: {
+			password: '1234',
+			userAge: 0,
+			userId: 0,
+			userImage: 'https://wallpaperaccess.com/full/3501969.png',
+			userName: '',
+		}
+	},
 	isLogin: false,
 	paging: { page: 1, next: null, size: 5 }, 
-	nextPaging: { page: 2, next: null, size: 5 }
 };
 
 // action creator
-const getCommentList = createAction(
-	GET_COMMENT_LIST, (commentList, totalComments, nextPaging) => ({commentList, totalComments, nextPaging}));
-const getNextCommentList = createAction(
-	GET_NEXT_COMMENT_LIST, (commentList, totalComments, nextPaging) => ({commentList, totalComments, nextPaging}));
+const getCommentList = createAction(GET_COMMENT_LIST, (commentList, totalComments) => ({commentList, totalComments}));
 const postComment = createAction(POST_COMMENT, (comment) => ({comment}));
 const deleteComment = createAction(DELETE_COMMENT, (commentId) => ({commentId}));
 const editComment = createAction(EDIT_COMMENT, (commentId, comment) => ({commentId, comment}));
 
 // Thunk function
-const __getCommentList = (pinId) =>
+const __getCommentList = (pinId, page = 1, size = 10) =>
 	async (dispatch, getState, { history }) => {
 		try {
-			console.log(initState.paging.page)
-			const next = getState().comment.paging.next;
-			const _page = getState().comment.paging.page;
-			const { data } = await commentApi.getCommentList(pinId, initState.paging.page, initState.paging.size);
-			
-				
-			if ( _page=== false && next === false ) return;
-
-			const totalPages = data.totalPages;
-			let nextPaging = {
-				page: data.content.length < initState.paging.size ? false: _page + 1,
-				next: _page === totalPages ? false : true,
-				size: initState.paging.size,
-			};
-
+			const { data } = await commentApi.getCommentList(pinId, page, size);
+			console.log(data)
 			const totalComments = data.totalElements
-			dispatch(getCommentList(data.content, totalComments, nextPaging));
+			dispatch(getCommentList(data.content, totalComments));
+			// const next = getState().comment.paging.next;
+			// const _page = getState().comment.paging.page;
+			// console.log(_page)
+			// if ( _page=== false && next === false ) return;
+			// dispatch(loading(true));
 			
+			// const { data } = await pinApi.getPinList(_page, size);
+
+			// const totalPages = data.totalPages;
+			// let paging = {
+			// 	page: data.content.length < size ? false: _page + 1,
+			// 	next: _page === totalPages ? false : true,
+			// 	size: size,
+			// };
+
+			// dispatch(getPinList(data.content, paging));
+
 		} catch (e) {
 			console.log(e);
 		}
 	};
-
-const __getNextCommentList = (pinId, page, size = 5) =>
-	async (dispatch, getState, { history }) => {
-		try {
-			const next = getState().comment.nextPaging.next;
-			const _page = getState().comment.nextpaging?.page;
-			const { data } = await commentApi.getCommentList(pinId, page, size);
-			
-			if ( _page === false && next === false ) return;
-
-			const totalPages = data.totalPages;
-			let nextPaging = {
-				page: data.content.length < size ? false: page + 1,
-				next: page === totalPages ? false : true,
-				size: size,
-			};
-
-			const totalComments = data.totalElements
-			dispatch(getCommentList(data.content, totalComments, nextPaging));
-			
-		} catch (e) {
-			console.log(e);
-		}
-};
-
 
 const __postComment = (pinId, comment) => 
 	async (dispatch, getState, { history }) => {
@@ -89,12 +77,11 @@ const __postComment = (pinId, comment) =>
 		};
 }
 
-const __deleteComment = (commentId, restOfComment) => 
+const __deleteComment = (commentId) => 
 	async (dispatch, getState, { history }) => {
 		try {
 			const { data } = await commentApi.deleteComment(commentId);
 			dispatch(deleteComment(commentId));
-			dispatch(restOfComment( restOfComment -1 ))
 		}	catch (e) {
 			console.log(e)
 		};
@@ -118,17 +105,18 @@ const __editComment = (commentId, modifiedComment) =>
 const comment = handleActions(
 	{
 		[GET_COMMENT_LIST]: (state, action) => produce(state, (draft) => {
-			draft.list = action.payload.commentList;
+			draft.list= action.payload.commentList // 수정
 			draft.totalComments = action.payload.totalComments;
-			draft.nextPaging = action.payload.nextPaging;
+			draft.isLoading = false;
 			}
 		),
-		[GET_NEXT_COMMENT_LIST]: (state, action) => produce(state, (draft) => {
-			draft.list.push(...action.payload.commentList);
-			draft.totalComments = action.payload.totalComments;
-			draft.nextPaging = action.payload.nextPaging;
-			}
-		),
+		// => {
+		// 	return {
+		// 		...state,
+		// 		list: action.payload.commentList,
+		// 		totalComments: action.payload.
+		// 	}
+		// },
 		[POST_COMMENT]: (state, action) => {
 			return {
 				...state,
@@ -160,7 +148,6 @@ const comment = handleActions(
 
 export const commentActions = {
 	__getCommentList,
-	__getNextCommentList,
 	__postComment,
 	__deleteComment,
 	__editComment,
