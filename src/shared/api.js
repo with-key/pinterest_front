@@ -22,16 +22,29 @@ export const userApi = {
 };
 
 export const pinApi = {
-	getPinList: (page, size) => instance.get(`/api/pin/page?page=${page}&size=${size}`),
+	getPinList: (page, size) =>
+		instance.get(`/api/pin/page?page=${page}&size=${size}`),
 	getPin: (pinId) => instance.get(`/pin/${pinId}`),
 	addPin: (pin) => instance.post('/pin', pin),
+	pinAddToBoard: (pinId, boardId) => {
+		console.log(pinId, boardId);
+		instance.post(`/pin/board/${pinId}?boardId=${boardId}`);
+	},
 };
 
 export const commentApi = {
-	getCommentList: (pinId, page, size) => instance.get(`/pin/comment/${pinId}?page=${page}&size=${size}`),
+	getCommentList: (pinId, page, size) =>
+		instance.get(`/pin/comment/${pinId}?page=${page}&size=${size}`),
 	postComment: (pinId, comment) =>
 		instance.post(`/pin/comment/${pinId}`, comment),
 	deleteComment: (commentId) => instance.delete(`/pin/comment/${commentId}`),
 	editComment: (commentId, comment) =>
 		instance.put(`/pin/comment/${commentId}`, comment),
+};
+
+export const boardApi = {
+	getBoard: () => instance.get('/board'),
+	addBoard: (board) => {
+		instance.post('/board', board);
+	},
 };
