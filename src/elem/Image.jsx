@@ -12,7 +12,7 @@ const Image = ({ shape, ...rest }) => {
   if (shape === 'relative'){
     return (
       <ImgContainer>
-			  <ImgContents {...rest} />
+			  <ImgContents {...rest} loading='lazy'/>
 	  	</ImgContainer>
     )
   }
@@ -52,23 +52,6 @@ const ImgContents = styled.img`
   src: url('${(props) => props.src}');
 
 `
-// const ImgContents = styled.div`
-// 	position: relative;
-// 	width: 100%;
-//   padding-top: 100%;
-// 	overflow: hidden;
-//   ${(props) => 
-//     props.pinDetail &&
-// 		css`
-// 			border-radius: 32px;
-//       margin: 20px;
-// 		`}
-// 	background-image: url('${(props) => props.src}');
-// 	background-size: cover;
-//   background-repeat: no-repeat;
-//   background-position: center;
-// `;
-
 // for user profile image
 const CircleImg = styled.div`
 	display: inline-block;
@@ -83,6 +66,4 @@ const CircleImg = styled.div`
   background-repeat: no-repeat;
   background-position: center;
 `;
-
-
 export default Image;
