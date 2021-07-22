@@ -13,7 +13,7 @@ const CommentCard = (props) => {
 	const userName = props.user.userName;
 	const modifiedAt = props.modifiedAt;
 	
-
+	
 	const [isEditMode, setIsEditMode] = useState(false);
 	
 	// 삭제
