@@ -51,6 +51,7 @@ const AddForm = ({ history }) => {
 		const { Location } = await upload.promise();
 		dispatch(uploadImgeToS3(Location));
 		dispatch(__addPin(contents));
+		history.push('/');
 	};
 
 	return (
