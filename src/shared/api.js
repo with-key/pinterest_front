@@ -28,7 +28,7 @@ export const pinApi = {
 };
 
 export const commentApi = {
-	getCommentList: (pinId) => instance.get(`/pin/comment/${pinId}`),
+	getCommentList: (pinId, page, size) => instance.get(`/pin/comment/${pinId}?page=${page}&size=${size}`),
 	postComment: (pinId, comment) =>
 		instance.post(`/pin/comment/${pinId}`, comment),
 	deleteComment: (commentId) => instance.delete(`/pin/comment/${commentId}`),

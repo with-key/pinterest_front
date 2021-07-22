@@ -57,7 +57,7 @@ export const __addPin = (contents) => (dispatch, getState) => {
 
 // 핀 목록 페이지 ; infinite scroll
 export const __getPinList =
-	(page = 1, size = 10) =>
+	(page = 1, size = 30) =>
 	async (dispatch, getState, { history }) => {
 		try {
 			const next = getState().pin.paging.next;
