@@ -12,11 +12,11 @@ import AddPin from '../pages/AddPin';
 const Router = () => {
 	return (
 		<Switch>
-			<Route path='/' component={Auth(Home, null)} exact />
+			<Route path='/' component={Auth(Home, true)} exact />
 			<Route path='/main' component={Auth(Signup, false)} exact />
-			<Route path='/pin/:id' component={Auth(PinDetail, null)} exact />
-			<Route path='/board' component={Auth(PinBoard, null)} exact />
-			<Route path='/pin-builder' component={Auth(AddPin, null)} exact />
+			<Route path='/pin/:id' component={Auth(PinDetail, true)} exact />
+			<Route path='/board' component={Auth(PinBoard, true)} exact />
+			<Route path='/pin-builder' component={Auth(AddPin, true)} exact />
 		</Switch>
 	);
 };

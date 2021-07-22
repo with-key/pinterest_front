@@ -18,7 +18,7 @@ const Template = ({ children, history, ...rest }) => {
 				>
 					<Drop.Item
 						_onClick={() => {
-							history.push('/pin-bulider');
+							history.push('/pin-builder');
 						}}
 					>
 						핀 만들기
