@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 //----- elements & components -----//
-import { Flex, Input, Button, Image } from '../elem';
+import { Flex, Input, Button, Image, Avatar } from '../elem';
 //----- redux -----//
 import { useDispatch } from 'react-redux';
 import { commentActions } from '../modules/comment';
@@ -23,7 +23,9 @@ const CommentWrite = (props) => {
 		<React.Fragment>
 			<Flex>
 				<Flex>
-					<Image shape='circle' size='48' />
+					<Avatar width='48px' fontSize='1.8rem' fontWeight='700'>
+						{localStorage.getItem('userId').slice(0, 1).toUpperCase()}
+					</Avatar>
 				</Flex>
 				<Flex width='100%' mg='0 0 0 16px'>
 					<Input

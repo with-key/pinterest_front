@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 // elements & components
-import { Flex, Text, Button, Image, Icons } from '../elem';
+import { Flex, Text, Button, Icons, Avatar } from '../elem';
 import Template from '../components/Template';
 import PinList from '../components/PinList';
 
@@ -21,7 +21,9 @@ const PinBoard = ({ history, match, ...rest }) => {
 	return (
 		<Template history={history}>
 			<Container>
-				<Image size='120'/>
+					<Avatar width='120px' fontSize='5.6rem' fontWeight='500'>
+						{localStorage.getItem('userId').slice(0, 1).toUpperCase()}
+					</Avatar>
 				<Text size='3.6rem' weight='700' mg='16px'>
 					{name}
 				</Text>

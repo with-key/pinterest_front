@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 //----- elements & components -----//
-import { Flex, Button, Image, Text, Icons } from '../elem';
+import { Flex, Button, Avatar, Image, Text, Icons } from '../elem';
 import CommentEdit from './CommentEdit';
 //----- redux -----//
 import { useDispatch } from 'react-redux';
@@ -26,7 +26,9 @@ const CommentCard = (props) => {
 	return (
 		<Flex>
 			<Flex width='10%'>
-				<Image shape='circle' size='48' />
+				<Avatar width='48px' fontSize='1.8rem' fontWeight='700'>
+					{userName.slice(0, 1).toUpperCase()}
+				</Avatar>
 			</Flex>
 			<Flex width='90%' style={{ flexDirection: 'column' }}>
 				{/* 댓글 카드 블록 */}

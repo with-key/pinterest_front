@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 // elements & components
-import { Flex, Image, Input, Button, Icons } from '../elem';
+import { Flex, Avatar, Input, Button, Icons } from '../elem';
 import Dropdown from './Dropdown';
 
 const Header = (props) => {
@@ -67,7 +67,9 @@ const Header = (props) => {
 					type='circle'
 					onClick={() => props.history.push('/board')}
 				>
-					<Image shape='circle' />
+					<Avatar width='36px' fontSize='1.4rem' fontWeight='700'>
+						{localStorage.getItem('userId').slice(0, 1).toUpperCase()}
+					</Avatar>
 				</Button>
 				<Button height='48px' type='circle' _onClick={toggleMenuField}>
 					<Icons.ArrowDown color='var(--primary-black)' />

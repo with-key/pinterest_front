@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 // elements & components
-import { Flex, Image, Button, Icons, Text } from '../elem';
+import { Flex, Image, Button, Text, Avatar } from '../elem';
 
 const PinCard = ({ history, pinId, pinImage, user, ...rest }) => {
 	return (
@@ -36,7 +36,9 @@ const PinCard = ({ history, pinId, pinImage, user, ...rest }) => {
 
 			{/* 핀 작성자 블록 */}
 			<Flex mg='8px 0' ai='center'>
-				<Image size='36' shape='circle' />
+				<Avatar width='36px' fontSize='1.8rem' fontWeight='700'>
+					{user.userName.slice(0, 1).toUpperCase()}
+				</Avatar>
 				<Text size='1.4rem' weight='400' mg='0px 8px'>
 					{user.userName}
 				</Text>

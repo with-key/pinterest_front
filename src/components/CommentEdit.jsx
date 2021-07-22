@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 //----- elements & components -----//
-import { Flex, Input, Button, Image } from '../elem';
+import { Flex, Input, Button, Image, Avatar } from '../elem';
 //----- redux -----//
 import { useDispatch } from 'react-redux';
 import { commentActions } from '../modules/comment';
@@ -23,7 +23,9 @@ const CommentEdit = (props) => {
 		<React.Fragment>
 			<Flex mg='0 0 0 16px'> 
 				<Flex ai='center'>
-					<Image shape='circle' size='36' />
+					<Avatar width='36px' fontSize='1.8rem' fontWeight='700'>
+						{localStorage.getItem('userId').slice(0, 1).toUpperCase()}
+					</Avatar>
 				</Flex>
 				<Flex width='100%' mg='0 0 0 16px'>
 					<Input

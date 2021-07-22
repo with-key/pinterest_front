@@ -27,20 +27,40 @@ const initState = {
 		}
 	},
 	isLogin: false,
+	paging: { page: 1, next: null, size: 5 }, 
 };
 
 // action creator
-const getCommentList = createAction(GET_COMMENT_LIST, (comment_list) => ({comment_list}));
+const getCommentList = createAction(GET_COMMENT_LIST, (commentList, totalComments) => ({commentList, totalComments}));
 const postComment = createAction(POST_COMMENT, (comment) => ({comment}));
 const deleteComment = createAction(DELETE_COMMENT, (commentId) => ({commentId}));
 const editComment = createAction(EDIT_COMMENT, (commentId, comment) => ({commentId, comment}));
 
 // Thunk function
-const __getCommentList = (pinId) =>
+const __getCommentList = (pinId, page = 1, size = 10) =>
 	async (dispatch, getState, { history }) => {
 		try {
-			const { data } = await commentApi.getCommentList(pinId);
-			dispatch(getCommentList(data));
+			const { data } = await commentApi.getCommentList(pinId, page, size);
+			console.log(data)
+			const totalComments = data.totalElements
+			dispatch(getCommentList(data.content, totalComments));
+			// const next = getState().comment.paging.next;
+			// const _page = getState().comment.paging.page;
+			// console.log(_page)
+			// if ( _page=== false && next === false ) return;
+			// dispatch(loading(true));
+			
+			// const { data } = await pinApi.getPinList(_page, size);
+
+			// const totalPages = data.totalPages;
+			// let paging = {
+			// 	page: data.content.length < size ? false: _page + 1,
+			// 	next: _page === totalPages ? false : true,
+			// 	size: size,
+			// };
+
+			// dispatch(getPinList(data.content, paging));
+
 		} catch (e) {
 			console.log(e);
 		}
@@ -84,12 +104,19 @@ const __editComment = (commentId, modifiedComment) =>
 // reducer
 const comment = handleActions(
 	{
-		[GET_COMMENT_LIST]: (state, action) => {
-			return {
-				...state,
-				list: action.payload.comment_list,
+		[GET_COMMENT_LIST]: (state, action) => produce(state, (draft) => {
+			draft.list= action.payload.commentList // 수정
+			draft.totalComments = action.payload.totalComments;
+			draft.isLoading = false;
 			}
-		},
+		),
+		// => {
+		// 	return {
+		// 		...state,
+		// 		list: action.payload.commentList,
+		// 		totalComments: action.payload.
+		// 	}
+		// },
 		[POST_COMMENT]: (state, action) => {
 			return {
 				...state,
