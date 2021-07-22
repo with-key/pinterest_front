@@ -11,7 +11,8 @@ const CommentCard = (props) => {
 	const dispatch = useDispatch();
 	const { commentContents, likeNum, pinId, commentId} = props;
 	const userName = props.user.userName;
-	const modifiedAt = props.user.modifiedAt;
+	const modifiedAt = props.modifiedAt;
+	
 
 	const [isEditMode, setIsEditMode] = useState(false);
 	
