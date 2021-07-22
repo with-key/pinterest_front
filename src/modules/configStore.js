@@ -4,6 +4,7 @@ import user from './user'; // 리듀서
 import pin from './pin';
 import image from './image';
 import comment from './comment';
+import board from './board';
 
 // middleware
 import thunk from 'redux-thunk'; // 썽크
@@ -16,6 +17,7 @@ import { connectRouter } from 'connected-react-router';
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
+	board,
 	image,
 	user,
 	pin,
