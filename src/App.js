@@ -5,12 +5,6 @@ import { userAcions } from './modules/user';
 import { useDispatch } from 'react-redux';
 
 const App = (props) => {
-	const dispatch = useDispatch();
-
-	useEffect(() => {
-		dispatch(userAcions.__setLogin());
-	}, []);
-
 	return (
 		<>
 			<GlobalStyles />

@@ -8,17 +8,21 @@ import { useDispatch } from 'react-redux';
 export default (SpecialComponent, option) => {
 	const AuthenticateCheck = (props) => {
 		const dispatch = useDispatch();
-		const isLogin = useSelector((store) => store.user.isLogin);
 
-		// const useName = localStorage.getItem('userId');
-		// console.log(useName);
+		const accessToken = document.cookie.split('=')[1];
+		const userId = localStorage.getItem('userId');
 
-		// useEffect(() => {
-		// 	dispatch(userAcions.__setLogin());
-		// 	if (!isLogin && option) {
-		// 		props.history.push('/main');
-		// 	}
-		// }, []);
+		const isLogin = userId !== null && accessToken !== undefined ? true : false;
+		console.log(isLogin);
+
+		useEffect(() => {
+			dispatch(userAcions.__setLogin());
+			if (!isLogin && option) {
+				props.history.push('/main');
+			} else if (isLogin && !option) {
+				props.history.push('/');
+			}
+		}, []);
 
 		return <SpecialComponent {...props} />;
 	};
