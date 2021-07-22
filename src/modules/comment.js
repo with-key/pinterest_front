@@ -1,31 +1,19 @@
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
-import { commentApi } from '../shared/api';
+import { commentApi, likeApi } from '../shared/api';
 
 // action
 const GET_COMMENT_LIST = 'comment/GET_COMMENT_LIST';
 const POST_COMMENT = 'comment/POST_COMMENT';
 const DELETE_COMMENT = 'comment/DELETE_COMMENT';
 const EDIT_COMMENT = 'comment/EDIT_COMMENT';
+// like action
+const POST_LIKE = 'like/POST_LIKE';
+const DELETE_LIKE = 'like/DELETE_LIKE';
 
 // initState
 const initState = {
 	list: [],
-	comment: {
-		commentContent: '',
-		createdAt: '2021-07-19T06:44:10.590Z',
-		id: 0,
-		likeNum: 0,
-		liken: false,
-		pinId: 1,
-		user: {
-			password: '1234',
-			userAge: 0,
-			userId: 0,
-			userImage: 'https://wallpaperaccess.com/full/3501969.png',
-			userName: '',
-		}
-	},
 	isLogin: false,
 	paging: { page: 1, next: null, size: 5 }, 
 };
@@ -35,13 +23,16 @@ const getCommentList = createAction(GET_COMMENT_LIST, (commentList, totalComment
 const postComment = createAction(POST_COMMENT, (comment) => ({comment}));
 const deleteComment = createAction(DELETE_COMMENT, (commentId) => ({commentId}));
 const editComment = createAction(EDIT_COMMENT, (commentId, comment) => ({commentId, comment}));
+// like action creator
+const postLike = createAction(POST_LIKE, (commentId) => ({commentId}));
+const deleteLike = createAction(DELETE_LIKE, (commentId) => ({commentId}));
 
 // Thunk function
 const __getCommentList = (pinId, page = 1, size = 10) =>
 	async (dispatch, getState, { history }) => {
 		try {
 			const { data } = await commentApi.getCommentList(pinId, page, size);
-			console.log(data)
+			// console.log(data)
 			const totalComments = data.totalElements
 			dispatch(getCommentList(data.content, totalComments));
 			// const next = getState().comment.paging.next;
@@ -101,6 +92,27 @@ const __editComment = (commentId, modifiedComment) =>
 		};
 }
 
+//----- like middleware -----//
+const __postLike = (commentId, pinId) => 
+	async (dispatch, getState, { history }) => {
+		try {
+			const { data } = await likeApi.postLike(commentId, pinId);
+			dispatch(postLike(commentId));
+		}	catch (e) {
+			console.log(e)
+		};
+}
+
+const __deleteLike = (commentId) => 
+	async (dispatch, getState, { history }) => {
+		try {
+			const { data } = await likeApi.deleteLike(commentId);
+			dispatch(deleteLike(commentId));
+		}	catch (e) {
+			console.log(e)
+		};
+}
+
 // reducer
 const comment = handleActions(
 	{
@@ -110,13 +122,6 @@ const comment = handleActions(
 			draft.isLoading = false;
 			}
 		),
-		// => {
-		// 	return {
-		// 		...state,
-		// 		list: action.payload.commentList,
-		// 		totalComments: action.payload.
-		// 	}
-		// },
 		[POST_COMMENT]: (state, action) => {
 			return {
 				...state,
@@ -142,6 +147,20 @@ const comment = handleActions(
 				}),
 			};			
 		},
+
+		//----- like reducers -----//
+		[POST_LIKE]: (state, action) => produce(state, (draft) => {
+			let _index = draft.list.findIndex((c) => c.commentId === action.payload.commentId);
+			draft.list[_index].liken = true;
+			draft.list[_index].likeNum += 1;
+		}
+	),
+		[DELETE_LIKE]: (state, action) => produce(state, (draft) => {
+			let _index = draft.list.findIndex((c) => c.commentId === action.payload.commentId);
+			draft.list[_index].liken = false;
+			draft.list[_index].likeNum -= 1;
+		}),
+
 	},
 	initState,
 );
@@ -151,6 +170,8 @@ export const commentActions = {
 	__postComment,
 	__deleteComment,
 	__editComment,
+	__postLike,
+	__deleteLike,
 };
 
 export default comment;
