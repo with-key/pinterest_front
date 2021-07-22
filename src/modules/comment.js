@@ -32,62 +32,50 @@ const initState = {
 // action creator
 const getCommentList = createAction(GET_COMMENT_LIST, (comment_list) => ({comment_list}));
 const postComment = createAction(POST_COMMENT, (comment) => ({comment}));
-const deleteComment = createAction(DELETE_COMMENT, (comment_id) => ({comment_id}));
-const editComment = createAction(EDIT_COMMENT, (comment_id, comment) => ({comment_id, comment}));
+const deleteComment = createAction(DELETE_COMMENT, (commentId) => ({commentId}));
+const editComment = createAction(EDIT_COMMENT, (commentId, comment) => ({commentId, comment}));
 
 // Thunk function
-const __getCommentList = (pinid) =>
+const __getCommentList = (pinId) =>
 	async (dispatch, getState, { history }) => {
 		try {
-			const { data } = await commentApi.getCommentList(pinid);
+			const { data } = await commentApi.getCommentList(pinId);
 			dispatch(getCommentList(data));
 		} catch (e) {
 			console.log(e);
 		}
 	};
 
-const __postComment = (pinid, comment) => 
+const __postComment = (pinId, comment) => 
 	async (dispatch, getState, { history }) => {
 		try {
-			const content ={
-				commentContent: comment,
-				likeNum: 0,
-				liken: false,
-				pinId: pinid,
-				createdAt: '2021-07-19T06:44:10.590Z',
-				user: { // 테스트코드 : 서버 연결 후 수정
-					userName: '안녕',
-					password: '1234',
-					userImage: 'https://wallpaperaccess.com/full/3501969.png',
-					userAge: 3
-				}
-			}
-			const { data } = await commentApi.postComment(pinid, content);
+			const content ={ commentContent: comment }
+			const { data } = await commentApi.postComment(pinId, content);
 			dispatch(postComment(data));
 		}	catch (e) {
 			console.log(e)
 		};
 }
 
-const __deleteComment = (comment_id) => 
+const __deleteComment = (commentId) => 
 	async (dispatch, getState, { history }) => {
 		try {
-			const { data } = await commentApi.deleteComment(comment_id);
-			dispatch(deleteComment(comment_id));
+			const { data } = await commentApi.deleteComment(commentId);
+			dispatch(deleteComment(commentId));
 		}	catch (e) {
 			console.log(e)
 		};
 }
 
-const __editComment = (comment_id, modifiedComment, previousComment) => 
+const __editComment = (commentId, modifiedComment) => 
 	async (dispatch, getState, { history }) => {
 		try {
 			const content ={
-				...previousComment,
 				commentContent: modifiedComment,
 			}
-			const { data } = await commentApi.editComment(comment_id, content);
-			dispatch(editComment(comment_id, data));
+			const { data } = await commentApi.editComment(commentId, content);
+			dispatch(editComment(commentId, data));
+			console.log(data)
 		}	catch (e) {
 			console.log(e)
 		};
@@ -111,16 +99,15 @@ const comment = handleActions(
 		[DELETE_COMMENT]: (state, action) => {
 			return {
 				...state,
-				list: state.list.filter((comment) => comment.id !== action.payload.comment_id)
+				list: state.list.filter((comment) => comment.commentId !== action.payload.commentId)
 			};
 		},
 		[EDIT_COMMENT]: (state, action) => {
-			console.log(action.payload.comment_id)
 			const data = action.payload.comment;
 			return {
 				...state,
 				list: state.list.map((comment, index) => {
-					if (comment.id === data.id) {
+					if (comment.commentId === data.commentId) {
 						return (state.list[index] = data);
 					} else {
 						return comment;

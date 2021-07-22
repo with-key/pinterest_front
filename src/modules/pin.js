@@ -15,7 +15,7 @@ const LOADING = 'pin/LOADING';
 const initState = {
 	list: [],
 	selectedPin: {},
-	paging: { page: 0, next: 0, limit: 5 }, // page 0? 1?
+	paging: { page: 1, next: null, size: 10 }, 
 	isLoading: false,
 	isLogin: false,
 	pin: null,
@@ -53,20 +53,24 @@ export const __addPin = (contents) => (dispatch, getState) => {
 
 // 핀 목록 페이지 ; infinite scroll
 export const __getPinList =
-	(page = 0, limit = 5) =>
+	(page = 1, size = 10) =>
 	async (dispatch, getState, { history }) => {
 		try {
-			const _next = getState().pin.paging?.next;
-			if (_next === null) return;
+			const next = getState().pin.paging.next;
+			const _page = getState().pin.paging.page;
+			if ( _page=== false && next === false ) return;
 			dispatch(loading(true));
+			
+			const { data } = await pinApi.getPinList(_page, size);
 
-			const { data } = await pinApi.getPinList(page, limit);
-			// next
-			if (data.length < limit) {
-				dispatch(getPinList(data, { next: null }));
-				return;
-			}
-			dispatch(getPinList(data, { page: page + 1, next: true, limit: limit }));
+			const totalPages = data.totalPages;
+			let paging = {
+				page: data.content.length < size ? false: _page + 1,
+				next: _page === totalPages ? false : true,
+				size: size,
+			};
+
+			dispatch(getPinList(data.content, paging));
 		} catch (e) {
 			console.log(e);
 		}
@@ -86,22 +90,15 @@ const __getPin =
 // reducer
 const pin = handleActions(
 	{
-		[GET_PIN_LIST]: (state, action) => {
-			return {
-				...state,
-				list: [...state.list, ...action.payload.pinList],
-				paging: action.payload.paging,
-			};
-		},
-		[GET_PIN]: (state, action) => {
-			return {
-				...state,
-				selectedPin: {
-					...action.payload.pin,
-					userName: action.payload.pin.user.userName,
-				},
-			};
-		},
+		[GET_PIN_LIST]: (state, action) => produce(state, (draft) => {
+				draft.list.push(...action.payload.pinList);
+        draft.paging = action.payload.paging;
+				draft.isLoading = false;
+			}
+		),
+		[GET_PIN]: (state, action) => produce(state, (draft) => {
+        draft.selectedPin = action.payload.pin;
+		}),
 		[ADD_PIN]: (state, action) => {
 			return {
 				...state,

@@ -16,7 +16,7 @@ const Router = () => {
 			<Route path='/main' component={Auth(Signup, false)} exact />
 			<Route path='/pin/:id' component={Auth(PinDetail, null)} exact />
 			<Route path='/board' component={Auth(PinBoard, null)} exact />
-			<Route path='/pin-bulider' component={Auth(AddPin, null)} exact />
+			<Route path='/pin-builder' component={Auth(AddPin, null)} exact />
 		</Switch>
 	);
 };

@@ -18,10 +18,21 @@ const PinList = ({ history }) => {
   const pin_list = useSelector((state)=> (state.pin.list));
 	const isLoading = useSelector((state)=> (state.pin.isLoading));
 	const paging = useSelector((state)=> (state.pin.paging));
+	// console.log(`state 내 page: ${paging.page} next: ${paging.next} size: ${paging.size}`)
+
+	const callNextPage = () => {
+		if (paging.next === false) {
+			return;
+		}
+		setTimeout(() => {
+			dispatch(pinActions.__getPinList(paging.page));
+		}, 500)
+	}
+
 	return (
 		<Container>
 			<InfiniteScroll
-					callNextPage = {() => (dispatch(pinActions.__getPinList(paging.page)))}
+					callNextPage = {callNextPage}
 					isLoading={isLoading}
 					isNext={ paging.next ? true : false }
 			>
@@ -44,7 +55,7 @@ const PinList = ({ history }) => {
 							<Flex 
 								key={index}  
 								style={{flexDirection: 'column'}}
-								onClick={() => {history.push(`/pin/${pin.id}`)}}
+								onClick={() => {history.push(`/pin/${pin.pinId}`)}}
 								>
 								<PinCard {...pin} history={history}/>
 							</Flex>				
