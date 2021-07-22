@@ -7,11 +7,12 @@ import CommentEdit from './CommentEdit';
 import { useDispatch } from 'react-redux';
 import { commentActions } from '../modules/comment';
 
+
 const CommentCard = (props) => {
 	const dispatch = useDispatch();
-	const { commentContents, likeNum, pinId, commentId} = props;
+	const { commentContents, likeNum, pinId, commentId, liken} = props;
 	const userName = props.user.userName;
-	const modifiedAt = props.user.modifiedAt;
+	const modifiedAt = props.modifiedAt;	
 
 	const [isEditMode, setIsEditMode] = useState(false);
 	
@@ -50,10 +51,28 @@ const CommentCard = (props) => {
 
 				<Aligned mg='4px 0 16px 16px' jc='space-between'>
 					<Aligned>
+						{!liken ? (
+							<Button 
+								comment 
+								type='circle' 
+								_onClick={(e) => {
+								e.preventDefault();
+								e.stopPropagation();
+								dispatch(commentActions.__postLike(commentId, pinId))}}>
+								<Icons.Like color='var(--primary-gray)' />
+							</Button> 
+						) : (
+							<Button 
+								comment 
+								type='circle' 
+								_onClick={(e) => {
+								e.preventDefault();
+								e.stopPropagation();
+								dispatch(commentActions.__deleteLike(commentId))}}>
+								<Icons.Like color='var(--primary-red)' />
+							</Button>
+						)}
 
-						<Button comment type='circle'>
-							<Icons.Like color='var(--primary-gray)' />
-						</Button>
 						<StyledText>
 							{likeNum}
 						</StyledText>

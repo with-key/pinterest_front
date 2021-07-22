@@ -48,3 +48,9 @@ export const boardApi = {
 		instance.post('/board', board);
 	},
 };
+
+export const likeApi = {
+	postLike: (commentId, pinId) =>
+		instance.post(`/like/${commentId}?pinId=${pinId}`),
+	deleteLike: (commentId) => instance.delete(`/like/${commentId}`),
+};

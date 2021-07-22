@@ -19,7 +19,7 @@ const initState = {
 			userName: '',
 		},
 	},
-	paging: { page: 1, next: null, size: 10 },
+	paging: { page: 1, next: null, size: 40 },
 	isLoading: false,
 	isLogin: false,
 	pin: null,
@@ -66,7 +66,7 @@ export const __addPin = (contents) => async (dispatch, getState) => {
 
 // 핀 목록 페이지 ; infinite scroll
 export const __getPinList =
-	(page = 1, size = 30) =>
+	(page = 1, size = initState.paging.size) =>
 	async (dispatch, getState, { history }) => {
 		try {
 			const next = getState().pin.paging.next;
