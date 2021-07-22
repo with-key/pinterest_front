@@ -8,6 +8,7 @@ const Input = ({ type, header, ...rest }) => {
 
 	return (
 		<DefaultInput
+			value={rest.value}
 			name={rest.name}
 			onClick={rest._onClick}
 			type={type}
