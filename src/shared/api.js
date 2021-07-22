@@ -35,3 +35,8 @@ export const commentApi = {
 	editComment: (commentId, comment) =>
 		instance.put(`/pin/comment/${commentId}`, comment),
 };
+
+export const likeApi = {
+	postLike: (commentId, pinId) => instance.post(`/like/${commentId}?pinId=${pinId}`),
+	deleteLike: (commentId) => instance.delete(`/like/${commentId}`),
+};

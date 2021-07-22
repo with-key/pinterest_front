@@ -20,7 +20,7 @@ const InfiniteScroll = (props) => {
     if (scrollHeight - innerHeight - scrollTop < 200) {
       callNextPage();
     }
-  }, 300);
+  }, 1200);
 
   const handleScroll = React.useCallback(_handleScroll, [isLoading]);
 

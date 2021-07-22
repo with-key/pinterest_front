@@ -11,20 +11,24 @@ import { commentActions } from '../modules/comment';
 const CommentList = (props) => {
 	const dispatch = useDispatch();
 	const [isCommentVisible, setIsCommentVisible] = useState(false);
-	const currentPage = useSelector((state)=> (state.comment.paging.page));
-	const [page, setPage] = useState(currentPage);
+	const currentPaging = useSelector((state)=> (state.comment.paging));
 	// 해당 핀 댓글 목록 가져오기
 	const pinId = props.match.params.id;
 	useEffect(() => {
 		dispatch(commentActions.__getCommentList(pinId));
 	}, []);
-	
+	// 댓글 목록 다음 페이지로 넘기기
+	const getNext = () => {
+		if (currentPaging.Next) return;
+		dispatch(commentActions.__getNextCommentList(pinId, currentPaging.page))
+	}	
 	const comment_list = useSelector((state)=> (state.comment.list));
 	const comment_count = useSelector((state)=> (state.comment.totalComments));
 	const currentComment = comment_list.length
 	const restOfComments = comment_count - currentComment;
 	
 	const userId = localStorage.getItem('userId')
+
 	return (
 		<React.Fragment>
 			<Section> 
@@ -65,10 +69,7 @@ const CommentList = (props) => {
 					})) : ('')}
 
 					{ ( comment_count > comment_list.length ) ? (												
-						<Flex 
-							mg='0 4px 8px' 
-							style={{cursor: 'pointer'}}
-							onClick={() => {dispatch(commentActions.__getCommentList(pinId, page))}}>
+						<Flex mg='0 4px 8px' style={{cursor: 'pointer'}} onClick={getNext}>
 							<Text size='1.4rem' weight='600' color='var(--primary-gray)' style={{textDecoration: 'underline'}}>
 								댓글 {restOfComments} 개
 							</Text>
